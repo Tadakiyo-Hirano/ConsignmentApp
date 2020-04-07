@@ -14,4 +14,4 @@
 
 * yarn 1.22.4
 
-* Git
+* Git(SSH)
