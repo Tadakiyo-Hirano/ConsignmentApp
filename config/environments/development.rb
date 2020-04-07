@@ -1,5 +1,7 @@
 Rails.application.configure do
   config.hosts << "a2abbb908755475aacf873d532c3015e.vfs.cloud9.us-east-1.amazonaws.com"
+  config.i18n.fallbacks = [I18n.default_locale]
+  
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
