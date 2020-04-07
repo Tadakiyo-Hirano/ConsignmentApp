@@ -1,24 +1,17 @@
-# README
+# 委託販売商品管理システム
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## ポートフォリオ Ver.1
 
-Things you may want to cover:
+## 開発環境
 
-* Ruby version
+* AWS Cloud9
 
-* System dependencies
+* Ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-linux]
 
-* Configuration
+* Rails 6.0.2.2
 
-* Database creation
+* Ubuntu 18.04.4 LTS (Bionic Beaver)
 
-* Database initialization
+* yarn 1.22.4
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Git
