@@ -6,6 +6,9 @@
   font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 }
 
+.main-container {
+  padding-left : 150px;
+}
 // @media (min-width: 1140px) {
 //   .container {
 //     max-width: 1600px;
@@ -18,26 +21,69 @@
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: #606060;
+  color: #fff;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
 }
 
 #logo:hover {
-  color: #606060;
+  color: #fff;
   text-decoration: none;
 }
 
 .header-menu {
-  color: #606060;
+  color: #fff;
 }
 
 .header-menu:hover {
-  color: #606060;
+  color: #fff;
   text-decoration: none;
 }
 
 .header-menu {
   margin-right: 10px;
+}
+
+.navbar-dark {
+  background-color: #12575f;
+}
+
+/* サイドバー */
+
+.navbar-fixed-top {
+  border: 0;
+}
+
+.sidebar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 52px;
+    bottom: 0;
+    left: 0;
+    width: 150px;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #2dac91;
+    border-right: 1px solid #eee;
+  }
+  .container {
+    max-width: 1600px;
+  }
+  #navbar-list-menu {
+    display: none;
+  }
+}
+
+.nav-sidebar > li > a {
+  color: #fff;
+  padding-right: 200px;
+  padding-left: 20px;
 }
