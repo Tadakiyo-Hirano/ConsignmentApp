@@ -1,5 +1,43 @@
 @import "bootstrap";
 
+/* 共通 */
+
 * {
   font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+}
+
+// @media (min-width: 1140px) {
+//   .container {
+//     max-width: 1600px;
+//   }
+// }
+
+/* ヘッダー */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #606060;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #606060;
+  text-decoration: none;
+}
+
+.header-menu {
+  color: #606060;
+}
+
+.header-menu:hover {
+  color: #606060;
+  text-decoration: none;
+}
+
+.header-menu {
+  margin-right: 10px;
 }

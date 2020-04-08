@@ -1,7 +1,11 @@
-<!-- Image and text -->
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-    <img src="/docs/4.2/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-    Bootstrap
-  </a>
-</nav>
+<header class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
+  <div class="container">
+    <%= link_to "&nbsp;委託商品管理".html_safe, '#', id: "logo", class: "fas fa-box" %>
+    <div class="header-list">
+      <ul class="navbar-nav mr-autot">
+        <li><%= link_to "トップ", '#', class: "header-menu" %></li>
+        <li><%= link_to "ログイン", '#', class: "header-menu" %>
+      </ul>
+    </div>
+  </div>
+</header>
