@@ -1,21 +1,10 @@
-<header class="navbar navbar-expand-md navbar-dark">
-  <div class="container">
+<header class="navbar navbar-expand-md navbar-dark" id="menu-bg">
+  <div class="container-fluid">
     <div><%= link_to "&nbsp;委託商品管理".html_safe, '#', id: "logo", class: "fas fa-cubes" %></div>
     <div class="header-list">
       <ul class="navbar-nav mr-autot">
-        <li><%= link_to "ログアウト", '#', class: "header-menu fas fa-sign-out-alt" %></li>
+        <li><%= link_to "&nbsp;ログアウト".html_safe, '#', class: "header-menu fas fa-sign-out-alt fa-pull-right" %></li>
       </ul>
     </div>
   </div>
 </header>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-      <ul class="nav nav-sidebar">
-        <!-- PC用のメニュー部分 -->
-        <%= sidebar_list_items() %>
-      </ul>
-    </div>
-  </div>
-</div>
