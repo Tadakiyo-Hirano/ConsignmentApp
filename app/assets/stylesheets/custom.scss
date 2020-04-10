@@ -6,6 +6,36 @@
   font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 }
 
+h1 {
+  text-align: center;
+}
+
+.btn-default {
+  background-color: #273a60;
+  color: #fff;
+}
+
+/* トップページ */
+
+body {
+  background-color: gray;
+}
+
+.jumbotron {
+  p {
+    text-align: left;
+  }
+  .form-control {
+    margin-bottom: 20px;
+  }
+}
+
+.login-top {
+  margin: auto;
+  margin-top: 100px;
+  text-align: center;
+}
+
 /* レスポンシブ */
 
 /* ウィンドウ幅が767px以上 */

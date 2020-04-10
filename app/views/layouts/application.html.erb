@@ -21,7 +21,10 @@
   
   
   <body>
-    <%= render 'layouts/header' %>
+    <% unless root_path %>
+      <%= render 'layouts/header' %>
+    <% end %>
+    
     <div class="container-fluid">
       <%= yield %>
     </div>
