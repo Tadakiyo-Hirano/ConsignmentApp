@@ -15,6 +15,7 @@ gem 'sassc', '~> 2.0.0'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'bootstrap'
+gem 'devise'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.4'
