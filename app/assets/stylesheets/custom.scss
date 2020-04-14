@@ -20,10 +20,22 @@ h1 {
   color: #fff;
 }
 
+.notice {
+  background-color: #5cb85c;
+  color: #white;
+  text-align: center;
+}
+
+.alert {
+  background-color: #d9534f;
+  color: #white;
+  text-align: center;
+}
+
 /* トップページ */
 
 body {
-  background-color: gray;
+  background-color: #D7D8DA;
 }
 
 .jumbotron {

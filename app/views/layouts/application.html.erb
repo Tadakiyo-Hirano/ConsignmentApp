@@ -21,15 +21,16 @@
   
   
   <body>
-    <!-- deviseフラッシュメッセージ -->
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    
     <% unless root_path %>
       <%= render 'layouts/header' %>
     <% end %>
     
     <div class="container-fluid">
+      <!-- deviseフラッシュメッセージ -->
+      <% flash.each do |key, value| %>
+        <p><%= content_tag(:div, value, class: "#{key}") %></p>
+      <% end %>
+      
       <%= yield %>
     </div>
   </body>
