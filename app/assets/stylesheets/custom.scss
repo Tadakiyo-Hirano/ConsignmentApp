@@ -225,3 +225,10 @@ body {
 
 /*ロゴやサイトタイトルをセンタリング*/
 .logo-area{text-align:center;margin:auto;}
+
+/* deviseエラーメッセージ */
+
+.devise-error-messages {
+  color: #d9534f;
+  text-align: left;
+}
