@@ -6,6 +6,10 @@
   font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 }
 
+.center {
+  text-align: center;
+}
+
 h1 {
   text-align: center;
 }
@@ -231,4 +235,19 @@ body {
 .devise-error-messages {
   color: #d9534f;
   text-align: left;
+}
+
+/* デバッグ */
+
+.debug_dump {
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  border: double 5px #273a60;
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
 }
