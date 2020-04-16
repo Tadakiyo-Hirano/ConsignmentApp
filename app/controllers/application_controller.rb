@@ -8,11 +8,20 @@ class ApplicationController < ActionController::Base
   
   # ログイン後の画面遷移
   def after_sign_in_path_for(resource)
-    root_path
+    user_path(current_user)
   end
   
   # ログアウト後の画面遷移
   def after_sign_out_path_for(resource)
     root_path
   end
+  
+  def set_user
+    @user = User.find(params[:id])
+  end
+  
+  # before_action :authenticate_user! コントローラーに設定して、ログイン済ユーザーのみにアクセスを許可する
+  # user_signed_in? ユーザーがサインイン済かどうかを判定する
+  # current_user サインインしているユーザーを取得する
+  # user_session ユーザーのセッション情報にアクセスする
 end

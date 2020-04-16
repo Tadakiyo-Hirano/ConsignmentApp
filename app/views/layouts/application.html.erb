@@ -21,7 +21,7 @@
   
   
   <body>
-    <% unless root_path %>
+    <% if user_signed_in? %>
       <%= render 'layouts/header' %>
     <% end %>
     
