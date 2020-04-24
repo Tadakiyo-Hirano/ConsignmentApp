@@ -4,7 +4,8 @@ ja:
       user: ユーザー
     attributes:
       user:
-        name: 名前
+        code: 担当者コード
+        name: 担当者
         email: メールアドレス
         encrypted_password: 暗号化されたパスワード
         reset_password_token: パスワードリセット時のトークン
