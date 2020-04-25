@@ -143,6 +143,45 @@ body {
   margin-left: 15px;
 }
 
+/* ヘッダードロップダウンメニュー */
+
+#dropdown-setting {
+  background-color: #273a60;
+  color: #fff;
+  border: transparent;
+}
+
+#dropdown-setting:focus {
+  outline: 0;
+}
+
+/* ユーザー情報編集画面 */
+
+.label-user_info {
+  margin-bottom: 20px;
+}
+
+.btn-user_info {
+  margin-top: 50px;
+}
+
+/* ウィンドウ幅が767px以上 */
+@media screen and (min-width: 767px) {
+  .edit-user_info {
+    color: red;
+  }
+}
+
+/* ウィンドウ幅が最大767pxまで */
+@media screen and (max-width: 767px) {
+  
+}
+
+ /* ウィンドウ幅が最大479pxまで */
+@media screen and (max-width: 479px) {
+  
+}
+
 /* ハンバーガーメニュー */
 
 /*チェックボックス等は非表示に*/
@@ -190,7 +229,7 @@ body {
   transition: .3s ease-in-out;
 }
 
-/*メニューの中身*/
+/* メニューの中身 */
 #nav-content {
   overflow: auto;
   position: fixed;
@@ -206,7 +245,7 @@ body {
   transform: translateX(-105%);
 }
 
-/*チェックがついたら表示させる*/
+/* チェックがついたら表示させる */
 #nav-input:checked ~ #nav-close {
   display: block;
   opacity: .5;

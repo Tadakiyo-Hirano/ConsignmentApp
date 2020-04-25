@@ -5,7 +5,21 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :timeoutable
          
-  CODE_VALUES = [0..999]
+  CODE_VALUES = 0..999
   validates :name, presence: true, length: { maximum: 50 }
   validates :code, presence: true, inclusion: { in: CODE_VALUES }
+  
+  # パスワードの入力なしでユーザー情報更新
+  def update_without_current_password(params, *options)
+    params.delete(:current_password)
+
+    if params[:password].blank? && params[:password_confirmation].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation)
+    end
+
+    result = update_attributes(params, *options)
+    clean_up_passwords
+    result
+  end
 end

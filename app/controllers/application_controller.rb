@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   # 新規登録時(sign_up時)にnameキーのパラメーターを追加で許可
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:code, :name])
   end
   
   # ログイン後の画面遷移
