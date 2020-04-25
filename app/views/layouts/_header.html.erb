@@ -4,7 +4,15 @@
       <input id="nav-input" type="checkbox" class="nav-unshown">
       <label id="nav-open" for="nav-input"><span></span></label>
       <label class="nav-unshown" id="nav-close" for="nav-input"></label>
-      <div id="nav-content" class="nav navbar-light" style="background-color: #212529;">ここに中身を入れる</div>
+      <div id="nav-content" class="nav navbar-light" style="background-color: #212529;">
+        ここに中身を入れる
+        <div>
+          <ul>
+            <li><%= link_to "設定", '#', class: "header-menu" %></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "header-menu" %></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
   
@@ -12,8 +20,24 @@
     <div><%= link_to "&nbsp;委託商品管理".html_safe, '#', id: "logo", class: "fas fa-cubes" %></div>
     <div class="header-list">
       <ul class="navbar-nav mr-autot">
-        <li class="pc-logout"><%= link_to "&nbsp;ログアウト".html_safe, destroy_user_session_path, method: :delete, class: "header-menu fas fa-sign-out-alt" %></li>
-        <li class="mobile-logout"><%= link_to "&nbsp;".html_safe, '#', class: "header-menu fas fa-sign-out-alt" %></li>
+        
+        <div class="dropdown">
+          <button type="button" id="dropdown1"
+              class="dropdown-toggle fas fa-cog"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">
+            設定
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdown1">
+            <a class="dropdown-item" href="#">Menu #1</a>
+            <a class="dropdown-item" href="#">Menu #2</a>
+            <a class="dropdown-item" href="#">Menu #3</a>
+          </div>
+        </div>
+        
+        <li class="pc-display"><%= link_to "&nbsp;設定".html_safe, '#', class: "header-menu fas fa-cog" %></li>
+        <li class="pc-display"><%= link_to "&nbsp;ログアウト".html_safe, destroy_user_session_path, method: :delete, class: "header-menu fas fa-sign-out-alt" %></li>
       </ul>
     </div>
   </div>

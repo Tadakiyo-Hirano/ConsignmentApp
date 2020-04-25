@@ -1,7 +1,7 @@
 @import "bootstrap";
 
 /* 共通 */
-
+  
 * {
   font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 }
@@ -61,7 +61,7 @@ body {
   text-align: center;
 }
 
-/* レスポンシブ */
+/* ヘッダーレスポンシブ */
 
 /* ウィンドウ幅が767px以上 */
 @media screen and (min-width: 767px) {
@@ -75,9 +75,6 @@ body {
   margin-left: 50px;
   font-size: 1.7em;
   color: #fff;
-  }
-  .mobile-logout {
-    display: none;
   }
 }
 
@@ -94,7 +91,7 @@ body {
   .header-top {
     margin-top: -45px;
   }
-  .pc-logout {
+  .pc-display {
     display: none;
   }
 }
@@ -112,7 +109,7 @@ body {
   .header-top {
     margin-top: -45px;
   }
-  .pc-logout {
+  .pc-display {
    display: none;
   }
 }
@@ -140,6 +137,10 @@ body {
 
 #nav-drawer {
   position: relative;
+}
+
+.pc-display {
+  margin-left: 15px;
 }
 
 /* ハンバーガーメニュー */
