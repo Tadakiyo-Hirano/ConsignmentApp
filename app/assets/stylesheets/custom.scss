@@ -10,8 +10,9 @@
   text-align: center;
 }
 
-h1 {
+h1, h2 {
   text-align: center;
+  margin-top: 20px;
 }
 
 .btn-default {
@@ -157,12 +158,26 @@ body {
 
 /* ユーザー情報編集画面 */
 
-.label-user_info {
-  margin-bottom: 20px;
+.user-edit-form {
+  .label-user {
+    margin-left: 5px;
+  }
+  .btn-user {
+    margin-top: 40px;
+  }
+  .form-control {
+    margin: -5px 0 20px 0;
+  }
 }
 
-.btn-user_info {
-  margin-top: 50px;
+.btn-field {
+  text-align: center;
+  width: 100%;
+}
+
+.btn-item {
+  display: inline-block;
+  width: 49%;
 }
 
 /* ウィンドウ幅が767px以上 */

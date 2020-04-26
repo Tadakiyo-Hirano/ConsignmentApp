@@ -1,4 +1,4 @@
 <% provide(:title, @user.name) %>
 
-<h1><%= @user.code %></h1>
+<h1><%= format('%03d', @user.code) %></h1>
 <h1><%= @user.name %></h1>
