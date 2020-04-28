@@ -16,6 +16,24 @@ class ApplicationController < ActionController::Base
     root_path
   end
   
+  # フレンドリーフォワーディング
+  def after_sign_in_path_for(resource)
+    if (session[:user_return_to] == root_path)
+      super
+    else
+      session[:user_return_to] || root_path
+    end
+  end
+  
+  # ログインしていない場合はroot_urlにリダイレクト
+  def signed_in_user
+    unless user_signed_in?
+      store_current_location
+      flash[:alert] = "ログインしてください。"
+      redirect_to root_path
+    end
+  end
+  
   def set_user
     @user = User.find(params[:id])
   end
