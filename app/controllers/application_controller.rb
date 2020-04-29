@@ -6,16 +6,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:code, :name])
   end
   
-  # ログイン後の画面遷移
-  def after_sign_in_path_for(resource)
-    user_path(current_user)
-  end
-  
-  # ログアウト後の画面遷移
-  def after_sign_out_path_for(resource)
-    root_path
-  end
-  
   # フレンドリーフォワーディング
   def after_sign_in_path_for(resource)
     if (session[:user_return_to] == root_path)
@@ -37,6 +27,36 @@ class ApplicationController < ActionController::Base
   def set_user
     @user = User.find(params[:id])
   end
+  
+  private
+  
+    # ログイン後の画面遷移
+    # def after_sign_in_path_for(resource)
+    #   user_path(current_user)
+    # end
+    
+    # ログイン後のリダイレクト先 userとadminでリダイレクト先分岐
+    def after_sign_in_path_for(resource_or_scope)
+      if resource_or_scope.is_a?(Admin)
+        admin_path(current_admin)
+      else
+        user_path(current_user)
+      end
+    end
+    
+    # ログアウト後の画面遷移
+    # def after_sign_out_path_for(resource)
+    #   root_path
+    # end
+    
+    # ログアウト後のリダイレクト先
+    def after_sign_out_path_for(resource_or_scope)
+      if Admin
+         'http://www.google.co.jp/'
+      else
+        root_path
+      end
+    end
   
   # before_action :authenticate_user! コントローラーに設定して、ログイン済ユーザーのみにアクセスを許可する
   # user_signed_in? ユーザーがサインイン済かどうかを判定する

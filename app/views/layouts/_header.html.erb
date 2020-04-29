@@ -6,21 +6,29 @@
     <div><%= link_to "&nbsp;委託商品管理".html_safe, root_path, id: "logo", class: "fas fa-cubes" %></div>
     <div class="header-list">
       <ul class="navbar-nav mr-autot">
-        <li class="pc-display"><%= link_to "&nbsp;メイン".html_safe, user_path(current_user), class: "header-menu fas fa-user-circle" %></li>
+        <% unless admin_signed_in? %>
+          <li class="pc-display"><%= link_to "&nbsp;メイン".html_safe, user_path(current_user), class: "header-menu fas fa-user-circle" %></li>
+        <% end %>
         <!-- ドロップダウンメニュー -->
         <div class="dropdown">
           <button type="button" id="dropdown-setting" class="pc-display faa-parent animated-hover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-cog faa-spin animated-hover"></i>&nbsp;設定
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdown1">
-            <a><%= link_to "&nbsp;担当者情報編集".html_safe, edit_user_registration_path, class: "dropdown-item fas fa-user-circle" %></a>
+            <% unless admin_signed_in? %>
+              <a><%= link_to "&nbsp;担当者情報編集".html_safe, edit_user_registration_path, class: "dropdown-item fas fa-user-circle" %></a>
+            <% end %>
             <a class="dropdown-item" href="#">Menu #2</a>
             <a class="dropdown-item" href="#">Menu #3</a>
           </div>
         </div>
         
         <!--<li class="pc-display"><= link_to "&nbsp;設定".html_safe, '#', class: "header-menu fas fa-cog" %></li>-->
-        <li class="pc-display"><%= link_to "ログアウト".html_safe, destroy_user_session_path, method: :delete, class: "header-menu fas fa-sign-out-alt" %></li>
+        <% if user_signed_in? %>
+          <li class="pc-display"><%= link_to "ログアウト".html_safe, destroy_user_session_path, method: :delete, class: "header-menu fas fa-sign-out-alt" %></li>
+        <% elsif admin_signed_in? %>
+          <li class="pc-display"><%= link_to "ログアウト".html_safe, destroy_admin_session_path, method: :delete, class: "header-menu fas fa-sign-out-alt" %>
+        <% end %>
       </ul>
     </div>
   </div>
