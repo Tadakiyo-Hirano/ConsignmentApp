@@ -1,0 +1,20 @@
+<div class="header-logo-menu">
+  <div id="nav-drawer">
+    <input id="nav-input" type="checkbox" class="nav-unshown">
+    <label id="nav-open" for="nav-input"><span></span></label>
+    <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+    <div id="nav-content" class="nav navbar-light" style="background-color: gray;"> <!-- #212529 グレー -->
+      <!-- ここに中身を入れる -->
+      <div class="hamburger-menu">
+        <ul>
+          <li class="hamburger-title"><i class="fas fa-cog "></i>&nbsp;設定</li>
+          <li class="hamburger-item"><%= link_to "メイン", user_path(current_user), class: "hamburger-menu" %></li>
+          <li class="hamburger-item"><%= link_to "担当者情報編集", edit_user_registration_path, class: "hamburger-menu" %></li>
+        </ul>
+        <ul>
+          <li class="hamburger-title"><%= link_to "&nbsp;ログアウト".html_safe, destroy_user_session_path, method: :delete, class: "hamburger-menu fas fa-sign-out-alt" %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
