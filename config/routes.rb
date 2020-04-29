@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins
   root 'top_pages#top'
   
   devise_for :users, controllers: {
