@@ -15,25 +15,34 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  # ログインしていない場合はroot_urlにリダイレクト
-  def signed_in_user
-    unless user_signed_in?
-      store_current_location
-      flash[:alert] = "ログインしてください。"
-      redirect_to root_path
-    end
-  end
-  
   def set_user
     @user = User.find(params[:id])
   end
   
   private
   
-    # ログイン後の画面遷移
-    # def after_sign_in_path_for(resource)
-    #   user_path(current_user)
-    # end
+    # ログインしていない場合はroot_urlにリダイレクト
+    def signed_in_user
+      unless user_signed_in? || admin_signed_in?
+        store_current_location
+        flash[:alert] = "ログインしてください。"
+        redirect_to root_path
+      end
+    end
+    
+    # adminでない場合はroot_urlにリダイレクト
+    def signed_in_admin
+      unless admin_signed_in?
+        store_current_location
+        flash[:alert] = "ログインしてください。"
+        redirect_to root_path
+      end
+    end
+  
+    # フレンドリーフォワーディング用、アクセスされたURLを保存する
+    def store_current_location
+      store_location_for(:user, request.url)
+    end
     
     # ログイン後のリダイレクト先 userとadminでリダイレクト先分岐
     def after_sign_in_path_for(resource_or_scope)
@@ -44,15 +53,10 @@ class ApplicationController < ActionController::Base
       end
     end
     
-    # ログアウト後の画面遷移
-    # def after_sign_out_path_for(resource)
-    #   root_path
-    # end
-    
     # ログアウト後のリダイレクト先
     def after_sign_out_path_for(resource_or_scope)
-      if Admin
-         'http://www.google.co.jp/'
+      if resource_or_scope == :admin
+        admin_session_path
       else
         root_path
       end
