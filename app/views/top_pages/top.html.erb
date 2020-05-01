@@ -1,18 +1,19 @@
 <% provide(:title, "") %>
+
 <div class="container container-top">
   <div class="col col-md-6 col-md-offset-3 login-top">
     <div class="center jumbotron">
       <p>
         <i class="fas fa-cubes"></i>
-        &nbsp;委託商品管理システム
+        委託商品管理システム
       </p>
       <%= render 'users/sessions/new' %>
+      <div class="admin-link"><%= link_to "", admin_session_path, class: "fas fa-user-cog fa-lg" %></div>
     </div>
   </div>
 </div>
 
 <%= link_to "新規", new_user_registration_path %>
-<%= link_to "管理者", admin_session_path %>
 
 <!--<= form_with(scope: :session, url: '#', local: true) do |f| %>-->
 <!--  <= f.email_field :email, placeholder: "ユーザーID", class: "form-control" %>-->

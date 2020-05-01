@@ -62,6 +62,16 @@ body {
   text-align: center;
 }
 
+.admin-link {
+  margin-bottom: -20px;
+  padding-top: 30px;
+  text-align: right;
+  .fa-user-cog, .fa-user {
+    color: #273a60;
+    text-decoration: none;
+  }
+}
+
 /* ヘッダーレスポンシブ */
 
 /* ウィンドウ幅が767px以上 */
