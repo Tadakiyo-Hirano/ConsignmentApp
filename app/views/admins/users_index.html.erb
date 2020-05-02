@@ -1,0 +1,27 @@
+<% provide(:title, "担当者一覧") %>
+
+<h2>管理画面</h2>
+<div class="container">
+  <div class="col col-md-10 offset-1 admin-menu">
+    <div class="table table-condensed table-hover">
+      <table>
+        <thead>
+          <tr>
+            <th><%= User.human_attribute_name :code %></th>
+            <th><%= User.human_attribute_name :name %></th>
+            <th><%= User.human_attribute_name :email %></th>
+          </tr>
+        </thead>
+        
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= format("%03d", user.code) %></td>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= link_to "編集", edit_user_registration_path(user) %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
