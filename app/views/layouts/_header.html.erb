@@ -3,7 +3,7 @@
   <%= render 'layouts/hamburger_button' %>
   
   <div class="p-2 container-fluid header-top">
-    <div><%= link_to "&nbsp;委託商品管理".html_safe, root_path, id: "logo", class: "fas fa-cubes" %></div>
+    <div><%= link_to header_title, root_path, id: "logo" %></div>
     <div class="header-list">
       <ul class="navbar-nav mr-autot">
         <% unless admin_signed_in? %>
