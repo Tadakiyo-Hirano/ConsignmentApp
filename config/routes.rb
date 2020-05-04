@@ -23,6 +23,6 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :users, only: :show
+  resources :users, only: %i(show update)
 
 end

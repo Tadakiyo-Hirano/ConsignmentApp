@@ -200,13 +200,18 @@ body {
   text-align: center;
 }
 
-/* 管理者画面ユーザー一覧 */
+/* 管理者画面ユーザー一覧 users_index */
 
 #table-usres {
   td {
     vertical-align: middle;
   }
 }
+ 
+.collapse {
+  margin-bottom: 30px;
+}
+
 
 /* ユーザー情報編集画面 */
 

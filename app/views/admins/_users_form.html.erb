@@ -1,5 +1,6 @@
-<%= form_with(model: user, local: true) do |f| %>
-  <%= f.number_field :code, class: "form-control" %>
-  <%= f.text_field :name, class: "form-control" %>
-  <%= f.email_field :email, class: "form-control" %>
+<%= form_with(model: user, local: true, method: :patch) do |f| %>
+  <%= f.number_field :code, placeholder: "#{User.human_attribute_name :code}", class: "form-control" %>
+  <%= f.text_field :name, placeholder: "#{User.human_attribute_name :name}", class: "form-control" %>
+  <%= f.email_field :email, placeholder: "#{User.human_attribute_name :email}", class: "form-control" %>
+  <%= f.submit "更新", class: "btn btn-default btn-block" %>
 <% end %>

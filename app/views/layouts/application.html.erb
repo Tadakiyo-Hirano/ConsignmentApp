@@ -33,7 +33,7 @@
     <div class="container-fluid">
       <!-- deviseフラッシュメッセージ -->
       <% flash.each do |key, value| %>
-        <p><%= content_tag(:div, value, class: "#{key}") %></p>
+        <p><%= content_tag(:div, value.html_safe, class: "#{key}") %></p>
       <% end %>
       
       <%= yield %>
