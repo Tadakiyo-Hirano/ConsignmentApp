@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :signed_in_user
-  before_action :authenticate_admin!, only: %i(update)
-  before_action :set_user, only: %i(show update)
+  before_action :authenticate_admin!, only: %i(update password_update)
+  before_action :set_user, only: %i(show update password_update)
   
   def show
   end
@@ -19,9 +19,23 @@ class UsersController < ApplicationController
     end
   end
   
+  def password_update
+    if @user.update_attributes(user_password_params)
+      flash[:notice] = "【#{format("%03d", @user.code)}】#{@user.name}のパスワードを更新しました。"
+      redirect_to users_index_admins_url
+    else
+      flash[:alert] = "#{@user.name}の更新に失敗しました。<br>" + @user.errors.full_messages.join("<br>")
+      redirect_to users_index_admins_url
+    end
+  end
+  
   private
   
     def user_params
       params.require(:user).permit(:code, :name, :email, :password, :password_confirmation)
+    end
+    
+    def user_password_params
+      params.require(:user).permit(:password, :password_confirmation)
     end
 end

@@ -17,9 +17,12 @@
       <% @users.each do |user| %>
         <tr>
           <td>
-            <a class="btn btn-default btn-sm" data-toggle="collapse" href="#collapse<%= user.id %>"
-               role="button" aria-expanded="false" aria-controls="collapse<%= user.id %>">
+            <a class="btn btn-default btn-sm" data-toggle="collapse" href="#collapse1-<%= user.id %>"
+               role="button" aria-expanded="false" aria-controls="collapse1-<%= user.id %>">
               編集
+            </a>
+            <a class="btn btn-danger fas fa-unlock-alt" data-toggle="collapse" href="#collapse2-<%= user.id %>"
+               role="button" aria-expanded="false" aria-controls="collapse2-<%= user.id %>">
             </a>
           </td>
           <td class="pc-display"><%= format("%03d", user.code) %></td>
@@ -28,9 +31,14 @@
         </tr>
         <tr>
           <td colspan="4">
-            <div class="collapse" id="collapse<%= user.id %>">
+            <div class="collapse" id="collapse1-<%= user.id %>">
               <div class="collapse-body">
                 <%= render 'users_form', { user: user } %>
+              </div>
+            </div>
+            <div class="collapse" id="collapse2-<%= user.id %>">
+              <div class="collapse-body">
+                <%= render 'users_password_form', { user: user } %>
               </div>
             </div>
           </td>

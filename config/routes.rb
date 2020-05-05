@@ -23,6 +23,10 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :users, only: %i(show update)
+  resources :users, only: %i(show update) do
+    member do
+      patch 'password_update' # パスワード更新
+    end
+  end
 
 end
