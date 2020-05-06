@@ -44,7 +44,7 @@ h1, h2 {
 /* トップページ */
 
 body {
-  background-color: #D7D8DA;
+  background-color: #d7d8da;
 }
 
 .jumbotron {
@@ -359,6 +359,27 @@ body {
 
 .field_with_errors input:focus {
   border: 2px solid #d9534f;
+}
+
+/*ページネーションデザイン*/
+.pagination>li>a {
+  background-color: #d7d8da;
+  border: none; /* 枠線 */
+  color: #696969; /* 文字色 */
+}
+
+/* 表示しているページ番号のデザイン */
+.pagination>.active>a {
+  border-radius: 4px;
+}
+
+.page-item.active>.page-link {
+  background-color: #273a60;
+}
+
+/*ホバー時のデザイン*/
+.pagination>li>a:hover {
+  border-radius: 4px;
 }
 
 /* デバッグ */

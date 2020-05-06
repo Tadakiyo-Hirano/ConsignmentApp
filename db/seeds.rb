@@ -13,7 +13,7 @@ Admin.create!(
 )
 
 num = 1
-5.times do |n|
+30.times do |n|
   User.create!(
     email: "sample-#{n + 1}@email.com",
     password: "password",

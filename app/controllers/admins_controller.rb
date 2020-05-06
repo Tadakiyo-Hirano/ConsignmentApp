@@ -6,6 +6,6 @@ class AdminsController < ApplicationController
   end
   
   def users_index
-    @users = User.all
+    @users = User.all.page(params[:page]).per(10)
   end
 end

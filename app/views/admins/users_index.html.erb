@@ -3,7 +3,7 @@
 <h2>担当者一覧編集</h2>
 <div class="container">
   <div class="col col-md-12 admin-menu">
-    <div class="wrapper">
+    <%= paginate @users %>
     <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-users">
       <thead>
         <tr>
@@ -45,6 +45,5 @@
         </tr>
       <% end %>
     </table>
-    </div>
   </div>
 </div>
