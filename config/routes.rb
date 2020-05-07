@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'products/new'
   root 'top_pages#top'
   
   devise_for :admins, controllers: {
@@ -29,5 +28,7 @@ Rails.application.routes.draw do
       patch 'password_update' # パスワード更新
     end
   end
+  
+  resources :products
 
 end

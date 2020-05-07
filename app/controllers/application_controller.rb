@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
     @user = User.find(params[:id])
   end
   
+  def set_product
+    @product = Product.find(params[:id])
+  end
+  
   private
   
     # ログインしていない場合はroot_urlにリダイレクト

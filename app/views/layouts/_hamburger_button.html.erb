@@ -8,7 +8,9 @@
       <div class="hamburger-menu">
         <ul>
           <li class="hamburger-title"><i class="fas fa-cog "></i>&nbsp;設定</li>
-          <% unless admin_signed_in? %>
+          <% if admin_signed_in? %>
+            <li class="hamburger-item"><%= link_to "メイン", admin_path(current_admin), class: "hamburger-menu" %></li>
+          <% else %>
             <li class="hamburger-item"><%= link_to "メイン", user_path(current_user), class: "hamburger-menu" %></li>
           <% end %>
           <li class="hamburger-item"><%= link_to "担当者情報編集", edit_user_registration_path, class: "hamburger-menu" %></li>

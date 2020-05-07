@@ -3,6 +3,7 @@ ja:
     models:
       user: ユーザー
       admin: 管理者
+      product: 商品
     attributes:
       user:
         code: 担当者コード
@@ -23,4 +24,9 @@ ja:
         remember_created_at: Remember me チェックボックスON
         created_at: 作成日
         updated_at: 更新日
+      product:
+        code: 商品コード
+        name: 商品名
+        classification: 区分
+        category: 分類
         

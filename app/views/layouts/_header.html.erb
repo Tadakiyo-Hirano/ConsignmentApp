@@ -6,7 +6,9 @@
     <div><%= link_to header_title, root_path, id: "logo" %></div>
     <div class="header-list">
       <ul class="navbar-nav mr-autot">
-        <% unless admin_signed_in? %>
+        <% if admin_signed_in? %>
+          <li class="pc-display"><%= link_to "&nbsp;メイン".html_safe, admin_path(current_admin), class: "header-menu fas fa-user-circle" %></li>
+        <% else %>
           <li class="pc-display"><%= link_to "&nbsp;メイン".html_safe, user_path(current_user), class: "header-menu fas fa-user-circle" %></li>
         <% end %>
         <!-- ドロップダウンメニュー -->

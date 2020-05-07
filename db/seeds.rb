@@ -12,14 +12,35 @@ Admin.create!(
    name: '管理アカウント'
 )
 
-num = 1
+num1 = 1
 30.times do |n|
   User.create!(
     email: "sample-#{n + 1}@email.com",
     password: "password",
     name: "テスト太郎#{n + 1}",
-    code: num += 1
+    code: num1 += 1
   )
 end
 
-puts "Sample user created successfully!"
+puts "Sample users created successfully!"
+
+num2 = 710011
+21.times do |n|
+  Product.create!(
+    code: num2 += 1,
+    name: "テスト商品A#{n + 1}",
+    classification: "本機",
+    category: "刈払機"
+  )
+end
+
+9.times do |n|
+  Product.create!(
+    code: "H50133445#{n + 1}",
+    name: "テスト商品B#{n + 1}",
+    classification: "本機",
+    category: "チェンソー"
+  )
+end
+
+puts "Sample products created successfully!"

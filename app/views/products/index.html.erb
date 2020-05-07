@@ -1,0 +1,51 @@
+<% provide(:title, "商品一覧") %>
+
+<h2><i class="fas fa-boxes"></i>&nbsp;商品一覧・編集</h2>
+<div class="container">
+  <div class="col col-md-12 admin-menu">
+    <%= paginate @products %>
+    <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-users">
+      <thead>
+        <tr>
+          <th></th>
+          <th><%= Product.human_attribute_name :code %></th>
+          <th><%= Product.human_attribute_name :name %></th>
+          <th class="pc-display"><%= Product.human_attribute_name :classification %></th>
+          <th class="pc-display"><%= Product.human_attribute_name :category %></th>
+        </tr>
+      </thead>
+      
+      <% @products.each do |product| %>
+        <tr>
+          <td>
+            <a class="btn btn-default btn-sm" data-toggle="collapse" href="#collapse1-<%= product.id %>"
+               role="button" aria-expanded="false" aria-controls="collapse1-<%= product.id %>">
+              編集
+            </a>
+            <a class="btn btn-danger fas fa-unlock-alt" data-toggle="collapse" href="#collapse2-<%= product.id %>"
+               role="button" aria-expanded="false" aria-controls="collapse2-<%= product.id %>">
+            </a>
+          </td>
+          <td><%= product.code %></td>
+          <td><%= product.name %></td>
+          <td class="pc-display"><%= product.classification %></td>
+          <td class="pc-display"><%= product.category %></td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <div class="collapse" id="collapse1-<%= product.id %>">
+              <div class="collapse-body">
+                <!--<= render 'users_form', { user: user } %>-->
+              </div>
+            </div>
+            <div class="collapse" id="collapse2-<%= product.id %>">
+              <div class="collapse-body">
+                <!--<= render 'users_password_form', { user: user } %>-->
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
