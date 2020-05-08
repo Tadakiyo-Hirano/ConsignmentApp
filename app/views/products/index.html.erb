@@ -22,9 +22,7 @@
                role="button" aria-expanded="false" aria-controls="collapse1-<%= product.id %>">
               編集
             </a>
-            <a class="btn btn-danger fas fa-unlock-alt" data-toggle="collapse" href="#collapse2-<%= product.id %>"
-               role="button" aria-expanded="false" aria-controls="collapse2-<%= product.id %>">
-            </a>
+            <%= link_to "削除", '#', class: "btn btn-danger btn-sm" %>
           </td>
           <td><%= product.code %></td>
           <td><%= product.name %></td>
@@ -32,15 +30,10 @@
           <td class="pc-display"><%= product.category %></td>
         </tr>
         <tr>
-          <td colspan="4">
+          <td colspan="5">
             <div class="collapse" id="collapse1-<%= product.id %>">
               <div class="collapse-body">
-                <!--<= render 'users_form', { user: user } %>-->
-              </div>
-            </div>
-            <div class="collapse" id="collapse2-<%= product.id %>">
-              <div class="collapse-body">
-                <!--<= render 'users_password_form', { user: user } %>-->
+                <%= render 'products_form', { product: product } %>
               </div>
             </div>
           </td>
