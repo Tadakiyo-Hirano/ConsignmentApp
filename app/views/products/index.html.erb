@@ -4,10 +4,10 @@
 <div class="container">
   <div class="col col-md-12 admin-menu">
     <%= paginate @products %>
-    <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-users">
+    <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
       <thead>
         <tr>
-          <th></th>
+          <th class="pc-width"><%= link_to "登録", new_product_path, class: "btn btn-default btn-sm btn-new-products" %></th>
           <th><%= Product.human_attribute_name :code %></th>
           <th><%= Product.human_attribute_name :name %></th>
           <th class="pc-display"><%= Product.human_attribute_name :classification %></th>
@@ -22,7 +22,7 @@
                role="button" aria-expanded="false" aria-controls="collapse1-<%= product.id %>">
               編集
             </a>
-            <%= link_to "削除", '#', class: "btn btn-danger btn-sm" %>
+            <%= link_to "削除", product, method: :delete, data: { confirm: "【#{product.code}】#{product.name}を削除しますか？" }, class: "btn btn-danger btn-sm btn-delete-products" %>
           </td>
           <td><%= product.code %></td>
           <td><%= product.name %></td>

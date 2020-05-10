@@ -95,6 +95,9 @@ body {
   .mobile-display {
     display: none;
   }
+  .pc-width {
+    width: 150px;
+  }
 }
 
 /* ウィンドウ幅が最大767pxまで */
@@ -132,9 +135,6 @@ body {
   }
   .header-top {
     margin-top: -45px;
-  }
-  .pc-display {
-   display: none;
   }
 }
 
@@ -200,7 +200,7 @@ body {
   text-align: center;
 }
 
-/* 管理者画面ユーザー一覧 users_index */
+/* 管理者画面ユーザー一覧 admin/users_index */
 
 #table-usres {
   td {
@@ -244,14 +244,45 @@ body {
   }
 }
 
-/* ウィンドウ幅が最大767pxまで */
 @media screen and (max-width: 767px) {
   
 }
 
- /* ウィンドウ幅が最大479pxまで */
 @media screen and (max-width: 479px) {
   
+}
+
+/* 管理者画面商品一覧 products/index */
+
+#table-products {
+  td {
+    vertical-align: middle;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .pc-width {
+    width: 150px;
+  }
+  .btn-new-products {
+    margin-left: -50px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+}
+
+@media screen and (min-width: 479px) {
+  .btn-new-products {
+    margin-left: -50px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .btn-delete-products {
+    margin-top: 2px;
+  }
 }
 
 /* ハンバーガーメニュー */
