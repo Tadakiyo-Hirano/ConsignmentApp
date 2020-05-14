@@ -30,5 +30,6 @@ Rails.application.routes.draw do
   end
   
   resources :products
+  resources :customers
 
 end
