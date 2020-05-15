@@ -44,3 +44,12 @@ end
 end
 
 puts "Sample products created successfully!"
+
+30.times do |n|
+  Customer.create!(
+    code: "018999#{rand(1000..9999)}-00",
+    name: "テスト顧客#{n + 1}"
+  )
+end
+
+puts "Sample customers created successfully!"
