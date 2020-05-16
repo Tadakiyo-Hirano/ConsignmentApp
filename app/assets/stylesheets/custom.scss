@@ -256,7 +256,7 @@ body {
   
 }
 
-/* 管理者画面商品一覧 products/index */
+/* 商品一覧 products/index */
 
 #table-products {
   td {
@@ -285,6 +285,39 @@ body {
 
 @media screen and (max-width: 479px) {
   .btn-delete-products {
+    margin-top: 2px;
+  }
+}
+
+/* 得意先一覧 customers/index */
+
+#table-customers {
+  td {
+    vertical-align: middle;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .pc-width {
+    width: 150px;
+  }
+  .btn-new-customers {
+    margin-left: -50px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+}
+
+@media screen and (min-width: 479px) {
+  .btn-new-customers {
+    margin-left: -50px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .btn-delete-customers {
     margin-top: 2px;
   }
 }

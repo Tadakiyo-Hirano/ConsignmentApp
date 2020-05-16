@@ -23,6 +23,10 @@ class ApplicationController < ActionController::Base
     @product = Product.find(params[:id])
   end
   
+  def set_customer
+    @customer = Customer.find(params[:id])
+  end
+  
   private
   
     # ログインしていない場合はroot_urlにリダイレクト

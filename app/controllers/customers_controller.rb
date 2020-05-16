@@ -1,7 +1,9 @@
 class CustomersController < ApplicationController
   before_action :signed_in_user
+  before_action :set_customer, only: %i()
   
   def index
+    @customers = Customer.all.page(params[:page]).per(10).order(code: :asc)
   end
   
   def show

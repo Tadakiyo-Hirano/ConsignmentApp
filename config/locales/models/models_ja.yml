@@ -4,6 +4,7 @@ ja:
       user: ユーザー
       admin: 管理者
       product: 商品
+      customer: 得意先
     attributes:
       user:
         code: 担当者コード
@@ -29,4 +30,7 @@ ja:
         name: 商品名
         classification: 区分
         category: 分類
+      customer:
+        code: 得意先コード
+        name: 得意先名
         

@@ -1,1 +1,40 @@
 <% provide(:title, "得意先一覧") %>
+
+<h2><i class="fas fa-users"></i>&nbsp;得意先一覧・編集</h2>
+<div class="container">
+  <div class="col col-md-12 admin-menu">
+    <%= paginate @customers %>
+    <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-customers">
+      <thead>
+        <tr>
+          <th class="pc-width"><%= link_to "登録", new_customer_path, class: "btn btn-default btn-sm btn-new-customers" %></th>
+          <th><%= Customer.human_attribute_name :code %></th>
+          <th><%= Customer.human_attribute_name :name %></th>
+        </tr>
+      </thead>
+      
+      <% @customers.each do |customer| %>
+        <tr>
+          <td>
+            <a class="btn btn-default btn-sm" data-toggle="collapse" href="#collapse1-<%= customer.id %>"
+               role="button" aria-expanded="false" aria-controls="collapse1-<%= customer.id %>">
+              編集
+            </a>
+            <%= link_to "削除", customer, method: :delete, data: { confirm: "【#{customer.code}】#{customer.name}を削除しますか？" }, class: "btn btn-danger btn-sm btn-delete-customers" %>
+          </td>
+          <td><%= customer.code %></td>
+          <td><%= customer.name %></td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <div class="collapse" id="collapse1-<%= customer.id %>">
+              <div class="collapse-body">
+                <!--<= render 'customers_form', { customer: customer } %>-->
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
