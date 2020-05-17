@@ -33,12 +33,12 @@
           <td colspan="4">
             <div class="collapse" id="collapse1-<%= user.id %>">
               <div class="collapse-body">
-                <%= render 'users_form', { user: user } %>
+                <%= render 'form', { user: user } %>
               </div>
             </div>
             <div class="collapse" id="collapse2-<%= user.id %>">
               <div class="collapse-body">
-                <%= render 'users_password_form', { user: user } %>
+                <%= render 'password_form', { user: user } %>
               </div>
             </div>
           </td>

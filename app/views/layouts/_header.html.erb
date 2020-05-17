@@ -20,7 +20,7 @@
             <a><%= link_to "&nbsp;商品一覧/編集".html_safe, products_path, class: "dropdown-item fas fa-boxes" %></a>
             <a><%= link_to "&nbsp;得意先一覧/編集".html_safe, customers_path, class: "dropdown-item fas fa-building" %></a>
             <a>
-              <%= link_to "&nbsp;担当者一覧/編集".html_safe, users_index_admins_path, class: "dropdown-item fas fa-user-circle" if admin_signed_in? %>
+              <%= link_to "&nbsp;担当者一覧/編集".html_safe, users_path, class: "dropdown-item fas fa-user-circle" if admin_signed_in? %>
               <%= link_to "&nbsp;担当者情報編集".html_safe, edit_user_registration_path, class: "dropdown-item fas fa-user-circle" unless admin_signed_in? %>
             </a>
           </div>

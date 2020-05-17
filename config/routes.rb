@@ -17,13 +17,9 @@ Rails.application.routes.draw do
     get '/users/sign_out', to: 'devise/sessions#destroy' # logout
   end
   
-  resources :admins, only: :show do
-    collection do
-      get 'users_index' # 担当者一覧
-    end
-  end
+  resources :admins, only: :show
   
-  resources :users, only: %i(show update) do
+  resources :users, only: %i(index show update) do
     member do
       patch 'password_update' # パスワード更新
     end

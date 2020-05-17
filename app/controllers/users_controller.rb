@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
   before_action :signed_in_user
-  before_action :authenticate_admin!, only: %i(update password_update)
+  before_action :authenticate_admin!, only: %i(index update password_update)
   before_action :set_user, only: %i(show update password_update)
+  
+  def index
+    @users = User.all.page(params[:page]).per(10)
+  end
   
   def show
   end
@@ -9,23 +13,23 @@ class UsersController < ApplicationController
   def update
     if @user.update_attributes(user_params)
       flash[:notice] = "【#{format("%03d", @user.code)}】#{@user.name}の情報を更新しました。"
-      redirect_to users_index_admins_url
+      redirect_to users_url
     elsif @user.name.blank?
       flash[:alert] = "更新に失敗しました。<br>" + @user.errors.full_messages.join("<br>")
-      redirect_to users_index_admins_url
+      redirect_to users_url
     else
       flash[:alert] = "#{@user.name}の更新に失敗しました。<br>" + @user.errors.full_messages.join("<br>")
-      redirect_to users_index_admins_url
+      redirect_to users_url
     end
   end
   
   def password_update
     if @user.update_attributes(user_password_params)
       flash[:notice] = "【#{format("%03d", @user.code)}】#{@user.name}のパスワードを更新しました。"
-      redirect_to users_index_admins_url
+      redirect_to users_url
     else
       flash[:alert] = "#{@user.name}の更新に失敗しました。<br>" + @user.errors.full_messages.join("<br>")
-      redirect_to users_index_admins_url
+      redirect_to users_url
     end
   end
   
