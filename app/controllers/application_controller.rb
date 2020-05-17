@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
     def signed_in_admin
       unless admin_signed_in?
         store_current_location
-        flash[:alert] = "ログインしてください。"
+        flash[:alert] = "アクセス権限がありません。"
         redirect_to root_path
       end
     end

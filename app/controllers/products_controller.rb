@@ -19,7 +19,7 @@ class ProductsController < ApplicationController
       flash[:notice] = "【#{@product.code}】#{@product.name}&emsp;商品登録完了。"
       redirect_to products_url
     else
-      flash[:alert] = "更新に失敗しました。<br>" + @product.errors.full_messages.join("<br>")
+      flash.now[:alert] = "更新に失敗しました。<br>" + @product.errors.full_messages.join("<br>")
       render :new
     end
   end

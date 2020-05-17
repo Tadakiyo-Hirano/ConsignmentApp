@@ -14,6 +14,7 @@
             <li class="hamburger-item"><%= link_to "メイン", user_path(current_user), class: "hamburger-menu" %></li>
           <% end %>
           <li class="hamburger-item list-style-none"><%= link_to "商品一覧/編集", products_url, class: "hamburger-menu" %></li>
+          <li class="hamburger-item list-style-none"><%= link_to "得意先一覧/編集", customers_url, class: "hamburger-menu" %></li>
           <li class="hamburger-item list-style-none">
             <%= link_to "担当者一覧/編集", users_index_admins_path, class: "hamburger-menu" if admin_signed_in? %>
             <%= link_to "担当者情報編集", edit_user_registration_path, class: "hamburger-menu" unless admin_signed_in? %>

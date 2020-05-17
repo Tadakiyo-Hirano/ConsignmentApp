@@ -1,6 +1,6 @@
 <% provide(:title, "得意先一覧") %>
 
-<h2><i class="fas fa-users"></i>&nbsp;得意先一覧・編集</h2>
+<h2><i class="fas fa-building"></i>&nbsp;得意先一覧・編集</h2>
 <div class="container">
   <div class="col col-md-12 admin-menu">
     <%= paginate @customers %>
@@ -29,7 +29,7 @@
           <td colspan="5">
             <div class="collapse" id="collapse1-<%= customer.id %>">
               <div class="collapse-body">
-                <!--<= render 'customers_form', { customer: customer } %>-->
+                <%= render 'form', { customer: customer } %>
               </div>
             </div>
           </td>

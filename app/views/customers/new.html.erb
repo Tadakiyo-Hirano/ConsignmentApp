@@ -1,2 +1,20 @@
-<h1>Customers#new</h1>
-<p>Find me in app/views/customers/new.html.erb</p>
+<% provide(:title, "得意先登録") %>
+<div class="container container-top">
+  <div class="col col-md-6 col-md-offset-3 login-top">
+    <div class="center jumbotron">
+      <p>得意先登録</p>
+        <%= form_with(model: @customer, local: true) do |f| %>
+          <%= f.text_field :code, placeholder: "#{Customer.human_attribute_name :code}", class: "form-control" %>
+          <%= f.text_field :name, placeholder: "#{Customer.human_attribute_name :name}", class: "form-control" %>
+          <div class="btn-field">
+          <div class="btn-item">
+            <%= f.submit "登録", class: "btn btn-default btn-block btn-user" %>
+          </div>
+          <div class="btn-item">
+            <%= link_to "戻る", customers_path, class: "btn btn-secondary btn-block btn-user" %>
+          </div>
+        <div>
+        <% end %>
+    </div>
+  </div>
+</div>
