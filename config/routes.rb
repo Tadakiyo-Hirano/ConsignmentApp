@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'consignments/new'
   root 'top_pages#top'
   
   devise_for :admins, controllers: {
