@@ -5,6 +5,7 @@ ja:
       admin: 管理者
       product: 商品
       customer: 得意先
+      consignment: 委託情報
     attributes:
       user:
         code: 担当者コード
@@ -33,4 +34,11 @@ ja:
       customer:
         code: 得意先コード
         name: 得意先名
+      consignment:
+        ship_date: 出荷日
+        customer_info: 得意先
+        product_info: 商品
+        serial_number: 機番
+        note: 備考
+        quantity: 数量
         
