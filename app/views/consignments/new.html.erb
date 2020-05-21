@@ -2,14 +2,12 @@
 <p>Find me in app/views/consignments/new.html.erb</p>
 <%= @user.name %>
 
-<%= form_with(model: @user, url: consignments_path, local: true, method: :post) do |f| %>
-  <%= f.fields_for :consignments do |c| %>
-    <%= c.date_select :ship_date, placeholder: "#{Consignment.human_attribute_name :ship_date}", class: "form-control" %>
-    <%= c.text_field :customer_info, placeholder: "#{Consignment.human_attribute_name :customer_info}", class: "form-control" %>
-    <%= c.text_field :product_info, placeholder: "#{Consignment.human_attribute_name :product_info}", class: "form-control" %>
-    <%= c.number_field :quantity, placeholder: "#{Consignment.human_attribute_name :quantity}", class: "form-control" %>
-    <%= c.text_field :serial_number, placeholder: "#{Consignment.human_attribute_name :serial_number}", class: "form-control" %>
-    <%= c.text_field :note, placeholder: "#{Consignment.human_attribute_name :note}", class: "form-control" %>
-  <% end %>
+<%= form_with(model: @consignment, url: user_consignments_path(@user), local: true) do |f| %>
+  <%= f.date_select :ship_date, placeholder: "#{Consignment.human_attribute_name :ship_date}", class: "form-control" %>
+  <%= f.text_field :customer_info, placeholder: "#{Consignment.human_attribute_name :customer_info}", class: "form-control" %>
+  <%= f.text_field :product_info, placeholder: "#{Consignment.human_attribute_name :product_info}", class: "form-control" %>
+  <%= f.number_field :quantity, placeholder: "#{Consignment.human_attribute_name :quantity}", class: "form-control" %>
+  <%= f.text_field :serial_number, placeholder: "#{Consignment.human_attribute_name :serial_number}", class: "form-control" %>
+  <%= f.text_field :note, placeholder: "#{Consignment.human_attribute_name :note}", class: "form-control" %>
   <%= f.submit "登録", class: "btn btn-sm btn-default btn-block" %>
 <% end %>

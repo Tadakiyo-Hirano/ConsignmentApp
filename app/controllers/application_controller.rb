@@ -34,7 +34,15 @@ class ApplicationController < ActionController::Base
       unless user_signed_in? || admin_signed_in?
         store_current_location
         flash[:alert] = "ログインしてください。"
-        redirect_to root_path
+        redirect_to root_url
+      end
+    end
+    
+    # 他ユーザーのpathにアクセスした場合は自分のメインページにリダイレクト
+    def signed_in_correct_user
+      unless current_user.id == @user.id
+        flash[:alert] = "アクセス権限がありません。"
+        redirect_to user_url(current_user)
       end
     end
     
@@ -43,7 +51,7 @@ class ApplicationController < ActionController::Base
       unless admin_signed_in?
         store_current_location
         flash[:alert] = "アクセス権限がありません。"
-        redirect_to root_path
+        redirect_to root_url
       end
     end
   
@@ -55,18 +63,18 @@ class ApplicationController < ActionController::Base
     # ログイン後のリダイレクト先 userとadminでリダイレクト先分岐
     def after_sign_in_path_for(resource_or_scope)
       if resource_or_scope.is_a?(Admin)
-        admin_path(current_admin)
+        admin_url(current_admin)
       else
-        user_path(current_user)
+        user_url(current_user)
       end
     end
     
     # ログアウト後のリダイレクト先
     def after_sign_out_path_for(resource_or_scope)
       if resource_or_scope == :admin
-        admin_session_path
+        admin_session_url
       else
-        root_path
+        root_url
       end
     end
   

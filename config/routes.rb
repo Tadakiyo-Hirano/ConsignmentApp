@@ -21,9 +21,9 @@ Rails.application.routes.draw do
   resources :admins, only: :show
   
   resources :users, only: %i(index show update) do
+    resources :consignments
     member do
       patch 'password_update' # パスワード更新
-      resources :consignments
     end
   end
   

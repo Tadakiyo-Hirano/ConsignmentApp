@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :signed_in_user
   before_action :authenticate_admin!, only: %i(index update password_update)
   before_action :set_user, only: %i(show update password_update)
+  before_action :signed_in_correct_user, only: %i(show)
   
   def index
     @users = User.all.page(params[:page]).per(10)
