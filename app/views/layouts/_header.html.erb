@@ -7,9 +7,9 @@
     <div class="header-list">
       <ul class="navbar-nav mr-autot">
         <% if admin_signed_in? %>
-          <li class="pc-display"><%= link_to "&nbsp;メイン".html_safe, admin_path(current_admin), class: "header-menu fas fa-user-circle" %></li>
+          <li class="pc-display"><%= link_to "&nbsp;#{current_admin.name}".html_safe, admin_path(current_admin), class: "header-menu fas fa-user-circle" %></li>
         <% else %>
-          <li class="pc-display"><%= link_to "&nbsp;メイン".html_safe, user_path(current_user), class: "header-menu fas fa-user-circle" %></li>
+          <li class="pc-display"><%= link_to "&nbsp;#{current_user.name}".html_safe, user_path(current_user), class: "header-menu fas fa-user-circle" if user_signed_in? %></li>
         <% end %>
         <!-- ドロップダウンメニュー -->
         <div class="dropdown">

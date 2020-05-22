@@ -2,7 +2,7 @@
 
 <h1>委託商品情報</h1>
 <div class="container">
-  <div class="col col-md-12 admin-menu">
+  <div class="col col-md-12 user-menu">
     <table class="table-bordered table-condensed bg-light" width="50%">
       <tr>
         <th class="pc-display"><%= format('%03d', @user.code) %></th>
@@ -14,6 +14,7 @@
     <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
       <thead>
         <tr>
+          <th>編集</th>
           <th><%= Consignment.human_attribute_name :ship_date %></th>
           <th class="pc-display"><%= Product.human_attribute_name :code %></th>
           <th><%= Product.human_attribute_name :name %></th>
@@ -27,6 +28,7 @@
       <% @user.consignments.each do |consignment| %>
       <tbody>
         <tr>
+          <td><%= link_to "", edit_user_consignment_path(@user, consignment), class: "far fa-edit" %></td>
           <td><%= consignment.ship_date %></td>
           <td class="pc-display"><%= consignment.product_info %></td>
           <td><%= consignment.product_info %></td>
