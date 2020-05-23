@@ -1,7 +1,7 @@
 class ConsignmentsController < ApplicationController
   before_action :signed_in_user
   before_action :set_user_consignments
-  before_action :set_consignment, only: %i(edit)
+  before_action :set_consignment, only: %i(edit update)
   before_action :signed_in_correct_user
   
   def index
@@ -23,6 +23,17 @@ class ConsignmentsController < ApplicationController
   end
   
   def edit
+  end
+  
+  def update
+    ActiveRecord::Base.transaction do
+      @consignment.update_attributes!(consignment_params)
+      flash[:notice] = "委託情報を更新しました。"
+      redirect_to @user
+    end
+  rescue ActiveRecord::RecordInvalid
+    flash.now[:alert] = "更新に失敗しました。<br>" + @consignment.errors.full_messages.join("<br>")
+    render :edit
   end
   
   private
