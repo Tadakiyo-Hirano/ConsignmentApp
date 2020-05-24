@@ -10,7 +10,14 @@
       <%= f.number_field :quantity, placeholder: "#{Consignment.human_attribute_name :quantity}", class: "form-control" %>
       <%= f.text_field :serial_number, placeholder: "#{Consignment.human_attribute_name :serial_number}", class: "form-control" %>
       <%= f.text_area :note, placeholder: "#{Consignment.human_attribute_name :note}", class: "form-control" %>
-      <%= f.submit "登録", class: "btn btn-sm btn-default btn-block" %>
+      <div class="btn-field">
+        <div class="btn-item">
+          <%= f.submit "登録", class: "btn btn-default btn-block" %>
+        </div>
+        <div class="btn-item">
+          <%= link_to "戻る", user_path(@user), class: "btn btn-secondary btn-block" %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>

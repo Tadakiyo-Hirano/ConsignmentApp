@@ -25,6 +25,16 @@ h1, h2 {
   color: #fff;
 }
 
+.btn-field {
+  text-align: center;
+  width: 100%;
+}
+
+.btn-item { 
+  display: inline-block;
+  width: 49%;
+}
+
 .list-style-none {
   list-style: none;
 }
@@ -223,16 +233,6 @@ body {
   }
 }
 
-.btn-field {
-  text-align: center;
-  width: 100%;
-}
-
-.btn-item {
-  display: inline-block;
-  width: 49%;
-}
-
 /* ウィンドウ幅が767px以上 */
 @media screen and (min-width: 767px) {
   .edit-user_info {
@@ -255,6 +255,18 @@ body {
   .form-control {
     margin: -5px 0 20px 0;
   }
+}
+
+/* 委託詳細 consignments/show */
+
+.btn-item-2 { 
+  display: inline-block;
+  width: 40%;
+}
+
+.btn-item-3 { 
+  display: inline-block;
+  width: 18%;
 }
 
 /* 商品一覧 products/index */

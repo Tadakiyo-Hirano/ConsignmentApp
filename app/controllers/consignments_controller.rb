@@ -1,7 +1,7 @@
 class ConsignmentsController < ApplicationController
   before_action :signed_in_user
   before_action :set_user_consignments
-  before_action :set_consignment, only: %i(edit update)
+  before_action :set_consignment, only: %i(show edit update)
   before_action :signed_in_correct_user
   
   def index

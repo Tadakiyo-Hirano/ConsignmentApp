@@ -28,8 +28,8 @@
       <% @user.consignments.each do |consignment| %>
       <tbody>
         <tr>
-          <td><%= link_to "", edit_user_consignment_path(@user, consignment), class: "far fa-edit" %></td>
-          <td><%= consignment.ship_date %></td>
+          <td><%= link_to "", user_consignment_path(@user, consignment), class: "far fa-edit" %></td>
+          <td><%= l(consignment.ship_date, format: :default) %></td>
           <td class="pc-display"><%= consignment.product_info %></td>
           <td><%= consignment.product_info %></td>
           <td><%= consignment.quantity %></td>

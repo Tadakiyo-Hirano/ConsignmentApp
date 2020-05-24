@@ -1,0 +1,51 @@
+<% provide(:title, "委託情報詳細") %>
+
+<h1>委託情報詳細</h1>
+<div class="row justify-content-md-center consignment-show">
+  <div class="col col-md-6 col-md-offset-3">
+    <table class="table table-bordered table-condensed bg-light">
+      <tbody>
+        <tr>
+          <th width="100"><%= Consignment.human_attribute_name :ship_date %></th>
+          <td><%= l(@consignment.ship_date, format: :default)  %></td>
+        </tr>
+        <tr>
+          <th><%= Consignment.human_attribute_name :customer_info %></th>
+          <td><%= @consignment.customer_info %></td>
+        </tr>
+        <tr>
+          <th><%= Consignment.human_attribute_name :product_info %></th>
+          <td><%= @consignment.product_info %></td>
+        </tr>
+        <tr>
+          <th><%= Consignment.human_attribute_name :quantity %></th>
+          <td><%= @consignment.quantity %></td>
+        </tr>
+        <tr>
+          <th><%= Consignment.human_attribute_name :serial_number %></th>
+          <td><%= @consignment.serial_number %></td>
+        </tr>
+        <tr>
+          <th><%= Consignment.human_attribute_name :note %></th>
+          <td><%= @consignment.note %></td>
+        </tr>
+        <tr>
+          <th><%= User.human_attribute_name :name %></th>
+          <td><%= @user.name %></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="btn-field">
+      <div class="btn-item-2">
+        <%= link_to "編集", edit_user_consignment_path(@user, @consignment), class: "btn btn-default btn-block" %>
+      </div>
+      <div class="btn-item-2">
+        <%= link_to "戻る", user_path(@user), class: "btn btn-secondary btn-block" %>
+      </div>
+      <div class="btn-item-3">
+        <%= link_to "削除".html_safe, user_path(@user), class: "btn btn-danger btn-block" %>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
