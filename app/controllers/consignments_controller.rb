@@ -9,6 +9,7 @@ class ConsignmentsController < ApplicationController
   
   def new
     @consignment = Consignment.new
+    @test = Consignment.all.to_json
   end
   
   def create

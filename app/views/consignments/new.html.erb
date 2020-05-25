@@ -5,6 +5,7 @@
   <div class="col col-md-6 col-md-offset-3">
     <%= form_with(model: @consignment, url: user_consignments_path(@user), local: true) do |f| %>
       <%= f.date_field :ship_date, value: Date.current, placeholder: "#{Consignment.human_attribute_name :ship_date}", class: "form-control" %>
+      <%= f.text_field "", class: "form-control" %>
       <%= f.text_field :customer_info, placeholder: "#{Consignment.human_attribute_name :customer_info}", class: "form-control" %>
       <%= f.text_field :product_info, placeholder: "#{Consignment.human_attribute_name :product_info}", class: "form-control" %>
       <%= f.number_field :quantity, placeholder: "#{Consignment.human_attribute_name :quantity}", class: "form-control" %>
@@ -21,3 +22,117 @@
     <% end %>
   </div>
 </div>
+
+
+<script>
+// グローバル変数にモデルデータを格納する
+var modeldata = modeljson_parse('<%=@test%>');
+
+/** 
+ * モデルをJSON.parseする
+ */
+function modeljson_parse(item) {
+    item = JSON.stringify(item);
+    item = item.substr(1, (item.length - 2));
+    item = unEscapeHtml(item);
+    item = JSON.parse(item);
+    return item;
+}
+
+// アンエスケープ処理
+export function unEscapeHtml(str) {
+    str = str.replace(/(&gt;)/g, '>');
+    str = str.replace(/(&lt;)/g, '<');
+    str = str.replace(/(&#092;)/g, '\\');
+    str = str.replace(/(&quot;)/g, '"');
+    str = str.replace(/(&#39;)/g, "'");
+    str = str.replace(/(&amp;)/g, '&');
+    return str
+}
+</script>
+
+<div id="app">
+HTMLソース
+・
+・
+・
+</div>
+
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        test: modeldata
+    }
+});
+</script>
+
+<script>
+// グローバル変数にモデルデータを格納する
+var modeldata = modeljson_parse('<%=@test%>');
+ 
+/** 
+ * モデルをJSON.parseする
+ */
+function modeljson_parse(item) {
+    item = JSON.stringify(item);
+    item = item.substr(1, (item.length - 2));
+    item = unEscapeHtml(item);
+    item = JSON.parse(item);
+    return item;
+}
+ 
+// アンエスケープ処理
+export function unEscapeHtml(str) {
+    str = str.replace(/(&gt;)/g, '>');
+    str = str.replace(/(&lt;)/g, '<');
+    str = str.replace(/(&#092;)/g, '\\');
+    str = str.replace(/(&quot;)/g, '"');
+    str = str.replace(/(&#39;)/g, "'");
+    str = str.replace(/(&amp;)/g, '&');
+    return str
+}
+</script>
+ 
+<div id="app">
+HTMLソース
+・
+・
+・
+</div>
+ 
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        test: modeldata
+    }
+});
+
+function find_model(model, id) {
+    var result = model.filter(function (val) {
+        return val.id == id;
+    });
+    return result[0];
+}
+
+JavaScript
+var data = find_model(app.test, 1);
+
+console.log(data.customer_info); // "国語"
+console.log(data.product_info); // 65
+
+var data = find_model(app.test, 1);
+ 
+console.log(data.customer_info); // "国語"
+console.log(data.product_info); // 65
+</script>
+
+
+
+<div v-for="item in @test" v-bind:key="item.id">
+    <span>{{ item.id }}</span>
+    <span>{{ item.customer_info }}</span>
+    <span>{{ item.product }}</span>
+</div>
+
