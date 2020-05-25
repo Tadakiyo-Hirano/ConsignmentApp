@@ -43,7 +43,9 @@
         <%= link_to "戻る", user_path(@user), class: "btn btn-secondary btn-block" %>
       </div>
       <div class="btn-item-3">
-        <%= link_to "削除".html_safe, user_path(@user), class: "btn btn-danger btn-block" %>
+        <%= link_to "削除", user_consignment_path, method: :delete,
+                            data: { confirm: "#{@consignment.customer_info}【#{@consignment.product_info}】を削除しますか？" },
+                            class: "btn btn-danger btn-block" %>
       </div>
     </div>
     </div>

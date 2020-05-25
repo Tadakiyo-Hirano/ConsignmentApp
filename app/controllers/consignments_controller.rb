@@ -1,7 +1,7 @@
 class ConsignmentsController < ApplicationController
   before_action :signed_in_user
   before_action :set_user_consignments
-  before_action :set_consignment, only: %i(show edit update)
+  before_action :set_consignment, only: %i(show edit update destroy)
   before_action :signed_in_correct_user
   
   def index
@@ -34,6 +34,12 @@ class ConsignmentsController < ApplicationController
   rescue ActiveRecord::RecordInvalid
     flash.now[:alert] = "更新に失敗しました。<br>" + @consignment.errors.full_messages.join("<br>")
     render :edit
+  end
+  
+  def destroy
+    @consignment.destroy
+    flash[:alert] = "【#{@consignment.customer_info}】#{@consignment.product_info}&emsp;削除完了。"
+    redirect_to @user
   end
   
   private
