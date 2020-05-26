@@ -8,8 +8,8 @@ class ConsignmentsController < ApplicationController
   end
   
   def new
+    @products = Product.all
     @consignment = Consignment.new
-    @test = Consignment.all.to_json
   end
   
   def create
