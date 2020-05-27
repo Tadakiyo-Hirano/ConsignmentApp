@@ -8,6 +8,7 @@ class ConsignmentsController < ApplicationController
   end
   
   def new
+    @customers = Customer.all
     @products = Product.all
     @consignment = Consignment.new
   end
