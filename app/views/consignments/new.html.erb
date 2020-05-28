@@ -28,14 +28,44 @@
 
 function func1() {
   var input_customer = document.getElementById("input_customer").value;
-
-  var customer = ('<%= Customer.find_by(code: @aaa)&.name %>')
   
+  var customer = ('<%= Customer.find_by(code: "0188868880-00")&.name %>')
+  // var customer = ('<= Customer.find_by(code: "0188868880-00")&.name %>')
   document.getElementById("output_customer").value = customer;
 
 }
 </script>
-<%= @aaa %>
+
+
+
+<div>
+  <%= text_field :cuttomer, "", id: "input" %>
+  <%= button_tag "検索", type: "button", onclick: "func2()" %>
+  <%= text_field :customer, "", id: "output" %>
+</div>
+
+<div id="abc">aaaaaa</div>
+
+<div>
+  <% @customers.each do |c| %>
+    <p><%= c.code %></p>
+    <p id="<%= c.code %>"><%= c.name %></p>
+  <% end %>
+</div>
+
+<script>
+function func2() {
+  var input = document.getElementById("input").value;
+  
+  var test = document.getElementById(input).innerHTML;
+  // var customer = ('<= Customer.find_by(code: "0188868880-00")&.name %>')
+  document.getElementById("output").value = test;
+  // alert(test);
+}
+</script>
+
+
+
 
 
 <!--<div class="wrapper">-->
