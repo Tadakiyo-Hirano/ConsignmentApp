@@ -5,9 +5,8 @@
   <div class="col col-md-6 col-md-offset-3">
     <%= form_with(model: @consignment, url: user_consignments_path(@user), local: true) do |f| %>
       <%= f.date_field :ship_date, value: Date.current, placeholder: "#{Consignment.human_attribute_name :ship_date}", class: "form-control" %>
-      <%= f.text_field :cuttomer, class: "form-control", id: "input_customer" %>
-      <%= button_tag "検索", type: "button", onclick: "func1()" %>
-      <%= f.text_field :customer_info, placeholder: "#{Consignment.human_attribute_name :customer_info}", class: "form-control", id: "output_customer" %>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#demoNormalModal">検索</button>
+      <%= f.text_field :customer_info, placeholder: "#{Consignment.human_attribute_name :customer_info}", id: "output_customer", class: "form-control" %>
       <%= f.text_field :product_info, placeholder: "#{Consignment.human_attribute_name :product_info}", class: "form-control" %>
       <%= f.number_field :quantity, placeholder: "#{Consignment.human_attribute_name :quantity}", class: "form-control" %>
       <%= f.text_field :serial_number, placeholder: "#{Consignment.human_attribute_name :serial_number}", class: "form-control" %>
@@ -24,45 +23,123 @@
   </div>
 </div>
 
+ モーダルダイアログ 
+<div class="modal fade" id="demoNormalModal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="demoModalTitle">タイトル</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table-responsive table-bordered table-condensed">
+          <tr>
+            <th></th>
+            <th class="center"><%= Customer.human_attribute_name :code %></th>
+            <th class="center"><%= Customer.human_attribute_name :name %></th>
+          </tr>
+          <% @customers.each do |c| %>
+          <tr>
+            <th class="center"><%= button_tag "確定", value: "#{c.code}",id: "#{c.code}", class: "btn btn-default btn-sm", onclick: "customerfunc()" %></th>
+            <td class="center" id="<%= c.code %>"><%= c.code %></td>
+            <td class="center"><%= c.name %></td>
+            <script>
+            $('.btn').on('click', function customerfunc() {
+              var select_customer =  $(this).attr("id");
+              // var select_customer = document.getElementById(#{c.code}).value;
+              
+              document.getElementById("output_customer").value = select_customer;
+            });
+            </script>
+          <% end %>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+        <button type="button" class="btn btn-primary">ボタン</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+ <script>
+   function msgdsp() {
+       alert("ボタンをクリックしましたね。");
+   }
+ </script>
+ <from>
+ <P><input type="button" name="B1" value="このボタンを押すとアラートを表示します" onclick="msgdsp()"></P>
+ </form>
+ 
+<button class="btn" value="11" id="btn1">ボタン1</button>
+<button class="btn" value="22" id="btn2">ボタン2</button>
 <script>
+//   $('.btn').on('click', function(){
+//     var id =  $(this).attr("id");
+//     alert(id);
+// });
+</script>
 
-function func1() {
-  var input_customer = document.getElementById("input_customer").value;
+
+<%= text_field :cuttomer, "", id: "input_customer" %>
+<%= text_field :cuttomer, "", id: "output_customer" %>
+<script>
+function customerfunc() {
+  var select_customer = document.getElementById("select_customer").value;
   
-  var customer = ('<%= Customer.find_by(code: "0188868880-00")&.name %>')
-  // var customer = ('<= Customer.find_by(code: "0188868880-00")&.name %>')
-  document.getElementById("output_customer").value = customer;
-
+  document.getElementById("output_customer").value = select_customer;
 }
 </script>
 
 
+<!--<= button_tag "検索", type: "button", onclick: "func1()" %>-->
+<!--<= text_field :cuttomer, "", id: "input_customer" %>-->
+<!--<= text_field :cuttomer, "", id: "output_customer" %>-->
+<!--<script>-->
 
-<div>
-  <%= text_field :cuttomer, "", id: "input" %>
-  <%= button_tag "検索", type: "button", onclick: "func2()" %>
-  <%= text_field :customer, "", id: "output" %>
-</div>
-
-<div id="abc">aaaaaa</div>
-
-<div>
-  <% @customers.each do |c| %>
-    <p><%= c.code %></p>
-    <p id="<%= c.code %>"><%= c.name %></p>
-  <% end %>
-</div>
-
-<script>
-function func2() {
-  var input = document.getElementById("input").value;
+<!--function func1() {-->
+<!--  var input_customer = document.getElementById("input_customer").value;-->
   
-  var test = document.getElementById(input).innerHTML;
-  // var customer = ('<= Customer.find_by(code: "0188868880-00")&.name %>')
-  document.getElementById("output").value = test;
-  // alert(test);
-}
-</script>
+<!--  var customer = ('<= Customer.find_by(code: "0188868880-00")&.name %>')-->
+  <!--// var customer = ('<= Customer.find_by(code: "0188868880-00")&.name %>')-->
+<!--  document.getElementById("output_customer").value = customer;-->
+
+<!--}-->
+<!--</script>-->
+
+
+
+<!--<div>-->
+<!--  <= text_field :cuttomer, "", id: "input" %>-->
+<!--  <= button_tag "検索", type: "button", onclick: "func2()" %>-->
+<!--  <= text_field :customer, "", id: "output" %>-->
+<!--</div>-->
+
+<!--<div id="abc">aaaaaa</div>-->
+
+<!--<div>-->
+<!--  < @customers.each do |c| %>-->
+<!--    <p><= c.code %></p>-->
+<!--    <p id="<= c.code %>"><= c.name %></p>-->
+<!--  < end %>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--function func2() {-->
+<!--  var input = document.getElementById("input").value;-->
+  
+<!--  var test = document.getElementById(input).innerHTML;-->
+  <!--// var customer = ('<= Customer.find_by(code: "0188868880-00")&.name %>')-->
+<!--  document.getElementById("output").value = test;-->
+  <!--// alert(test);-->
+<!--}-->
+<!--</script>-->
 
 
 
@@ -133,3 +210,5 @@ function func2() {
 <!--$('#search-text').on('input', searchWord);-->
 
 <!--</script>-->
+
+
