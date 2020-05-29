@@ -1,17 +1,40 @@
 <% provide(:title, "委託商品登録") %>
 
 <h1>委託商品登録</h1>
-<div class="row justify-content-md-center consignment-new-form">
+<div class="row justify-content-md-center">
   <div class="col col-md-6 col-md-offset-3">
     <%= form_with(model: @consignment, url: user_consignments_path(@user), local: true) do |f| %>
-      <%= f.date_field :ship_date, value: Date.current, placeholder: "#{Consignment.human_attribute_name :ship_date}", class: "form-control" %>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#demoNormalModal">検索</button>
-      <%= f.text_field :customer_info, placeholder: "#{Consignment.human_attribute_name :customer_info}", id: "output_customer", class: "form-control" %>
-      <%= f.text_field :product_info, placeholder: "#{Consignment.human_attribute_name :product_info}", class: "form-control" %>
-      <%= f.number_field :quantity, placeholder: "#{Consignment.human_attribute_name :quantity}", class: "form-control" %>
-      <%= f.text_field :serial_number, placeholder: "#{Consignment.human_attribute_name :serial_number}", class: "form-control" %>
-      <%= f.text_area :note, placeholder: "#{Consignment.human_attribute_name :note}", class: "form-control" %>
-      <div class="btn-field">
+      <div class="consignment-new-form">
+        <%= f.date_field :ship_date, value: Date.current, placeholder: "#{Consignment.human_attribute_name :ship_date}", class: "form-control" %>
+      </div>
+      
+      <div class="consignment-new-form input-group">
+        <%= f.text_field :customer_info, placeholder: "#{Consignment.human_attribute_name :customer_info}", id: "output_customer", class: "form-control" %>
+        <div class="input-group-append">
+          <!--<button type="button" class="" data-toggle="modal" data-target="#customerModal">検索</button>-->
+          <%= button_tag type: "button", data: {toggle: "modal", target: "#customerModal"}, class: "btn btn-default" do %>
+            検索
+          <% end %>
+        </div>
+      </div>
+      
+      <div class="consignment-new-form">
+        <%= f.text_field :product_info, placeholder: "#{Consignment.human_attribute_name :product_info}", class: "form-control" %>
+      </div>
+      
+      <div class="consignment-new-form">
+        <%= f.number_field :quantity, placeholder: "#{Consignment.human_attribute_name :quantity}", class: "form-control" %>
+      </div class="consignment-new-form">
+      
+      <div class="consignment-new-form">
+        <%= f.text_field :serial_number, placeholder: "#{Consignment.human_attribute_name :serial_number}", class: "form-control" %>
+      </div>
+      
+      <div class="consignment-new-form">
+        <%= f.text_area :note, placeholder: "#{Consignment.human_attribute_name :note}", class: "form-control" %>
+      </div>
+      
+      <div class="consignment-new-form btn-field">
         <div class="btn-item">
           <%= f.submit "登録", class: "btn btn-default btn-block" %>
         </div>
@@ -24,17 +47,17 @@
 </div>
 
  モーダルダイアログ 
-<div class="modal fade" id="demoNormalModal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-fluid" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="demoModalTitle">タイトル</h5>
+        <h5 class="modal-title" id="customerModalTitle">得意先検索</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <table class="table-responsive table-bordered table-condensed">
+        <table class="table-responsive table-bordered table-condensed table-hover">
           <tr>
             <th></th>
             <th class="center"><%= Customer.human_attribute_name :code %></th>
@@ -42,17 +65,17 @@
           </tr>
           <% @customers.each do |c| %>
           <tr>
-            <th class="center"><%= button_tag "確定", value: "#{c.code}",id: "#{c.code}", class: "btn btn-default btn-sm", onclick: "customerfunc()" %></th>
+            <th class="center" data-dismiss="modal"><%= button_tag "確定", value: "#{c.code}",id: "#{c.code}", class: "btn btn-default btn-sm select_customer-btn", onclick: "customerfunc()" %></th>
             <td class="center" id="<%= c.code %>"><%= c.code %></td>
             <td class="center"><%= c.name %></td>
+            
             <script>
-            $('.btn').on('click', function customerfunc() {
-              var select_customer =  $(this).attr("id");
-              // var select_customer = document.getElementById(#{c.code}).value;
-              
-              document.getElementById("output_customer").value = select_customer;
-            });
+              $('.select_customer-btn').on('click', function customerfunc() {
+                var select_customer =  $(this).attr("id");
+                document.getElementById("output_customer").value = select_customer;
+              });
             </script>
+            
           <% end %>
           </tr>
         </table>
@@ -65,8 +88,12 @@
   </div>
 </div>
 
-
-
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="..." aria-label="..." aria-describedby="button-addon2">
+  <div class="input-group-append">
+    <button type="button" id="button-addon2" class="btn btn-outline-secondary">ボタン</button>
+  </div>
+</div>
 
  <script>
    function msgdsp() {
