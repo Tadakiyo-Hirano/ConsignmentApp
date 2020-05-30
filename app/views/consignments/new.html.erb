@@ -12,14 +12,19 @@
         <%= f.text_field :customer_info, placeholder: "#{Consignment.human_attribute_name :customer_info}", id: "output_customer", class: "form-control" %>
         <div class="input-group-append">
           <!--<button type="button" class="" data-toggle="modal" data-target="#customerModal">検索</button>-->
-          <%= button_tag type: "button", data: {toggle: "modal", target: "#customerModal"}, class: "btn btn-default" do %>
+          <%= button_tag type: "button", data: {toggle: "modal", target: "#customer-modal"}, class: "btn btn-default" do %>
             検索
           <% end %>
         </div>
       </div>
       
-      <div class="consignment-new-form">
-        <%= f.text_field :product_info, placeholder: "#{Consignment.human_attribute_name :product_info}", class: "form-control" %>
+      <div class="consignment-new-form input-group">
+        <%= f.text_field :product_info, placeholder: "#{Consignment.human_attribute_name :product_info}", id: "output_product", class: "form-control" %>
+        <div class="input-group-append">
+          <%= button_tag type: "button", data: {toggle: "modal", target: "#product-modal"}, class: "btn btn-default" do %>
+            検索
+          <% end %>
+        </div>
       </div>
       
       <div class="consignment-new-form">
@@ -46,48 +51,22 @@
   </div>
 </div>
 
- モーダルダイアログ 
-<div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-fluid" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="customerModalTitle">得意先検索</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <table class="table-responsive table-bordered table-condensed table-hover">
-          <tr>
-            <th></th>
-            <th class="center"><%= Customer.human_attribute_name :code %></th>
-            <th class="center"><%= Customer.human_attribute_name :name %></th>
-          </tr>
-          <% @customers.each do |c| %>
-          <tr>
-            <th class="center" data-dismiss="modal"><%= button_tag "確定", value: "#{c.code}",id: "#{c.code}", class: "btn btn-default btn-sm select_customer-btn", onclick: "customerfunc()" %></th>
-            <td class="center" id="<%= c.code %>"><%= c.code %></td>
-            <td class="center"><%= c.name %></td>
-            
-            <script>
-              $('.select_customer-btn').on('click', function customerfunc() {
-                var select_customer =  $(this).attr("id");
-                document.getElementById("output_customer").value = select_customer;
-              });
-            </script>
-            
-          <% end %>
-          </tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-        <button type="button" class="btn btn-primary">ボタン</button>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- 得意先検索モーダル -->
+<%= render 'customer_search' %>
 
+<!-- 商品検索モーダル -->
+<%= render 'product_search' %>
+
+
+
+
+
+
+
+
+
+
+<!-- テスト  -->
 <div class="input-group mb-3">
   <input type="text" class="form-control" placeholder="..." aria-label="..." aria-describedby="button-addon2">
   <div class="input-group-append">
@@ -95,14 +74,14 @@
   </div>
 </div>
 
- <script>
-   function msgdsp() {
-       alert("ボタンをクリックしましたね。");
-   }
- </script>
- <from>
- <P><input type="button" name="B1" value="このボタンを押すとアラートを表示します" onclick="msgdsp()"></P>
- </form>
+<script>
+ function msgdsp() {
+     alert("ボタンをクリックしましたね。");
+ }
+</script>
+<from>
+<P><input type="button" name="B1" value="このボタンを押すとアラートを表示します" onclick="msgdsp()"></P>
+</form>
  
 <button class="btn" value="11" id="btn1">ボタン1</button>
 <button class="btn" value="22" id="btn2">ボタン2</button>

@@ -1,0 +1,41 @@
+<!-- 商品検索モーダル -->
+<div class="modal fade" id="product-modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-fluid" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productModalTitle">商品検索</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table-responsive table-bordered table-condensed table-hover">
+          <tr>
+            <th></th>
+            <th class="center"><%= Product.human_attribute_name :code %></th>
+            <th class="center"><%= Product.human_attribute_name :name %></th>
+          </tr>
+          <% @products.each do |c| %>
+          <tr>
+            <th class="center" data-dismiss="modal"><%= button_tag "確定", value: "#{c.code}",id: "#{c.code}", class: "btn btn-default btn-sm select_product-btn", onclick: "productfunc()" %></th>
+            <td class="center" id="<%= c.code %>"><%= c.code %></td>
+            <td class="center"><%= c.name %></td>
+            
+            <script>
+              $('.select_product-btn').on('click', function productfunc() {
+                var select_product =  $(this).attr("id");
+                document.getElementById("output_product").value = select_product;
+              });
+            </script>
+            
+          <% end %>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+        <button type="button" class="btn btn-primary">ボタン</button>
+      </div>
+    </div>
+  </div>
+</div>

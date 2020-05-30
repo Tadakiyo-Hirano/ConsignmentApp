@@ -1,0 +1,41 @@
+<!-- 得意先検索モーダル -->
+<div class="modal fade" id="customer-modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-fluid" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="customerModalTitle">得意先検索</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table-responsive table-bordered table-condensed table-hover">
+          <tr>
+            <th></th>
+            <th class="center"><%= Customer.human_attribute_name :code %></th>
+            <th class="center"><%= Customer.human_attribute_name :name %></th>
+          </tr>
+          <% @customers.each do |c| %>
+          <tr>
+            <th class="center" data-dismiss="modal"><%= button_tag "確定", value: "#{c.code}",id: "#{c.code}", class: "btn btn-default btn-sm select_customer-btn", onclick: "customerfunc()" %></th>
+            <td class="center" id="<%= c.code %>"><%= c.code %></td>
+            <td class="center"><%= c.name %></td>
+            
+            <script>
+              $('.select_customer-btn').on('click', function customerfunc() {
+                var select_customer =  $(this).attr("id");
+                document.getElementById("output_customer").value = select_customer;
+              });
+            </script>
+            
+          <% end %>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+        <button type="button" class="btn btn-primary">ボタン</button>
+      </div>
+    </div>
+  </div>
+</div>
