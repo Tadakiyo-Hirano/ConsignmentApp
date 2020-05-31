@@ -8,16 +8,43 @@
             <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      
+      <div class="row search-area">
+         <div class="col-xs-3">
+          <form>
+            <input type="text" id="search-text" class="form-control" placeholder="検索ワードを入力">
+          </form>
+          <div class="search-result">
+            <div class="search-result__hit-num"></div>
+            <div id="search-result__list"></div>
+          </div>
+        </div>
+      </div>
+      
       <div class="modal-body">
+        <% @customers.each do |c| %>
+          <div class="target-area modal-search-list">
+            <ul>
+              <li>
+                <%= button_tag "確定", value: "#{c.code}",id: "#{c.code}", data: {dismiss: "modal" }, class: "btn btn-default btn-sm select_customer-btn", onclick: "customerfunc()" %>
+                &nbsp;
+                <%= c.code %>
+                &nbsp;
+                <%= c.name %>
+              </li>
+            <ul>
+          </div>
+        <% end %>
+        
         <table class="table-responsive table-bordered table-condensed table-hover">
           <tr>
             <th></th>
             <th class="center"><%= Customer.human_attribute_name :code %></th>
             <th class="center"><%= Customer.human_attribute_name :name %></th>
-          </tr>
+          </tr class="search-area">
           <% @customers.each do |c| %>
-          <tr>
-            <th class="center" data-dismiss="modal"><%= button_tag "確定", value: "#{c.code}",id: "#{c.code}", class: "btn btn-default btn-sm select_customer-btn", onclick: "customerfunc()" %></th>
+          <tr class="target-area">
+            <td class="center" data-dismiss="modal"><%= button_tag "確定", value: "#{c.code}",id: "#{c.code}", class: "btn btn-default btn-sm select_customer-btn", onclick: "customerfunc()" %></th>
             <td class="center" id="<%= c.code %>"><%= c.code %></td>
             <td class="center"><%= c.name %></td>
             
@@ -25,6 +52,27 @@
               $('.select_customer-btn').on('click', function customerfunc() {
                 var select_customer =  $(this).attr("id");
                 document.getElementById("output_customer").value = select_customer;
+              });
+              
+              $(function () {
+                searchWord = function(){
+                  var searchText = $(this).val(), // 検索ボックスに入力された値
+                      targetText;
+              
+                  $('.target-area li').each(function() {
+                    targetText = $(this).text();
+              
+                    // 検索対象となるリストに入力された文字列が存在するかどうかを判断
+                    if (targetText.indexOf(searchText) != -1) {
+                      $(this).removeClass('hidden');
+                    } else {
+                      $(this).addClass('hidden');
+                    }
+                  });
+                };
+              
+                // searchWordの実行
+                $('#search-text').on('input', searchWord);
               });
             </script>
             
@@ -39,3 +87,37 @@
     </div>
   </div>
 </div>
+
+<style>
+.search-area input[type="text"] {
+  padding: 5px 5px 3px;
+  font-size: 16px;
+  border: 1px solid #D6D6D6;
+}
+
+.search-area input[type="text"]:focus {
+  background: #F9F9F9;
+}
+
+.search-result {
+  margin-top: 20px;
+}
+.hit-num__text span {
+  font-weight: bold;
+}
+#search-result__list {
+  margin-top: 15px;
+}
+#search-result__list span {
+  display: inline-block;
+  margin-right: 15px;
+  padding: 5px;
+  background: #F2F2F2;
+}
+.target-area {
+  margin-top: 50px;
+}
+.target-area .hidden {
+  display: none
+}
+</style>
