@@ -19,6 +19,13 @@ consignment/index
       <li>いちご220円</li>
       <li>すいか500円</li>
     </ul>
+    <ul class="target-area">
+      <li><p>りんご120円</p><p>aaaa</p></li>
+      <li>ばなな100円</li>
+      <li>みかん150円</li>
+      <li>いちご220円</li>
+      <li>すいか500円</li>
+    </ul>
   </div><!-- /.wrapper -->
   <table>
     <tr class="target-area">
@@ -38,7 +45,7 @@ consignment/index
     var searchText = $(this).val(), // 検索ボックスに入力された値
         targetText;
 
-    $('.target-area td').each(function() {
+    $('.target-area li').each(function() {
       targetText = $(this).text();
 
       // 検索対象となるリストに入力された文字列が存在するかどうかを判断
@@ -89,3 +96,21 @@ consignment/index
 }
 </style>
 
+<style>
+.table02 {
+    display: table;
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+}
+.table02 .cell {
+    display: table-cell;
+    padding: 2px;
+    border: 1px solid black;
+}
+</style>
+<div class="table02">
+    <p class="cell">あああああああああああああああああああああああ</p>
+    <p class="cell">いいい</p>
+    <p class="cell">う</p>
+</div>

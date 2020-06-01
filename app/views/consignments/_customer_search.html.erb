@@ -22,17 +22,27 @@
       </div>
       
       <div class="modal-body">
+        
+        <div class="modal-search-list">
+          <div class="search-table">
+            <p class="fixed-cell">
+             
+            </p>
+            <p class="variable-cell">q</p>
+            <p class="variable-cell">q</p>
+          </div>
+        </div>
+        
         <% @customers.each do |c| %>
           <div class="target-area modal-search-list">
-            <ul>
-              <li>
-                <%= button_tag "確定", value: "#{c.code}",id: "#{c.code}", data: {dismiss: "modal" }, class: "btn btn-default btn-sm select_customer-btn", onclick: "customerfunc()" %>
-                &nbsp;
-                <%= c.code %>
-                &nbsp;
-                <%= c.name %>
-              </li>
-            <ul>
+            <div class="search-table">
+              <p class="fixed-cell">
+                <%= button_tag "確定", value: "#{c.code}",id: "#{c.code}", data: {dismiss: "modal" },
+                                       class: "btn btn-default btn-sm select_customer-btn", onclick: "customerfunc()" %>
+              </p>
+              <p class="variable-cell"><%= c.code %></p>
+              <p class="variable-cell"><%= c.name %></p>
+            </div>
           </div>
         <% end %>
         
@@ -59,7 +69,7 @@
                   var searchText = $(this).val(), // 検索ボックスに入力された値
                       targetText;
               
-                  $('.target-area li').each(function() {
+                  $('.target-area div').each(function() {
                     targetText = $(this).text();
               
                     // 検索対象となるリストに入力された文字列が存在するかどうかを判断
@@ -114,10 +124,36 @@
   padding: 5px;
   background: #F2F2F2;
 }
-.target-area {
+.target-area ul {
   margin-top: 50px;
+  list-style: none;
 }
 .target-area .hidden {
   display: none
+}
+/*.target-area ul {*/
+/*  margin-top: -30px;*/
+/*}*/
+
+
+
+.search-table {
+    display: table;
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+}
+.search-table .fixed-cell {
+    display: table-cell;
+    padding: 2px;
+    border: 1px solid #dee2e6;
+    width: 60px;
+    text-align: center;
+}
+.search-table .variable-cell {
+    display: table-cell;
+    padding: 2px;
+    border: 1px solid #dee2e6;
+    text-align: center;
 }
 </style>
