@@ -10,9 +10,9 @@
       </div>
       
       <div class="row search-area">
-         <div class="col-xs-3">
+         <div class="col col-md-9">
           <form>
-            <input type="text" id="search-text" class="form-control" placeholder="検索ワードを入力">
+            <input type="text" id="search-text-customer" class="form-control" placeholder="得意先コード又は得意先名で検索">
           </form>
           <div class="search-result">
             <div class="search-result__hit-num"></div>
@@ -22,138 +22,59 @@
       </div>
       
       <div class="modal-body">
-        
         <div class="modal-search-list">
           <div class="search-table">
-            <p class="fixed-cell">
-             
-            </p>
-            <p class="variable-cell">q</p>
-            <p class="variable-cell">q</p>
+            <p class="fixed-cell"></p>
+            <p class="variable-cell"><%= Customer.human_attribute_name :code %></p>
+            <p class="variable-cell"><%= Customer.human_attribute_name :name %></p>
           </div>
         </div>
         
-        <% @customers.each do |c| %>
-          <div class="target-area modal-search-list">
+        <% @customers.each do |customer| %>
+          <div class="target-area-customer modal-search-list">
             <div class="search-table">
               <p class="fixed-cell">
-                <%= button_tag "確定", value: "#{c.code}",id: "#{c.code}", data: {dismiss: "modal" },
+                <%= button_tag "確定", value: "#{customer.code}",id: "#{customer.code}", data: {dismiss: "modal" },
                                        class: "btn btn-default btn-sm select_customer-btn", onclick: "customerfunc()" %>
               </p>
-              <p class="variable-cell"><%= c.code %></p>
-              <p class="variable-cell"><%= c.name %></p>
+              <p class="variable-cell"><%= customer.code %></p>
+              <p class="variable-cell"><%= customer.name %></p>
             </div>
           </div>
         <% end %>
-        
-        <table class="table-responsive table-bordered table-condensed table-hover">
-          <tr>
-            <th></th>
-            <th class="center"><%= Customer.human_attribute_name :code %></th>
-            <th class="center"><%= Customer.human_attribute_name :name %></th>
-          </tr class="search-area">
-          <% @customers.each do |c| %>
-          <tr class="target-area">
-            <td class="center" data-dismiss="modal"><%= button_tag "確定", value: "#{c.code}",id: "#{c.code}", class: "btn btn-default btn-sm select_customer-btn", onclick: "customerfunc()" %></th>
-            <td class="center" id="<%= c.code %>"><%= c.code %></td>
-            <td class="center"><%= c.name %></td>
-            
-            <script>
-              $('.select_customer-btn').on('click', function customerfunc() {
-                var select_customer =  $(this).attr("id");
-                document.getElementById("output_customer").value = select_customer;
-              });
-              
-              $(function () {
-                searchWord = function(){
-                  var searchText = $(this).val(), // 検索ボックスに入力された値
-                      targetText;
-              
-                  $('.target-area div').each(function() {
-                    targetText = $(this).text();
-              
-                    // 検索対象となるリストに入力された文字列が存在するかどうかを判断
-                    if (targetText.indexOf(searchText) != -1) {
-                      $(this).removeClass('hidden');
-                    } else {
-                      $(this).addClass('hidden');
-                    }
-                  });
-                };
-              
-                // searchWordの実行
-                $('#search-text').on('input', searchWord);
-              });
-            </script>
-            
-          <% end %>
-          </tr>
-        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-        <button type="button" class="btn btn-primary">ボタン</button>
       </div>
     </div>
   </div>
 </div>
 
-<style>
-.search-area input[type="text"] {
-  padding: 5px 5px 3px;
-  font-size: 16px;
-  border: 1px solid #D6D6D6;
-}
-
-.search-area input[type="text"]:focus {
-  background: #F9F9F9;
-}
-
-.search-result {
-  margin-top: 20px;
-}
-.hit-num__text span {
-  font-weight: bold;
-}
-#search-result__list {
-  margin-top: 15px;
-}
-#search-result__list span {
-  display: inline-block;
-  margin-right: 15px;
-  padding: 5px;
-  background: #F2F2F2;
-}
-.target-area ul {
-  margin-top: 50px;
-  list-style: none;
-}
-.target-area .hidden {
-  display: none
-}
-/*.target-area ul {*/
-/*  margin-top: -30px;*/
-/*}*/
-
-
-
-.search-table {
-    display: table;
-    table-layout: fixed;
-    border-collapse: collapse;
-    width: 100%;
-}
-.search-table .fixed-cell {
-    display: table-cell;
-    padding: 2px;
-    border: 1px solid #dee2e6;
-    width: 60px;
-    text-align: center;
-}
-.search-table .variable-cell {
-    display: table-cell;
-    padding: 2px;
-    border: 1px solid #dee2e6;
-    text-align: center;
-}
-</style>
+<!-- 検索機能 -->
+<script>
+  $('.select_customer-btn').on('click', function customerfunc() {
+    var select_customer =  $(this).attr("id");
+    document.getElementById("output_customer").value = select_customer;
+  });
+  
+  $(function () {
+    searchWord = function(){
+      var searchText = $(this).val(), // 検索ボックスに入力された値
+          targetText;
+  
+      $('.target-area-customer div').each(function() {
+        targetText = $(this).text();
+  
+        // 検索対象となるリストに入力された文字列が存在するかどうかを判断
+        if (targetText.indexOf(searchText) != -1) {
+          $(this).removeClass('hidden');
+        } else {
+          $(this).addClass('hidden');
+        }
+      });
+    };
+  
+    // searchWordの実行
+    $('#search-text-customer').on('input', searchWord);
+  });
+</script>
