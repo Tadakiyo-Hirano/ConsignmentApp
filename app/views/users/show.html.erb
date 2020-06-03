@@ -26,18 +26,18 @@
       </thead>
       
       <% @user.consignments.each do |consignment| %>
-      <tbody>
-        <tr>
-          <td><%= link_to "", user_consignment_path(@user, consignment), class: "far fa-edit" %></td>
-          <td><%= l(consignment.ship_date, format: :default) %></td>
-          <td class="pc-display"><%= consignment.product_info %></td>
-          <td><%= Product.find_by(code: consignment.product_info)&.name %></td>
-          <td><%= consignment.quantity %></td>
-          <td class="pc-display"><%= consignment.serial_number %></td>
-          <td class="pc-display"><%= consignment.customer_info %></td>
-          <td class="pc-display"><%= consignment.note %></td>
-        </tr>
-      </tbody>
+        <tbody>
+          <tr>
+            <td><%= link_to "", user_consignment_path(@user, consignment), class: "far fa-edit" %></td>
+            <td><%= l(consignment.ship_date, format: :default) %></td>
+            <td class="pc-display"><%= consignment.product_info %></td>
+            <td><%= Product.find_by(code: consignment.product_info)&.name %></td>
+            <td><%= consignment.quantity %></td>
+            <td class="pc-display"><%= consignment.serial_number %></td>
+            <td class="pc-display"><%= consignment.customer_info %></td>
+            <td class="pc-display"><%= consignment.note %></td>
+          </tr>
+        </tbody>
       <% end %>
     </table>
   </div>

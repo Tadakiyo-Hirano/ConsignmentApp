@@ -25,6 +25,8 @@ class ConsignmentsController < ApplicationController
   end
   
   def edit
+    @customers = Customer.all
+    @products = Product.all
   end
   
   def update

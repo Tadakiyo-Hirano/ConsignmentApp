@@ -529,6 +529,41 @@ body {
   border: 2px solid #d9534f;
 }
 
+.aaa {
+  width: 90%;
+}
+
+.bbb {
+  display: inline-block;
+}
+
+// @media screen and (min-width: 767px) {
+//   .field_with_errors input#output_customer.form-control {
+//     width: 100vw;
+//   }
+// }
+
+/* ウィンドウ幅が最大767pxまで */
+// @media screen and (max-width: 767px) {
+//   .field_with_errors input#output_customer.form-control {
+//     width: 80vw;
+//   }
+// }
+
+// /* ウィンドウ幅が最大479pxから */
+// @media screen and (min-width: 479px) {
+//   .field_with_errors input#output_customer.form-control {
+//     width: 42.3vw;
+//   }
+// }
+
+// /* ウィンドウ幅が最大479pxまで */
+// @media screen and (max-width: 479px) {
+//   .field_with_errors input#output_customer.form-control {
+//     width: 76.5vw;
+//   }
+// }
+
 /*ページネーションデザイン*/
 .pagination>li>a {
   background-color: #d7d8da;

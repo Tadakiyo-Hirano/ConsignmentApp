@@ -8,15 +8,15 @@
         <%= f.date_field :ship_date, value: Date.current, placeholder: "#{Consignment.human_attribute_name :ship_date}", class: "form-control" %>
       </div>
       
-      <div class="consignment-new-form input-group">
+      <div class="consignment-new-form aaa bbb">
         <%= f.text_field :customer_info, placeholder: "#{Consignment.human_attribute_name :customer_info}", id: "output_customer", class: "form-control" %>
-        <div class="input-group-append">
-          <!--<button type="button" class="" data-toggle="modal" data-target="#customerModal">検索</button>-->
+      </div>
+        <div class="input-group-append bbb">
           <%= button_tag type: "button", data: {toggle: "modal", target: "#customer-modal"}, class: "btn btn-default" do %>
             検索
           <% end %>
         </div>
-      </div>
+      
       
       <div class="consignment-new-form input-group">
         <%= f.text_field :product_info, placeholder: "#{Consignment.human_attribute_name :product_info}", id: "output_product", class: "form-control" %>
@@ -56,13 +56,3 @@
 
 <!-- 商品検索モーダル -->
 <%= render 'product_search' %>
-
-
-
-
-
-
-
-
-
-
