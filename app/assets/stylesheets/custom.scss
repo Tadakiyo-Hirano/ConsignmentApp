@@ -258,9 +258,22 @@ body {
   margin-top: 20px;
 }
 
+.consignment-new-form-btn {
+  margin: 20px 0 -15px 2px;
+}
+
 .search-area {
   margin: 10px 0 -20px 0;
 }
+
+// .search-group {
+//   display: inline-block;
+//   .btn {
+//     margin-bottom: 5px;
+//     border-color: #d7d8da;
+//     border-style: solid;
+//   }
+// }
 
 /* 委託新規登録モーダル内検索機能 */
 
@@ -528,41 +541,6 @@ body {
 .field_with_errors input:focus {
   border: 2px solid #d9534f;
 }
-
-.aaa {
-  width: 90%;
-}
-
-.bbb {
-  display: inline-block;
-}
-
-// @media screen and (min-width: 767px) {
-//   .field_with_errors input#output_customer.form-control {
-//     width: 100vw;
-//   }
-// }
-
-/* ウィンドウ幅が最大767pxまで */
-// @media screen and (max-width: 767px) {
-//   .field_with_errors input#output_customer.form-control {
-//     width: 80vw;
-//   }
-// }
-
-// /* ウィンドウ幅が最大479pxから */
-// @media screen and (min-width: 479px) {
-//   .field_with_errors input#output_customer.form-control {
-//     width: 42.3vw;
-//   }
-// }
-
-// /* ウィンドウ幅が最大479pxまで */
-// @media screen and (max-width: 479px) {
-//   .field_with_errors input#output_customer.form-control {
-//     width: 76.5vw;
-//   }
-// }
 
 /*ページネーションデザイン*/
 .pagination>li>a {
