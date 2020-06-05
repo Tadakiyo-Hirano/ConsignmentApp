@@ -5,6 +5,7 @@ class ConsignmentsController < ApplicationController
   before_action :signed_in_correct_user
   
   def index
+    redirect_to new_user_consignment_path
   end
   
   def new
@@ -19,8 +20,8 @@ class ConsignmentsController < ApplicationController
       flash[:notice] = "登録完了。"
       redirect_to @user
     else
-      flash.now[:alert] = "更新に失敗しました。<br>" + @consignment.errors.full_messages.join("<br>")
-      render :new
+      redirect_to new_user_consignment_path,
+      flash: {alert: "更新に失敗しました。<br>" + @consignment.errors.full_messages.join("<br>")}
     end
   end
   

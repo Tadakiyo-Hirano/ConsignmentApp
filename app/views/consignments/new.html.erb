@@ -15,22 +15,21 @@
           得意先検索
         <% end %>
       </div>
-      
       <div class="consignment-new-form">
         <%= f.text_field :customer_info, placeholder: "#{Consignment.human_attribute_name :customer_info}",
-                                         id: "output_customer", class: "form-control" %>
+                                         id: "output_customer_id", class: "form-control", readonly: true %>
+        <%= f.text_field :customer_name, id: "output_customer_name", class: "form-control", readonly: true %>
       </div>
       
-      
-      <div class="consignment-new-form input-group">
+      <div class="consignment-new-form-btn">
+        <%= button_tag type: "button", data: {toggle: "modal", target: "#product-modal"},
+                                       class: "btn btn-sm btn-default" do %>
+          &nbsp;&nbsp;商品検索&nbsp;&nbsp;
+        <% end %>
+      </div>
+      <div class="consignment-new-form">
         <%= f.text_field :product_info, placeholder: "#{Consignment.human_attribute_name :product_info}",
                                         id: "output_product", class: "form-control" %>
-        <div class="input-group-append">
-          <%= button_tag type: "button", data: {toggle: "modal", target: "#product-modal"},
-                                         class: "btn btn-default" do %>
-            検索
-          <% end %>
-        </div>
       </div>
       
       <div class="consignment-new-form">
