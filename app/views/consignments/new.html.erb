@@ -16,9 +16,10 @@
         <% end %>
       </div>
       <div class="consignment-new-form">
+        <%= f.hidden_field :customer_id_number, id: "output_customer_id", class: "form-control", readonly: true %>
         <%= f.text_field :customer_info, placeholder: "#{Consignment.human_attribute_name :customer_info}",
-                                         id: "output_customer_id", class: "form-control", readonly: true %>
-        <%= f.text_field :customer_name, id: "output_customer_name", class: "form-control", readonly: true %>
+                                         id: "output_customer_code", class: "form-control", readonly: true %>
+        <%= f.text_field :customer_name, placeholder: "#{Consignment.human_attribute_name :customer_name}", id: "output_customer_name", class: "form-control", readonly: true %>
       </div>
       
       <div class="consignment-new-form-btn">

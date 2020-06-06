@@ -36,7 +36,8 @@ ja:
         name: 得意先名
       consignment:
         ship_date: 出荷日
-        customer_info: 得意先
+        customer_info: 得意先コード
+        customer_name: 得意先名
         product_info: 商品
         serial_number: 機番
         note: 備考

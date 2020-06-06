@@ -22,7 +22,7 @@ class ConsignmentsController < ApplicationController
       flash[:notice] = "登録完了。"
       redirect_to @user
     else
-      flash.now[:alert] = "更新に失敗しました。<br>" + @consignment.errors.full_messages.join("<br>")
+      flash.now[:alert] = "更新に失敗しました、赤枠内は必須です。<br>" + @consignment.errors.full_messages.join("<br>")
       render :new
     end
   end
@@ -52,7 +52,7 @@ class ConsignmentsController < ApplicationController
   private
   
     def consignment_params
-      params.require(:consignment).permit(:ship_date, :customer_info, :product_info, :serial_number, :note, :quantity, :user_id)
+      params.require(:consignment).permit(:ship_date, :customer_id_number, :customer_info, :customer_name, :product_info, :serial_number, :note, :quantity, :user_id)
     end
     
     def set_user_consignments
