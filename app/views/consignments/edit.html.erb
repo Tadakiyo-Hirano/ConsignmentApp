@@ -5,8 +5,8 @@
   <div class="col col-md-6 col-md-offset-3">
     <%= form_with(model: @consignment, url: user_consignment_path(@user, @consignment), local: true, method: :patch) do |f| %>
       <%= f.date_field :ship_date, placeholder: "#{Consignment.human_attribute_name :ship_date}", class: "form-control" %>
-      <%= f.text_field :customer_info, placeholder: "#{Consignment.human_attribute_name :customer_info}", class: "form-control" %>
-      <%= f.text_field :product_info, placeholder: "#{Consignment.human_attribute_name :product_info}", class: "form-control" %>
+      <%= f.text_field :customer_code, placeholder: "#{Consignment.human_attribute_name :customer_code}", class: "form-control" %>
+      <%= f.text_field :product_code, placeholder: "#{Consignment.human_attribute_name :product_code}", class: "form-control" %>
       <%= f.number_field :quantity, placeholder: "#{Consignment.human_attribute_name :quantity}", class: "form-control" %>
       <%= f.text_field :serial_number, placeholder: "#{Consignment.human_attribute_name :serial_number}", class: "form-control" %>
       <%= f.text_area :note, placeholder: "#{Consignment.human_attribute_name :note}", class: "form-control" %>
@@ -30,7 +30,7 @@
       </div>
       
       <div class="consignment-new-form input-group">
-        <%= f.text_field :customer_info, placeholder: "#{Consignment.human_attribute_name :customer_info}", id: "output_customer", class: "form-control" %>
+        <%= f.text_field :customer_code, placeholder: "#{Consignment.human_attribute_name :customer_code}", id: "output_customer", class: "form-control" %>
         <div class="input-group-append">
           <%= button_tag type: "button", data: {toggle: "modal", target: "#customer-modal"}, class: "btn btn-default" do %>
             検索
@@ -39,7 +39,7 @@
       </div>
       
       <div class="consignment-new-form input-group">
-        <%= f.text_field :product_info, placeholder: "#{Consignment.human_attribute_name :product_info}", id: "output_product", class: "form-control" %>
+        <%= f.text_field :product_code, placeholder: "#{Consignment.human_attribute_name :product_code}", id: "output_product", class: "form-control" %>
         <div class="input-group-append">
           <%= button_tag type: "button", data: {toggle: "modal", target: "#product-modal"}, class: "btn btn-default" do %>
             検索

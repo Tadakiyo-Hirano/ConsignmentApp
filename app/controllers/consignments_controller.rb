@@ -45,14 +45,16 @@ class ConsignmentsController < ApplicationController
   
   def destroy
     @consignment.destroy
-    flash[:alert] = "【#{@consignment.customer_info}】#{@consignment.product_info}&emsp;削除完了。"
+    flash[:alert] = "【#{@consignment.customer_code}】#{@consignment.product_code}&emsp;削除完了。"
     redirect_to @user
   end
   
   private
   
     def consignment_params
-      params.require(:consignment).permit(:ship_date, :customer_id_number, :customer_info, :customer_name, :product_info, :serial_number, :note, :quantity, :user_id)
+      params.require(:consignment).permit(:ship_date, :customer_id_number, :customer_code, :customer_name,
+                                          :product_id_number, :product_code, :product_name, :serial_number,
+                                          :note, :quantity, :user_id)
     end
     
     def set_user_consignments
