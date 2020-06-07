@@ -35,10 +35,10 @@
             <div class="search-table">
               <p class="fixed-cell">
                 <%= button_tag "確定", value: "#{product.code}",id: "#{product.code}", data: {dismiss: "modal" },
-                                       class: "btn btn-default btn-sm select_product-btn", onclick: "productfunc()" %>
+                                       class: "#{product.id} #{product.name} btn btn-default btn-sm select_product-btn", onclick: "productfunc()" %>
               </p>
               <p class="variable-cell"><%= product.code %></p>
-              <p class="variable-cell"><%= product.name %></p>
+              <p class="variable-cell" onclick="productfunc()"><%= product.name %></p>
             </div>
           </div>
         <% end %>
@@ -53,8 +53,12 @@
 <!-- 検索機能 -->
 <script>
   $('.select_product-btn').on('click', function productfunc() {
-    var select_product =  $(this).attr("id");
-    document.getElementById("output_product").value = select_product;
+    var select_product_code =  $(this).attr("id");
+    var select_product_id = $(this).attr("class").split(" ")[0];
+    var select_product_name = $(this).attr("class").split(" ")[1];
+    document.getElementById("output_product_code").value = select_product_code;
+    document.getElementById("output_product_id").value = select_product_id;
+    document.getElementById("output_product_name").value = select_product_name;
   });
   
   $(function () {
