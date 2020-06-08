@@ -21,6 +21,7 @@
           <th>委託台数</th>
           <th class="pc-display"><%= Consignment.human_attribute_name :serial_number %></th>
           <th class="pc-display"><%= Consignment.human_attribute_name :customer_code %></th>
+          <th class="pc-display"><%= Consignment.human_attribute_name :customer_name %></th>
           <th class="pc-display"><%= Consignment.human_attribute_name :note %></th>
         </tr>
       </thead>
@@ -35,6 +36,7 @@
             <td><%= consignment.quantity %></td>
             <td class="pc-display"><%= consignment.serial_number %></td>
             <td class="pc-display"><%= consignment.customer_code %></td>
+            <td class="pc-display"><%= consignment.customer_name %></td>
             <td class="pc-display"><%= consignment.note %></td>
           </tr>
         </tbody>

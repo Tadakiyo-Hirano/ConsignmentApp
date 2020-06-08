@@ -6,16 +6,24 @@
     <table class="table table-bordered table-condensed bg-light">
       <tbody>
         <tr>
-          <th width="100"><%= Consignment.human_attribute_name :ship_date %></th>
+          <th width="130"><%= Consignment.human_attribute_name :ship_date %></th>
           <td><%= l(@consignment.ship_date, format: :default)  %></td>
         </tr>
         <tr>
-          <th><%= Consignment.human_attribute_name :customer_info %></th>
-          <td><%= @consignment.customer_info %></td>
+          <th><%= Consignment.human_attribute_name :customer_code %></th>
+          <td><%= @consignment.customer_code %></td>
         </tr>
         <tr>
-          <th><%= Consignment.human_attribute_name :product_info %></th>
-          <td><%= @consignment.product_info %></td>
+          <th><%= Consignment.human_attribute_name :customer_name %></th>
+          <td><%= @consignment.customer_name %></td>
+        </tr>
+        <tr>
+          <th><%= Consignment.human_attribute_name :product_code %></th>
+          <td><%= @consignment.product_code %></td>
+        </tr>
+        <tr>
+          <th><%= Consignment.human_attribute_name :product_name %></th>
+          <td><%= @consignment.product_name %></td>
         </tr>
         <tr>
           <th><%= Consignment.human_attribute_name :quantity %></th>
@@ -44,7 +52,7 @@
       </div>
       <div class="btn-item-3">
         <%= link_to "削除", user_consignment_path, method: :delete,
-                            data: { confirm: "#{@consignment.customer_info}【#{@consignment.product_info}】を削除しますか？" },
+                            data: { confirm: "#{@consignment.customer_code}【#{@consignment.product_code}】を削除しますか？" },
                             class: "btn btn-danger btn-block" %>
       </div>
     </div>

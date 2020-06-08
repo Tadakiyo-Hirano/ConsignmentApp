@@ -1,0 +1,55 @@
+<div class="consignment-form">
+  <%= f.date_field :ship_date, value: yield(:text), placeholder: "#{Consignment.human_attribute_name :ship_date}",
+                               class: "form-control" %>
+</div>
+
+<div class="consignment-form-btn">
+  <%= button_tag type: "button", data: {toggle: "modal", target: "#customer-modal"},
+                                 class: "btn btn-sm btn-default" do %>
+    得意先検索
+  <% end %>
+</div>
+
+<div class="consignment-form">
+  <%= f.hidden_field :customer_id_number, id: "output_customer_id", class: "form-control", readonly: true %>
+  <%= f.text_field :customer_code, placeholder: "#{Consignment.human_attribute_name :customer_code}",
+                                   id: "output_customer_code", class: "form-control", readonly: true %>
+  <%= f.text_field :customer_name, placeholder: "#{Consignment.human_attribute_name :customer_name}",
+                                   id: "output_customer_name", class: "form-control", readonly: true %>
+</div>
+
+<div class="consignment-form-btn">
+  <%= button_tag type: "button", data: {toggle: "modal", target: "#product-modal"},
+                                 class: "btn btn-sm btn-default" do %>
+    &nbsp;&nbsp;商品検索&nbsp;&nbsp;
+  <% end %>
+</div>
+
+<div class="consignment-form">
+  <%= f.hidden_field :product_id_number, id: "output_product_id", class: "form-control", readonly: true %>
+  <%= f.text_field :product_code, placeholder: "#{Consignment.human_attribute_name :product_code}",
+                                  id: "output_product_code", class: "form-control", readonly: true %>
+  <%= f.text_field :product_name, placeholder: "#{Consignment.human_attribute_name :product_name}",
+                                   id: "output_product_name", class: "form-control", readonly: true %>
+</div>
+
+<div class="consignment-form">
+  <%= f.number_field :quantity, placeholder: "#{Consignment.human_attribute_name :quantity}", class: "form-control" %>
+</div class="consignment-form">
+
+<div class="consignment-form">
+  <%= f.text_field :serial_number, placeholder: "#{Consignment.human_attribute_name :serial_number}", class: "form-control" %>
+</div>
+
+<div class="consignment-form">
+  <%= f.text_area :note, placeholder: "#{Consignment.human_attribute_name :note}", class: "form-control" %>
+</div>
+
+<div class="consignment-form btn-field">
+  <div class="btn-item">
+    <%= f.submit yield(:button_text), class: "btn btn-default btn-block" %>
+  </div>
+  <div class="btn-item">
+    <%= link_to "戻る", user_path(@user), class: "btn btn-secondary btn-block" %>
+  </div>
+</div>
