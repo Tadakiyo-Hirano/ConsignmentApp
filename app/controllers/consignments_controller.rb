@@ -58,7 +58,7 @@ class ConsignmentsController < ApplicationController
     end
     
     def set_user_consignments
-      @user = User.find(params[:user_id])
+      @user = User.find(params[:user_id]).decorate
     end
     
     def set_consignment

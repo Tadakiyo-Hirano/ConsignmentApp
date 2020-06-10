@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   end
   
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find(params[:id]).decorate
   end
   
   def set_product
