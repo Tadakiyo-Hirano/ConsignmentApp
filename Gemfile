@@ -19,6 +19,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 gem 'kaminari'
+gem 'draper'
 
 group :development, :test do
   gem 'awesome_print' # コンソールで ap User.all等とすると、User.allより見やすい。
