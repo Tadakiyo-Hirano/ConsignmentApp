@@ -26,7 +26,7 @@
         </tr>
       </thead>
       
-      <% @user.consignments.each do |c| %>
+      <% @user.consignments.decorate.each do |c| %>
         <tbody>
           <tr>
             <td><%= link_to "", user_consignment_path(@user, c), class: "far fa-edit" %></td>
@@ -35,7 +35,7 @@
             <td><%= Product.find(c.product_id_number).name %></td>
             <td><%= c.quantity %></td>
             <td class="pc-display"><%= c.serial_number %></td>
-            <td class="pc-display"><%= Customer.find(c.customer_id_number).code %></td>
+            <td class="pc-display"><%= Customer.find(c.customer_id_number).code %><%= c.customer_id_number %></td>
             <td class="pc-display"><%= Customer.find(c.customer_id_number).name %></td>
             <td class="pc-display"><%= c.note %></td>
           </tr>
