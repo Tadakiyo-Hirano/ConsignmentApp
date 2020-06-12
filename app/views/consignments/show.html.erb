@@ -11,19 +11,19 @@
         </tr>
         <tr>
           <th><%= Consignment.human_attribute_name :customer_code %></th>
-          <td><%= @consignment.customer_code %></td>
+          <td><%= @consignment.customer_id_number.code %></td>
         </tr>
         <tr>
           <th><%= Consignment.human_attribute_name :customer_name %></th>
-          <td><%= @consignment.customer_name %></td>
+          <td><%= @consignment.customer_id_number.name %></td>
         </tr>
         <tr>
           <th><%= Consignment.human_attribute_name :product_code %></th>
-          <td><%= @consignment.product_code %></td>
+          <td><%= @consignment.product_id_number.code %></td>
         </tr>
         <tr>
           <th><%= Consignment.human_attribute_name :product_name %></th>
-          <td><%= @consignment.product_name %></td>
+          <td><%= @consignment.product_id_number.name %></td>
         </tr>
         <tr>
           <th><%= Consignment.human_attribute_name :quantity %></th>

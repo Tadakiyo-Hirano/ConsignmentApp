@@ -13,10 +13,4 @@ class UserDecorator < ApplicationDecorator
   def code
     format('%03d', object.code)
   end
-  
-  # Customer.find(c.customer_id_number).code
-  # def customer_id_number
-  #   # object.find(id: c.customer_id_number).code
-  #   format('%03d', object.customer_id_number)
-  # end
 end

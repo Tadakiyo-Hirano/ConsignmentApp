@@ -31,12 +31,12 @@
           <tr>
             <td><%= link_to "", user_consignment_path(@user, c), class: "far fa-edit" %></td>
             <td><%= l(c.ship_date, format: :default) %></td>
-            <td class="pc-display"><%= product_code(c.product_id_number) %></td>
-            <td><%= product_name(c.product_id_number) %></td>
+            <td class="pc-display"><%= c.product_id_number.code %></td>
+            <td><%= c.product_id_number.name %></td>
             <td><%= c.quantity %></td>
             <td class="pc-display"><%= c.serial_number %></td>
-            <td class="pc-display"><%= customer_code(c.customer_id_number) %></td>
-            <td class="pc-display"><%= customer_name(c.customer_id_number) %></td>
+            <td class="pc-display"><%= c.customer_id_number.code %></td>
+            <td class="pc-display"><%= c.customer_id_number.name %></td>
             <td class="pc-display"><%= c.note %></td>
           </tr>
         </tbody>

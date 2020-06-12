@@ -22,7 +22,7 @@ class ConsignmentsController < ApplicationController
       flash[:notice] = "登録完了。"
       redirect_to @user
     else
-      flash.now[:alert] = "更新に失敗しました、赤枠内は必須です。<br>" + @consignment.errors.full_messages.join("<br>")
+      flash.now[:alert] = "登録に失敗しました、赤枠内は必須です。<br>" + @consignment.errors.full_messages.join("<br>")
       render :new
     end
   end
@@ -58,11 +58,11 @@ class ConsignmentsController < ApplicationController
     end
     
     def set_user_consignments
-      @user = User.find(params[:user_id]).decorate
+      @user = User.find(params[:user_id])
     end
     
     def set_consignment
-      unless @consignment = @user.consignments.find_by(id: params[:id])
+      unless @consignment = @user.consignments.find_by(id: params[:id]).decorate
         flash[:alert] = "アクセス権限がありません。"
         redirect_to @user
       end
