@@ -12,6 +12,6 @@ class ConsignmentDecorator < Draper::Decorator
   #   end
   
   def customer_id_number
-    Customer.find(id: object.customer_id_number).code
+    object.customer_id_number
   end
 end
