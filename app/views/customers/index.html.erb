@@ -22,7 +22,7 @@
             </a>
             <%= link_to "削除", customer, method: :delete, data: { confirm: "【#{customer.code}】#{customer.name}を削除しますか？" }, class: "btn btn-danger btn-sm btn-delete-customers" %>
           </td>
-          <td><%= customer.code %></td>
+          <td><%= customer.code %><a class=<%= stamp(customer.created_at, customer.updated_at) %>></td>
           <td><%= customer.name %></td>
         </tr>
         <tr>

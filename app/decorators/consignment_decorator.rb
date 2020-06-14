@@ -12,7 +12,7 @@ class ConsignmentDecorator < Draper::Decorator
   #   end
   
   # Consignment.customer_id_numberから、Customer.idを引用、Custmer.idが削除されてnilの場合は削除済と表示してエラー回避
-  def customer_id_number
+  def customer_id_num
     if Customer.where(id: object.customer_id_number).any?
       Customer.find(object.customer_id_number)
     else
@@ -21,7 +21,7 @@ class ConsignmentDecorator < Draper::Decorator
   end
   
   # Consignment.product_id_numberから、Product.idを引用、Product.idが削除されてnilの場合は削除済と表示してエラー回避
-  def product_id_number
+  def product_id_num
     if Product.where(id: object.product_id_number).any?
       Product.find(object.product_id_number)
     else

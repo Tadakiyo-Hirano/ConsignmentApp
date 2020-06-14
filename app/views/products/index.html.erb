@@ -24,7 +24,7 @@
             </a>
             <%= link_to "削除", product, method: :delete, data: { confirm: "【#{product.code}】#{product.name}を削除しますか？" }, class: "btn btn-danger btn-sm btn-delete-products" %>
           </td>
-          <td><%= product.code %></td>
+          <td><%= product.code %><a class=<%= stamp(product.created_at, product.updated_at) %>></td>
           <td><%= product.name %></td>
           <td class="pc-display"><%= product.classification %></td>
           <td class="pc-display"><%= product.category %></td>

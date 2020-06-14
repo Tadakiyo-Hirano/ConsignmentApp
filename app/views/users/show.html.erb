@@ -11,6 +11,7 @@
       </tr>
     </table>
     <br>
+    <%= paginate @user_consignments %>
     <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
       <thead>
         <tr>
@@ -26,17 +27,17 @@
         </tr>
       </thead>
       
-      <% @user.consignments.decorate.each do |c| %>
+      <% @user_consignments.decorate.each do |c| %>
         <tbody>
           <tr>
             <td><%= link_to "", user_consignment_path(@user, c), class: "far fa-edit" %></td>
-            <td><%= l(c.ship_date, format: :default) %></td>
-            <td class="pc-display"><%= c.product_id_number&.code %></td>
-            <td><%= c.product_id_number&.name %></td>
+            <td><%= l(c.ship_date, format: :default) %><a class=<%= stamp(c.created_at, c.updated_at) %>></a></td>
+            <td class="pc-display"><%= c.product_id_num&.code %></td>
+            <td><%= c.product_id_num&.name %></td>
             <td><%= c.quantity %></td>
             <td class="pc-display"><%= c.serial_number %></td>
-            <td class="pc-display"><%= c.customer_id_number&.code %></td>
-            <td class="pc-display"><%= c.customer_id_number&.name %></td>
+            <td class="pc-display"><%= c.customer_id_num&.code %></td>
+            <td class="pc-display"><%= c.customer_id_num&.name %></td>
             <td class="pc-display"><%= c.note %></td>
           </tr>
         </tbody>

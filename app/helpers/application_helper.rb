@@ -22,4 +22,12 @@ module ApplicationHelper
       end
     end
   end
+  
+  def stamp(created_at, updated_at)
+    if (created_at + 3.minutes) > DateTime.current && created_at == updated_at
+      "new_stamp"
+    elsif (updated_at + 3.minutes) > DateTime.current
+      "update_stamp"
+    end
+  end
 end

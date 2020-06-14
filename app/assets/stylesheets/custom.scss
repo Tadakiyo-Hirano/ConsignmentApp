@@ -55,6 +55,30 @@ h1, h2 {
   text-align: center;
 }
 
+.new_stamp{
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  text-align: center;
+  vertical-align: top;
+  line-height: 4px;
+  border-radius: 50%;
+  border: solid 1px #d9534f;
+  background-color: #d9534f;
+}
+
+.update_stamp{
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  text-align: center;
+  vertical-align: top;
+  line-height: 4px;
+  border-radius: 50%;
+  border: solid 1px #5cb85c;
+  background-color: #5cb85c;
+}
+
 /* トップページ */
 
 body {
