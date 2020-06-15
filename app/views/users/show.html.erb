@@ -31,7 +31,8 @@
         <tbody>
           <tr>
             <td><%= link_to "", user_consignment_path(@user, c), class: "far fa-edit" %></td>
-            <td><%= l(c.ship_date, format: :default) %><a class=<%= stamp(c.created_at, c.updated_at) %>></a></td>
+            <td class="pc-display"><%= l(c.ship_date, format: :default) %><a class=<%= stamp(c.created_at, c.updated_at) %>></a></td>
+            <td class="mobile-display"><%= l(c.ship_date, format: :short) %><a class=<%= stamp(c.created_at, c.updated_at) %>></a></td>
             <td class="pc-display"><%= c.product_id_num&.code %></td>
             <td><%= c.product_id_num&.name %></td>
             <td><%= c.quantity %></td>

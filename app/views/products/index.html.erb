@@ -3,7 +3,22 @@
 <h2><i class="fas fa-boxes"></i>&nbsp;商品一覧・編集</h2>
 <div class="container">
   <div class="col col-md-12 admin-menu">
+    <div>
+      <%= form_with(scope: :search, url: products_path, class: "form-inline", method: :get, local: true) do |f| %>
+        <div class="input-group mb-3">
+          <%= f.text_field :code, placeholder: "#{Product.human_attribute_name :code}", class: "form-control" %>
+          <%= f.text_field :name, placeholder: "#{Product.human_attribute_name :name}", class: "form-control" %>
+          <div class="input-group-append">
+            <%= f.submit "検索", class: "btn btn-sm btn-default" %>
+          </div>
+        </div>
+        <div class="ml-3 mb-3"><%= search_results_text %></div>
+      <% end %>
+    </div>
+    
+    
     <%= paginate @products %>
+    
     <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
       <thead>
         <tr>

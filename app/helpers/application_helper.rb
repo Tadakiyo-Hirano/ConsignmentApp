@@ -23,11 +23,18 @@ module ApplicationHelper
     end
   end
   
+  # 新規登録、編集直後に丸印のバッジを表示する
   def stamp(created_at, updated_at)
     if (created_at + 3.minutes) > DateTime.current && created_at == updated_at
       "new_stamp"
     elsif (updated_at + 3.minutes) > DateTime.current
       "update_stamp"
+    end
+  end
+  
+  def search_results_text
+    if params[:search].present?
+      "検索結果#{@products.count}"
     end
   end
 end

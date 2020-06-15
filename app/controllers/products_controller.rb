@@ -3,7 +3,8 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i(show edit update destroy)
   
   def index
-    @products = Product.all.page(params[:page]).per(10).order(code: :asc)
+    @search_params = product_search_params
+    @products = Product.search(@search_params).page(params[:page]).per(10).order(code: :asc)
   end
   
   def show
@@ -50,5 +51,9 @@ class ProductsController < ApplicationController
   
     def product_params
       params.require(:product).permit(:code, :name, :classification, :category)
+    end
+    
+    def product_search_params
+      params.fetch(:search, {}).permit(:code, :name, :classification, :category)
     end
 end
