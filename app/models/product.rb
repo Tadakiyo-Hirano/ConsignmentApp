@@ -6,6 +6,7 @@ class Product < ApplicationRecord
   validates :classification, presence: true, length: { maximum: 15 }
   validates :category, presence: true, length: { maximum: 15 }
   
+  # 検索
   scope :search, -> (search_params) do
     return if search_params.blank?
     name_like(search_params[:name]).code_like(search_params[:code])

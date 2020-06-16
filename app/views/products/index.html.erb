@@ -12,12 +12,11 @@
             <%= f.submit "検索", class: "btn btn-sm btn-default" %>
           </div>
         </div>
-        <div class="ml-3 mb-3"><%= search_results_text %></div>
+        <div class="ml-3 mb-3"><%= search_results_text(@products) %></div>
       <% end %>
     </div>
     
-    
-    <%= paginate @products %>
+    <%= paginate @products if @search_params.blank? %>
     
     <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
       <thead>

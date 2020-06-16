@@ -32,9 +32,9 @@ module ApplicationHelper
     end
   end
   
-  def search_results_text
+  def search_results_text(search_hash)
     if params[:search].present?
-      "検索結果#{@products.count}"
+      "検索結果#{search_hash.count}"
     end
   end
 end

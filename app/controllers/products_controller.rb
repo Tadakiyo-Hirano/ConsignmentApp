@@ -4,7 +4,8 @@ class ProductsController < ApplicationController
   
   def index
     @search_params = product_search_params
-    @products = Product.search(@search_params).page(params[:page]).per(10).order(code: :asc)
+    @products = @search_params.blank? ? Product.search(@search_params).page(params[:page]).per(10).order(code: :asc) : 
+                                        Product.search(@search_params).order(code: :asc)
   end
   
   def show
@@ -53,6 +54,7 @@ class ProductsController < ApplicationController
       params.require(:product).permit(:code, :name, :classification, :category)
     end
     
+    # 検索用
     def product_search_params
       params.fetch(:search, {}).permit(:code, :name, :classification, :category)
     end

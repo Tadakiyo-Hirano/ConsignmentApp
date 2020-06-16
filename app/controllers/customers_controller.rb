@@ -3,7 +3,8 @@ class CustomersController < ApplicationController
   before_action :set_customer, only: %i(update destroy)
   
   def index
-    @customers = Customer.all.page(params[:page]).per(10).order(code: :asc)
+    @search_params = customer_search_params
+    @customers = Customer.search(@search_params).page(params[:page]).per(10).order(code: :asc)
   end
   
   def show
@@ -50,5 +51,10 @@ class CustomersController < ApplicationController
   
     def customer_params
       params.require(:customer).permit(:code, :name)
+    end
+    
+    # 検索用
+    def customer_search_params
+      params.fetch(:search, {}).permit(:code, :name)
     end
 end
