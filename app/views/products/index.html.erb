@@ -16,7 +16,7 @@
       <% end %>
     </div>
     
-    <%= paginate @products if @search_params.blank? %>
+    <%= paginate @products if @search_none %>
     
     <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
       <thead>

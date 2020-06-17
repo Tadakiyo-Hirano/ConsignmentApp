@@ -16,7 +16,7 @@
       <% end %>
     </div>
     
-    <%= paginate @customers %>
+    <%= paginate @customers if @search_none %>
     
     <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-customers">
       <thead>

@@ -4,8 +4,10 @@ class ProductsController < ApplicationController
   
   def index
     @search_params = product_search_params
-    @products = @search_params.blank? ? Product.search(@search_params).page(params[:page]).per(10).order(code: :asc) : 
-                                        Product.search(@search_params).order(code: :asc)
+    # @search_none = @search_params.blank? || @search_params[:code] == "" && @search_params[:name] == ""
+    @search_none = search_none
+    @products = @search_none ? Product.search(@search_params).page(params[:page]).per(10).order(code: :asc) : 
+                               Product.search(@search_params).order(code: :asc)
   end
   
   def show
@@ -56,6 +58,6 @@ class ProductsController < ApplicationController
     
     # 検索用
     def product_search_params
-      params.fetch(:search, {}).permit(:code, :name, :classification, :category)
+      params.fetch(:search, {}).permit(:code, :name)
     end
 end

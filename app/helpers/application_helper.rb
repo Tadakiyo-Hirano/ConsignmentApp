@@ -32,9 +32,15 @@ module ApplicationHelper
     end
   end
   
+  def search_none
+    @search_params.blank? || @search_params[:code] == "" && @search_params[:name] == ""
+  end
+  
   def search_results_text(search_hash)
-    if params[:search].present?
-      "検索結果#{search_hash.count}"
+    if @search_params[:code] == "" && @search_params[:name] == ""
+      "検索ワードを入力してください。"
+    elsif params[:search].present?
+      "検索結果 #{search_hash.count}件"
     end
   end
 end

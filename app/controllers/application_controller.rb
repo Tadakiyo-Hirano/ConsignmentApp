@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
   before_action :configure_permitted_parameters, if: :devise_controller?
   
   # 新規登録時(sign_up時)にnameキーのパラメーターを追加で許可
