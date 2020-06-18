@@ -1,4 +1,6 @@
 class CustomersController < ApplicationController
+  include CustomersHelper
+  
   before_action :signed_in_user
   before_action :set_customer, only: %i(update destroy)
   
@@ -39,15 +41,20 @@ class CustomersController < ApplicationController
       flash[:alert] = "更新に失敗しました。<br>" + @customer.errors.full_messages.join("<br>")
       redirect_to customers_url
     else
-      flash[:alert] = "#{@customer.name}の更新に失敗しました。<br>" + @customer.errors.full_messages.join("<br>")
+      flash[:warning] = "#{@customer.name}の更新に失敗しました。<br>" + @customer.errors.full_messages.join("<br>")
       redirect_to customers_url
     end
   end
   
   def destroy
-    @customer.destroy
-    flash[:alert] = "【#{@customer.code}】#{@customer.name}&emsp;削除完了。"
-    redirect_to products_url
+    if in_use_customer_id
+      flash[:warning] = "委託情報に使用されている顧客情報です。削除できません。"
+      redirect_back(fallback_location: customers_url)
+    else
+      @customer.destroy
+      flash[:alert] = "【#{@customer.code}】#{@customer.name}&emsp;削除完了。"
+      redirect_to customers_url
+    end
   end
   
   private
