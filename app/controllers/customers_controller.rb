@@ -4,7 +4,10 @@ class CustomersController < ApplicationController
   
   def index
     @search_params = customer_search_params
-    @customers = Customer.search(@search_params).page(params[:page]).per(10).order(code: :asc)
+    # @customers = Customer.search(@search_params).page(params[:page]).per(10).order(code: :asc)
+    @search_none = search_none
+    @customers = @search_none ? Customer.search(@search_params).page(params[:page]).per(10).order(code: :asc) : 
+                               Customer.search(@search_params).order(code: :asc)
   end
   
   def show
