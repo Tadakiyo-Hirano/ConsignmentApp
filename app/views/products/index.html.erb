@@ -12,7 +12,9 @@
             <%= f.submit "検索", class: "btn btn-sm btn-default" %>
           </div>
         </div>
-        <div class="ml-3 mb-3"><%= search_results_text(@products) %></div>
+        <div class="ml-3 mb-3">
+          <%= search_results_text(@products) %>&emsp;<%= search_results_link(products_path) %>
+        </div>
       <% end %>
     </div>
     

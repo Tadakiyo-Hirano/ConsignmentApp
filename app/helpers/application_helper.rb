@@ -46,11 +46,11 @@ module ApplicationHelper
     end
   end
   
-  def search_results_link
+  def search_results_link(path)
     if @search_params[:code] == "" && @search_params[:name] == ""
       return
     elsif params[:search].present?
-      link_to "戻る", customers_path
+      link_to "戻る", path
     end
   end
 end
