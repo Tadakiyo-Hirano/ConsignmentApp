@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_07_073125) do
+ActiveRecord::Schema.define(version: 2020_06_20_131246) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -60,6 +60,15 @@ ActiveRecord::Schema.define(version: 2020_06_07_073125) do
     t.index ["code"], name: "index_products_on_code", unique: true
   end
 
+  create_table "stocks", force: :cascade do |t|
+    t.integer "return_quantity", default: 0, null: false
+    t.integer "sales_quantity", default: 0, null: false
+    t.integer "consignment_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["consignment_id"], name: "index_stocks_on_consignment_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -75,4 +84,5 @@ ActiveRecord::Schema.define(version: 2020_06_07_073125) do
   end
 
   add_foreign_key "consignments", "users"
+  add_foreign_key "stocks", "consignments"
 end

@@ -1,5 +1,6 @@
 class Consignment < ApplicationRecord
   belongs_to :user
+  has_many :stocks
   
   validates :ship_date, presence: true
   validates :customer_id_number, presence: true
