@@ -45,6 +45,11 @@
   <%= f.text_area :note, placeholder: "#{Consignment.human_attribute_name :note}", class: "form-control" %>
 </div>
 
+<%= f.fields_for :stocks do |ff| %>
+  <%= ff.number_field :return_quantity, class: "form-control" %>
+  <%= ff.number_field :sales_quantity, class: "form-control" %>
+<% end %>
+
 <div class="consignment-form btn-field">
   <div class="btn-item">
     <%= f.submit yield(:button_text), class: "btn btn-default btn-block" %>

@@ -1,6 +1,7 @@
 class Consignment < ApplicationRecord
   belongs_to :user
   has_many :stocks, dependent: :destroy
+  accepts_nested_attributes_for :stocks
   
   validates :ship_date, presence: true
   validates :customer_id_number, presence: true

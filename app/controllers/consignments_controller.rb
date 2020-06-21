@@ -12,6 +12,7 @@ class ConsignmentsController < ApplicationController
     @customers = Customer.all
     @products = Product.all
     @consignment = Consignment.new
+    @consignment.stocks.build
   end
   
   def create
@@ -54,7 +55,7 @@ class ConsignmentsController < ApplicationController
     def consignment_params
       params.require(:consignment).permit(:ship_date, :customer_id_number, :customer_code, :customer_name,
                                           :product_id_number, :product_code, :product_name, :serial_number,
-                                          :note, :quantity, :user_id)
+                                          :note, :quantity, :user_id, stocks_attributes: [:id, :return_quantity, :sales_quantity])
     end
     
     def set_user_consignments
