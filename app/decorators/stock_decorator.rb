@@ -9,5 +9,11 @@ class StockDecorator < ApplicationDecorator
   #       object.created_at.strftime("%a %m/%d/%y")
   #     end
   #   end
+  
+  # def consignment_quantity
+  #   object.stocks.each do |aa|
+  #     aa
+  #   end
+  # end
 
 end

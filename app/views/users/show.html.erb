@@ -35,10 +35,9 @@
             <td class="mobile-display"><%= l(c.ship_date, format: :short) %><a class=<%= stamp(c.created_at, c.updated_at) %>></a></td>
             <td class="pc-display"><%= c.product_id_num&.code %></td>
             <td><%= c.product_id_num&.name %></td>
-            <td><%= c.stocks.e { |a| a.consignment_quantity} %></td>
             <td>
-              <% c.stocks.each do |aa|%>
-              <%= aa.consignment_quantity %>
+              <% c.stocks.each do |stock|%>
+                <%= stock.consignment_quantity %>
               <% end %>
             </td>
             <td class="pc-display"><%= c.serial_number %></td>
