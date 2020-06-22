@@ -34,8 +34,10 @@
 </div>
 
 <div class="consignment-form">
-  <%= f.number_field :quantity, placeholder: "#{Consignment.human_attribute_name :quantity}", class: "form-control" %>
-</div class="consignment-form">
+  <%= f.fields_for :stocks do |ff| %>
+    <%= ff.number_field :consignment_quantity, placeholder: "#{Stock.human_attribute_name :consignment_quantity}", class: "form-control" %>
+  <% end %>
+</div>
 
 <div class="consignment-form">
   <%= f.text_field :serial_number, placeholder: "#{Consignment.human_attribute_name :serial_number}", class: "form-control" %>
@@ -44,11 +46,6 @@
 <div class="consignment-form">
   <%= f.text_area :note, placeholder: "#{Consignment.human_attribute_name :note}", class: "form-control" %>
 </div>
-
-<%= f.fields_for :stocks do |ff| %>
-  <%= ff.number_field :return_quantity, class: "form-control" %>
-  <%= ff.number_field :sales_quantity, class: "form-control" %>
-<% end %>
 
 <div class="consignment-form btn-field">
   <div class="btn-item">

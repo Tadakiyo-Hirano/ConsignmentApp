@@ -6,6 +6,7 @@ ja:
       product: 商品
       customer: 得意先
       consignment: 委託情報
+      stock: 在庫
     attributes:
       user:
         code: 担当者コード
@@ -44,5 +45,8 @@ ja:
         product_name: 商品名
         serial_number: 機番
         note: 備考
-        quantity: 数量
+      stock:
+        consignment_quantity: 委託数量
+        return_quantity: 引上数量
+        sales_quantity: 売上数量
         

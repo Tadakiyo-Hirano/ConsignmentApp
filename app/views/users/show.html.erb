@@ -19,7 +19,7 @@
           <th><%= Consignment.human_attribute_name :ship_date %></th>
           <th class="pc-display"><%= Product.human_attribute_name :code %></th>
           <th><%= Product.human_attribute_name :name %></th>
-          <th>委託台数</th>
+          <th><%= Stock.human_attribute_name :consignment_quantity %></th>
           <th class="pc-display"><%= Consignment.human_attribute_name :serial_number %></th>
           <th class="pc-display"><%= Consignment.human_attribute_name :customer_code %></th>
           <th class="pc-display"><%= Consignment.human_attribute_name :customer_name %></th>
@@ -35,7 +35,12 @@
             <td class="mobile-display"><%= l(c.ship_date, format: :short) %><a class=<%= stamp(c.created_at, c.updated_at) %>></a></td>
             <td class="pc-display"><%= c.product_id_num&.code %></td>
             <td><%= c.product_id_num&.name %></td>
-            <td><%= c.quantity %></td>
+            <td><%= c.stocks.e { |a| a.consignment_quantity} %></td>
+            <td>
+              <% c.stocks.each do |aa|%>
+              <%= aa.consignment_quantity %>
+              <% end %>
+            </td>
             <td class="pc-display"><%= c.serial_number %></td>
             <td class="pc-display"><%= c.customer_id_num&.code %></td>
             <td class="pc-display"><%= c.customer_id_num&.name %></td>
