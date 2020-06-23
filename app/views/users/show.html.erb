@@ -37,7 +37,7 @@
             <td><%= c.product_id_num&.name %></td>
             <td>
               <% c.stocks.each do |stock|%>
-                <%= stock.consignment_quantity %>
+                <%= stock_result(stock) %>
               <% end %>
             </td>
             <td class="pc-display"><%= c.serial_number %></td>
