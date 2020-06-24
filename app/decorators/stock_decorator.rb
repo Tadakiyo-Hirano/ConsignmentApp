@@ -15,5 +15,5 @@ class StockDecorator < ApplicationDecorator
   #     aa
   #   end
   # end
-
+  
 end
