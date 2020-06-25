@@ -10,7 +10,7 @@ class UserDecorator < ApplicationDecorator
   #     end
   #   end
   
-  def code
-    format('%03d', object.code)
-  end
+  # def code
+  #   format('%03d', object.code)
+  # end
 end

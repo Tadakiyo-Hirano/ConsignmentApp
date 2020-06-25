@@ -4,3 +4,36 @@
 <% @stocks.each do |f| %>
   <%= f.consignment_quantity %>
 <% end %>
+<h1><%= "#{customer_name} / #{product_name}" %></h1>
+<div class="container">
+  <div class="col col-md-12 user-menu">
+    <table class="table-bordered table-condensed bg-light" width="50%">
+      <tbody>
+        <tr>
+          <th class="pc-display"><%= code(@user) %></th>
+          <th class="pc-display"><%= @user.name %></th>
+          <th><%= link_to "新規登録", '#', class: "btn btn-sm btn-default" %></th>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <table class="table-responsive table-bordered table-condensed table-hover bg-light">
+      <thead>
+        <tr>
+          <th>処理日</th>
+          <th>引上数</th>
+          <th>売上数</th>
+          <th>備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
