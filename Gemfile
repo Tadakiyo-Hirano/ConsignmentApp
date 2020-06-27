@@ -18,7 +18,7 @@ gem 'bootstrap'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
-gem 'kaminari'
+gem "kaminari", ">= 1.2.1"
 gem 'draper'
 
 group :development, :test do
