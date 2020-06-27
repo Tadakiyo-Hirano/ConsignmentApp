@@ -21,10 +21,10 @@
       <thead>
         <tr>
           <th>処理日</th>
-          <th>引上数</th>
-          <th>売上数</th>
-          <th>残数</th>
-          <th>備考</th>
+          <th><%= Stock.human_attribute_name :return_quantity %></th>
+          <th><%= Stock.human_attribute_name :sales_quantity %></th>
+          <th>委託残数</th>
+          <th><%= Consignment.human_attribute_name :note %></th>
         </tr>
       </thead>
       <tbody>
@@ -33,6 +33,7 @@
           <td></td>
           <td></td>
           <td></td>
+          <td><%= @user.consignments.find(params[:consignment_id]).note %></td>
         </tr>
       </tbody>
     </table>
