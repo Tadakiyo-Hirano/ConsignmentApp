@@ -1,9 +1,3 @@
-<% provide(:title, "#{customer_name} / #{product_name}") %>
-
-<% @stocks.each do |f| %>
-  <%= f.consignment_quantity %>
-<% end %>
-<h1><%= "#{customer_name} / #{product_name}" %></h1>
 <div class="container">
   <div class="col col-md-12 user-menu">
     <table class="table-bordered table-condensed bg-light" width="50%">
@@ -11,7 +5,7 @@
         <tr>
           <th class="pc-display"><%= code(@user) %></th>
           <th class="pc-display"><%= @user.name %></th>
-          <th><%= link_to "新規登録", new_user_consignment_stock_path, class: "btn btn-sm btn-default" %></th>
+          <th><%= link_to "新規登録", '#', class: "btn btn-sm btn-default" %></th>
         </tr>
       </tbody>
     </table>
@@ -27,13 +21,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><%= @user.consignments.find(params[:consignment_id]).note %></td>
-        </tr>
+        <%= form_with(model: @stock, url: user_consignment_stocks_path, local: true) do |f| %>
+          <tr>
+            <td><%= f.date_field :processing_date, class: "form-control" %></td>
+            <td><%= f.number_field :return_quantity, class: "form-control" %></td>
+            <td><%= f.number_field :sales_quantity, class: "form-control" %></td>
+            <td><%= f.submit "登録", class: "btn btn-default btn-block" %></td>
+            <td><%= @user.consignments.find(params[:consignment_id]).note %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
     </div>
