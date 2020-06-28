@@ -20,7 +20,7 @@
     <table class="table-responsive table-bordered table-condensed table-hover bg-light">
       <thead>
         <tr>
-          <th>処理日</th>
+          <th><%= Stock.human_attribute_name :processing_date %></th>
           <th><%= Stock.human_attribute_name :return_quantity %></th>
           <th><%= Stock.human_attribute_name :sales_quantity %></th>
           <th>委託残数</th>

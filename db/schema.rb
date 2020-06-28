@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_22_130854) do
+ActiveRecord::Schema.define(version: 2020_06_28_070640) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2020_06_22_130854) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "consignment_quantity"
+    t.date "processing_date"
     t.index ["consignment_id"], name: "index_stocks_on_consignment_id"
   end
 
