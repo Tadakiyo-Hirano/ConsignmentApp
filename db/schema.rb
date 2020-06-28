@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_070640) do
     t.integer "consignment_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "consignment_quantity"
+    t.integer "consignment_quantity", default: 0, null: false
     t.date "processing_date"
     t.index ["consignment_id"], name: "index_stocks_on_consignment_id"
   end
