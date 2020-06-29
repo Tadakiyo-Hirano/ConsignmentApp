@@ -13,8 +13,9 @@ class StocksController < ApplicationController
   end
   
   def create
-    @stock = Stock.new(stock_params)
-    # @stock = Srotck.new(stock_params)
+    @consignment = Consignment.find(params[:user_id])
+    @stock = @consignment.stocks.build(stock_params)
+    # @consignment = @user.consignments.build(consignment_params)
     if @stock.save
       flash[:notice] = "登録完了。"
       redirect_to @user

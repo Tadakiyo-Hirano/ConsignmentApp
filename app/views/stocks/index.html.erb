@@ -1,8 +1,5 @@
 <% provide(:title, "#{customer_name} / #{product_name}") %>
 
-<% @stocks.each do |f| %>
-  <%= f.consignment_quantity %>
-<% end %>
 <h1><%= "#{customer_name} / #{product_name}" %></h1>
 <div class="container">
   <div class="col col-md-12 user-menu">
@@ -22,20 +19,29 @@
           <th><%= Stock.human_attribute_name :processing_date %></th>
           <th><%= Stock.human_attribute_name :return_quantity %></th>
           <th><%= Stock.human_attribute_name :sales_quantity %></th>
-          <th>委託残数</th>
           <th><%= Consignment.human_attribute_name :note %></th>
         </tr>
       </thead>
       <tbody>
+        <% @stocks.each do |stock| %>
+          <tr>
+            <td><%= stock.processing_date %></td>
+            <td><%= stock.return_quantity %></td>
+            <td><%= stock.sales_quantity %></td>
+            <td><%= @user.consignments.find(params[:consignment_id]).note %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tbody>
         <tr>
           <td></td>
+          <td>委託残数</td>
+          <td><%= @user.consignments.find(params[:consignment_id]).quantity - @stocks.map { |stock| stock.return_quantity }.sum - @stocks.map { |stock| stock.sales_quantity }.sum %></td>
           <td></td>
-          <td></td>
-          <td></td>
-          <td><%= @user.consignments.find(params[:consignment_id]).note %></td>
         </tr>
       </tbody>
     </table>
     </div>
   </div>
 </div>
+<%= @user.consignments.find(params[:consignment_id]).quantity - @stocks.map { |stock| stock.return_quantity }.sum - @stocks.map { |stock| stock.sales_quantity }.sum %>
