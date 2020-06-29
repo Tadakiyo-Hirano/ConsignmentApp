@@ -34,9 +34,10 @@
 </div>
 
 <div class="consignment-form">
-  <%= f.fields_for :stocks do |ff| %>
-    <%= ff.number_field :consignment_quantity, placeholder: "#{Stock.human_attribute_name :consignment_quantity}", class: "form-control" %>
-  <% end %>
+  <%= f.number_field :quantity, placeholder: "#{Consignment.human_attribute_name :quantity}", class: "form-control" %>
+  <!--<= f.fields_for :stocks do |ff| %>-->
+  <!--  <= ff.number_field :consignment_quantity, placeholder: "#{Stock.human_attribute_name :consignment_quantity}", class: "form-control" %>-->
+  <!--< end %>-->
 </div>
 
 <div class="consignment-form">

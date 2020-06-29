@@ -44,10 +44,10 @@ ja:
         product_code: 商品コード
         product_name: 商品名
         serial_number: 機番
+        quantity: 委託数量
         note: 備考
       stock:
         processing_date: 処理日
-        consignment_quantity: 委託数量
         return_quantity: 引上数量
         sales_quantity: 売上数量
         

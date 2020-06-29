@@ -55,7 +55,10 @@ class ConsignmentsController < ApplicationController
     def consignment_params
       params.require(:consignment).permit(:ship_date, :customer_id_number, :customer_code, :customer_name,
                                           :product_id_number, :product_code, :product_name, :serial_number,
-                                          :note, :user_id, stocks_attributes: [:id, :consignment_quantity, :return_quantity, :sales_quantity])
+                                          :quantity, :note, :user_id)
+      # params.require(:consignment).permit(:ship_date, :customer_id_number, :customer_code, :customer_name,
+      #                                     :product_id_number, :product_code, :product_name, :serial_number,
+      #                                     :note, :user_id, stocks_attributes: [:id, :consignment_quantity, :return_quantity, :sales_quantity])
     end
     
     def set_user_consignments

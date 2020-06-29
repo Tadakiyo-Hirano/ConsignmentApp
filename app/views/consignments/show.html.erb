@@ -26,11 +26,12 @@
           <td><%= @consignment.product_id_num.name %></td>
         </tr>
         <tr>
-          <th><%= Stock.human_attribute_name :consignment_quantity %></th>
+          <th><%= Consignment.human_attribute_name :quantity %></th>
           <td>
-            <% @consignment.stocks.each do |stock| %>
-              <%= stock_result(stock) %>
-            <% end %>
+            <%= @consignment.quantity %>
+            <!--< @consignment.stocks.each do |stock| %>-->
+            <!--  <= stock_result(stock) %>-->
+            <!--< end %>-->
           </td>
         </tr>
         <tr>

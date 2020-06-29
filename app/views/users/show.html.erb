@@ -19,7 +19,7 @@
           <th><%= Consignment.human_attribute_name :ship_date %></th>
           <th class="pc-display"><%= Product.human_attribute_name :code %></th>
           <th><%= Product.human_attribute_name :name %></th>
-          <th><%= Stock.human_attribute_name :consignment_quantity %></th>
+          <th><%= Consignment.human_attribute_name :quantity %></th>
           <th class="pc-display"><%= Consignment.human_attribute_name :serial_number %></th>
           <th class="pc-display"><%= Consignment.human_attribute_name :customer_code %></th>
           <th class="pc-display"><%= Consignment.human_attribute_name :customer_name %></th>
@@ -36,9 +36,10 @@
             <td class="pc-display"><%= c.product_id_num&.code %></td>
             <td><%= c.product_id_num&.name %></td>
             <td>
-              <% c.stocks.each do |stock|%>
-                <%= link_to stock_result(stock), user_consignment_stocks_path(@user, c) %>
-              <% end %>
+              <%= link_to c.quantity, user_consignment_stocks_path(@user, c) %>
+              <!--< c.stocks.each do |stock|%>-->
+              <!--  <= link_to stock_result(stock), user_consignment_stocks_path(@user, c) %>-->
+              <!--< end %>-->
             </td>
             <td class="pc-display"><%= c.serial_number %></td>
             <td class="pc-display"><%= c.customer_id_num&.code %></td>
