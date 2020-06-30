@@ -10,28 +10,28 @@
       </tbody>
     </table>
     <br>
-    <table class="table-responsive table-bordered table-condensed table-hover bg-light">
-      <thead>
-        <tr>
-          <th><%= Stock.human_attribute_name :processing_date %></th>
-          <th><%= Stock.human_attribute_name :return_quantity %></th>
-          <th><%= Stock.human_attribute_name :sales_quantity %></th>
-          <th>委託残数</th>
-          <th><%= Consignment.human_attribute_name :note %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= form_with(model: @stock, url: user_consignment_stocks_path, local: true) do |f| %>
+    <%= form_with(model: @stock, url: user_consignment_stocks_path, local: true) do |f| %>
+      <table class="table-responsive table-bordered table-condensed table-hover bg-light">
+        <thead>
+          <tr>
+            <th><%= Stock.human_attribute_name :processing_date %></th>
+            <th><%= Stock.human_attribute_name :return_quantity %></th>
+            <th><%= Stock.human_attribute_name :sales_quantity %></th>
+            <th>委託残数</th>
+            <th><%= Consignment.human_attribute_name :note %></th>
+          </tr>
+        </thead>
+        <tbody>
           <tr>
             <td><%= f.date_field :processing_date, class: "form-control" %></td>
-            <td><%= f.number_field :return_quantity, class: "form-control" %></td>
-            <td><%= f.number_field :sales_quantity, class: "form-control" %></td>
+            <td><%= f.number_field :return_quantity, type: "number", step: 1, class: "form-control" %></td>
+            <td><%= f.number_field :sales_quantity, type: "number", step: 1, class: "form-control" %></td>
             <td><%= f.submit "登録", class: "btn btn-default btn-block" %></td>
             <td><%= @user.consignments.find(params[:consignment_id]).note %></td>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-    </div>
+        </tbody>
+      </table>
+    <% end %>
   </div>
 </div>
+<%= @user.name %>
