@@ -26,6 +26,13 @@ class StocksController < ApplicationController
     end
   end
   
+  def edit
+    @stock = Stock.find(params[:id])
+  end
+  
+  def update
+  end
+  
   private
     
     def set_user_stocks

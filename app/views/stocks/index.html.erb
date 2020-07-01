@@ -16,6 +16,7 @@
     <table class="table-responsive table-bordered table-condensed table-hover bg-light">
       <thead>
         <tr>
+          <th>編集</th>
           <th><%= Stock.human_attribute_name :processing_date %></th>
           <th><%= Stock.human_attribute_name :return_quantity %></th>
           <th><%= Stock.human_attribute_name :sales_quantity %></th>
@@ -25,6 +26,7 @@
       <tbody>
         <% @stocks.each do |stock| %>
           <tr>
+            <td><%= link_to "", edit_user_consignment_stock_path(User.find(params[:user_id]), Consignment.find(params[:consignment_id]), stock), class: "far fa-edit" %></td>
             <td><%= stock.processing_date %></td>
             <td><%= stock.return_quantity %></td>
             <td><%= stock.sales_quantity %></td>
