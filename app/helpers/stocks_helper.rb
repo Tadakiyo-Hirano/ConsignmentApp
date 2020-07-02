@@ -12,4 +12,9 @@ module StocksHelper
   def product_name
     Product.find(@user.consignments.find(params[:consignment_id]).product_id_number).name
   end
+  
+  # 委託残数合計
+  def consignment_remaining_count
+    @user.consignments.find(params[:consignment_id]).quantity - @stocks.map { |s| s.return_quantity }.sum - @stocks.map { |s| s.sales_quantity }.sum
+  end
 end

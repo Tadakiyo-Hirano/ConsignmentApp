@@ -38,7 +38,7 @@
         <tr>
           <td></td>
           <td>委託残数</td>
-          <td><%= @user.consignments.find(params[:consignment_id]).quantity - @stocks.map { |stock| stock.return_quantity }.sum - @stocks.map { |stock| stock.sales_quantity }.sum %></td>
+          <td><%= consignment_remaining_count %></td>
           <td></td>
         </tr>
       </tbody>

@@ -36,10 +36,8 @@
             <td class="pc-display"><%= c.product_id_num&.code %></td>
             <td><%= c.product_id_num&.name %></td>
             <td>
-              <%= link_to c.quantity, user_consignment_stocks_path(@user, c) %>
-              <!--< c.stocks.each do |stock|%>-->
-              <!--  <= link_to stock_result(stock), user_consignment_stocks_path(@user, c) %>-->
-              <!--< end %>-->
+              <%= link_to user_consignment_remaining_count(c), user_consignment_stocks_path(@user, c) %>
+              <%= c.quantity - c.stocks.map { |s| s.return_quantity }.sum - c.stocks.map { |s| s.sales_quantity }.sum %>
             </td>
             <td class="pc-display"><%= c.serial_number %></td>
             <td class="pc-display"><%= c.customer_id_num&.code %></td>
