@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @stocks.each do |stock| %>
+        <% @stocks.decorate.each do |stock| %>
           <tr>
             <td><%= link_to "", edit_user_consignment_stock_path(User.find(params[:user_id]), Consignment.find(params[:consignment_id]), stock), class: "far fa-edit" %></td>
             <td><%= stock.processing_date %></td>
@@ -46,4 +46,3 @@
     </div>
   </div>
 </div>
-<%= @user.consignments.find(params[:consignment_id]).quantity - @stocks.map { |stock| stock.return_quantity }.sum - @stocks.map { |stock| stock.sales_quantity }.sum %>

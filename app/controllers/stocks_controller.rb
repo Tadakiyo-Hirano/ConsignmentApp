@@ -13,10 +13,8 @@ class StocksController < ApplicationController
   end
   
   def create
-    # @consignment = @user.consignments.find_by(id: params[:id])
     @consignment = Consignment.find(params[:consignment_id])
     @stock = @consignment.stocks.build(stock_params)
-    # @consignment = @user.consignments.build(consignment_params)
     if @stock.save
       flash[:notice] = "登録完了。"
       redirect_to user_consignment_stocks_path

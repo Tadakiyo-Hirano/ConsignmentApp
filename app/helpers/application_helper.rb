@@ -58,12 +58,4 @@ module ApplicationHelper
       link_to "戻る", path
     end
   end
-  
-  # def consignment_remaining_count(consignment)
-  #   @stocks = @user.consignments.find(params[:consignment_id]).stocks
-  #   consignment.quantity - @stocks.map { |s| s.return_quantity }.sum - @stocks.map { |s| s.sales_quantity }.sum
-  #   # @stocks = @user.consignments.find(params[:consignment_id]).stocks
-  #   # c.quantity - @stocks.map { |stock| stock.return_quantity }.sum - @stocks.map { |stock| stock.sales_quantity }
-  #   # @user.consignments.find(params[:consignment_id]).quantity - @stocks.map { |stock| stock.return_quantity }.sum - @stocks.map { |stock| stock.sales_quantity }.sum
-  # end
 end

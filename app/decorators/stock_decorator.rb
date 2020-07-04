@@ -16,4 +16,11 @@ class StockDecorator < ApplicationDecorator
   #   end
   # end
   
+  def return_quantity
+    stock.return_quantity if 0 != stock.return_quantity
+  end
+  
+  def sales_quantity
+    stock.sales_quantity if 0 != stock.sales_quantity
+  end
 end

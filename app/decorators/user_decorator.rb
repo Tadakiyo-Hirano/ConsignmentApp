@@ -13,4 +13,5 @@ class UserDecorator < ApplicationDecorator
   # def code
   #   format('%03d', object.code)
   # end
+  
 end
