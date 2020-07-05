@@ -29,6 +29,15 @@ class StocksController < ApplicationController
   end
   
   def update
+    @stock = Stock.find(params[:id])
+    ActiveRecord::Base.transaction do
+      @stock.update_attributes!(stock_params)
+      flash[:notice] = "更新"
+      redirect_to user_consignment_stocks_path
+    end
+  rescue ActiveRecord::RecordInvalid
+    flash[:alert] = "失敗"
+    render :edit
   end
   
   private

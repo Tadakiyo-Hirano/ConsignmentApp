@@ -1,2 +1,38 @@
-<%= @stock.id  %>,
-<%= @stock.processing_date %>
+<% provide(:title, "#{customer_name} / #{product_name}") %>
+
+<h1><%= "#{customer_name} / #{product_name}" %></h1>
+<div class="container">
+  <div class="col col-md-12 user-menu">
+    <table class="table-bordered table-condensed bg-light" width="50%">
+      <tbody>
+        <tr>
+          <th class="pc-display"><%= code(@user) %></th>
+          <th class="pc-display"><%= @user.name %></th>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <%= form_with(model: @stock, url: user_consignment_stock_path(User.find(params[:user_id]), Consignment.find(params[:consignment_id]), @stock), local: true, method: :patch) do |f| %>
+      <table class="table-responsive table-bordered table-condensed table-hover bg-light">
+        <thead>
+          <tr>
+            <th><%= Stock.human_attribute_name :processing_date %></th>
+            <th><%= Stock.human_attribute_name :return_quantity %></th>
+            <th><%= Stock.human_attribute_name :sales_quantity %></th>
+            <th>委託残数</th>
+            <th><%= Consignment.human_attribute_name :note %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= f.date_field :processing_date, class: "form-control" %></td>
+            <td><%= f.number_field :return_quantity, type: "number", step: 1, class: "form-control" %></td>
+            <td><%= f.number_field :sales_quantity, type: "number", step: 1, class: "form-control" %></td>
+            <td><%= f.submit "編集", class: "btn btn-default btn-block" %></td>
+            <td><%= @user.consignments.find(params[:consignment_id]).note %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

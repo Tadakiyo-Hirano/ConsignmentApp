@@ -10,9 +10,4 @@ module UsersHelper
   def none_zero_total(c)
     total_consignment_balance(c) != 0
   end
-  
-  # 委託残数合計
-  # def user_consignment_remaining_count(c)
-  #   total_consignment_balance(c)
-  # end
 end

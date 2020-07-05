@@ -1,3 +1,6 @@
+<% provide(:title, "#{customer_name} / #{product_name}") %>
+
+<h1><%= "#{customer_name} / #{product_name}" %></h1>
 <div class="container">
   <div class="col col-md-12 user-menu">
     <table class="table-bordered table-condensed bg-light" width="50%">
@@ -34,4 +37,3 @@
     <% end %>
   </div>
 </div>
-<%= @user.name %>
