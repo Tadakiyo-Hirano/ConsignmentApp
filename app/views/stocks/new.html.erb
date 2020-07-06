@@ -1,39 +1,68 @@
 <% provide(:title, "#{customer_name} / #{product_name}") %>
+<%= code(@user) %><%= @user.name %>
 
-<h1><%= "#{customer_name} / #{product_name}" %></h1>
+<h2>委託在庫受払 入力</h2>
 <div class="container">
   <div class="col col-md-12 user-menu">
-    <table class="table-bordered table-condensed bg-light" width="50%">
+    <table class="table-responsive table-bordered table-condensed bg-light">
       <tbody>
         <tr>
-          <th class="pc-display"><%= code(@user) %></th>
-          <th class="pc-display"><%= @user.name %></th>
-          <th><%= link_to "新規登録", '#', class: "btn btn-sm btn-default" %></th>
+          <th><%= Consignment.human_attribute_name :customer_name %></th>
+          <td><%= customer_name %></td>
         </tr>
+        <tr>
+          <th><%= Consignment.human_attribute_name :product_name %></th>
+          <td><%= product_name %></td>
+        </tr>
+        <tr>
+            <th><%= Consignment.human_attribute_name :serial_number %></th>
+            <td colspan="3"><%= @user.consignments.find(params[:consignment_id]).serial_number %></td>
+          </tr>
+          <tr>
+            <th><%= Consignment.human_attribute_name :note %></th>
+            <td colspan="3"><%= @user.consignments.find(params[:consignment_id]).note %></td>
+          </tr>
+          <tr>
+            <th>委託残数</th>
+            <td><%= consignment_remaining_count %></td>
+          </tr>
       </tbody>
     </table>
+    
     <br>
+    
     <%= form_with(model: @stock, url: user_consignment_stocks_path, local: true) do |f| %>
       <table class="table-responsive table-bordered table-condensed table-hover bg-light">
         <thead>
           <tr>
-            <th><%= Stock.human_attribute_name :processing_date %></th>
-            <th><%= Stock.human_attribute_name :return_quantity %></th>
-            <th><%= Stock.human_attribute_name :sales_quantity %></th>
-            <th>委託残数</th>
-            <th><%= Consignment.human_attribute_name :note %></th>
+            <th colspan="2"><%= Stock.human_attribute_name :processing_date %></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><%= f.date_field :processing_date, class: "form-control" %></td>
-            <td><%= f.number_field :return_quantity, type: "number", step: 1, class: "form-control" %></td>
-            <td><%= f.number_field :sales_quantity, type: "number", step: 1, class: "form-control" %></td>
-            <td><%= f.submit "登録", class: "btn btn-default btn-block" %></td>
-            <td><%= @user.consignments.find(params[:consignment_id]).note %></td>
+            <td colspan="2"><%= f.date_field :processing_date, value: Date.current, class: "form-control" %></td>
           </tr>
         </tbody>
       </table>
+      
+      <br>
+      
+      <table class="table-responsive table-bordered table-condensed bg-light">
+        <thead>
+          <tr>
+            <th><%= Stock.human_attribute_name :return_quantity %></th>
+            <th><%= Stock.human_attribute_name :sales_quantity %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= f.number_field :return_quantity, type: "number", step: 1, class: "form-control" %></td>
+            <td><%= f.number_field :sales_quantity, type: "number", step: 1, class: "form-control" %></td>
+          </tr>
+        </tbody>
+      </table>
+      <%= f.submit "登録", class: "btn btn-default btn-block" %>
     <% end %>
+    <%= link_to "戻る", user_consignment_stocks_path, class: "btn btn-secondary btn-block btn-stock" %>
   </div>
 </div>

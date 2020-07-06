@@ -9,6 +9,7 @@ class StocksController < ApplicationController
   end
   
   def new
+    @stocks = @user.consignments.find(params[:consignment_id]).stocks
     @stock = Stock.new
   end
   
@@ -19,12 +20,13 @@ class StocksController < ApplicationController
       flash[:notice] = "登録完了。"
       redirect_to user_consignment_stocks_path
     else
-      flash.now[:alert] = "更新に失敗しました。<br> " + @stock.errors.full_messages.join("<br>")
+      flash.now[:alert] = "登録に失敗しました。<br> " + @stock.errors.full_messages.join("<br>")
       render :new
     end
   end
   
   def edit
+    @stocks = @user.consignments.find(params[:consignment_id]).stocks
     @stock = Stock.find(params[:id])
   end
   
