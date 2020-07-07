@@ -3,7 +3,7 @@
 
 <h2>委託在庫受払 一覧</h2>
 <div class="container">
-  <div class="col col-md-12 user-menu">
+  <div class="col col-md-8 offset-md-2 user-menu">
     <table class="table-responsive table-bordered table-condensed bg-light">
       <tbody>
         <tr>
@@ -33,15 +33,16 @@
     <br>
     
     <table class="table-responsive table-bordered table-condensed table-hover bg-light">
-      <thead>
-        <tr>
-          <th>編集</th>
-          <th><%= Stock.human_attribute_name :processing_date %></th>
-          <th><%= Stock.human_attribute_name :return_quantity %></th>
-          <th><%= Stock.human_attribute_name :sales_quantity %></th>
-          <th><%= Consignment.human_attribute_name :note %></th>
-        </tr>
-      </thead>
+      <% if @stocks.present? %>
+        <thead>
+          <tr>
+            <th>編集</th>
+            <th><%= Stock.human_attribute_name :processing_date %></th>
+            <th><%= Stock.human_attribute_name :return_quantity %></th>
+            <th><%= Stock.human_attribute_name :sales_quantity %></th>
+          </tr>
+        </thead>
+      <% end %>
       <tbody>
         <% @stocks.decorate.each do |stock| %>
           <tr>
@@ -49,7 +50,6 @@
             <td><%= stock.processing_date %><a class=<%= stamp(stock.created_at, stock.updated_at) %>></a></td>
             <td><%= stock.return_quantity %></td>
             <td><%= stock.sales_quantity %></td>
-            <td><%= @user.consignments.find(params[:consignment_id]).note %></td>
           </tr>
         <% end %>
       </tbody>

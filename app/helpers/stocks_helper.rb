@@ -13,7 +13,7 @@ module StocksHelper
     Product.find(@user.consignments.find(params[:consignment_id]).product_id_number).name
   end
   
-  # 委託残数合計
+  # 委託残数合計 create updateにも@stocks = @user.consignments.find(params[:consignment_id]).stocksを設定しないとvalidation時、undefined method mapのエラーが発生する。
   def consignment_remaining_count
     @user.consignments.find(params[:consignment_id]).quantity - @stocks.map { |s| s.return_quantity }.sum - @stocks.map { |s| s.sales_quantity }.sum
   end

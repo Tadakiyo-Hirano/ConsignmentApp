@@ -9,12 +9,13 @@ class StocksController < ApplicationController
   end
   
   def new
-    @stocks = @user.consignments.find(params[:consignment_id]).stocks
+    @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
     @stock = Stock.new
   end
   
   def create
     @consignment = Consignment.find(params[:consignment_id])
+    @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
     @stock = @consignment.stocks.build(stock_params)
     if @stock.save
       flash[:notice] = "登録完了。"
@@ -26,11 +27,12 @@ class StocksController < ApplicationController
   end
   
   def edit
-    @stocks = @user.consignments.find(params[:consignment_id]).stocks
+    @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
     @stock = Stock.find(params[:id])
   end
   
   def update
+    @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
     @stock = Stock.find(params[:id])
     ActiveRecord::Base.transaction do
       @stock.update_attributes!(stock_params)
