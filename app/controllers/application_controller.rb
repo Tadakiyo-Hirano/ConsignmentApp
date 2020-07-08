@@ -4,36 +4,19 @@ class ApplicationController < ActionController::Base
   
   # PCA-Web API
   def pca_api
-    # require "uri"
-    # require "net/http"
-    
-    # url = URI("https://east02.pcawebapi.jp/v1/Kon20/Hello")
-    
-    # https = Net::HTTP.new(url.host, url.port);
-    # https.use_ssl = true
-    
-    # request = Net::HTTP::Get.new(url)
-    
-    # response = https.request(request)
-    
-    # @api_info = response.read_body
-    
     require "uri"
     require "net/http"
     
-    url = URI("https://east02.pcawebapi.jp/v1/Kon20/GetLogOnUser")
+    url = URI("https://east02.pcawebapi.jp/v1/Kon20/Hello")
     
     https = Net::HTTP.new(url.host, url.port);
     https.use_ssl = true
     
     request = Net::HTTP::Get.new(url)
-    request["Authorization"] = "Bearer qnGDr-S030RtHXWZZgquJkCXnVvO22pXNmhNhcmRemxNDPqOedkYkkLB05ZagT1aiiolRvopzf1AFQRkTrWcKbtvp0vNP_PIgH5UBAQ7gvnX7af7BHzE5GyxOMZhUuG1ZvRVB3C1LkqVh0-0gNtY3Let1FsKGeWGsbs8rA0VJa3ntcVZNzIp0krqbEGH7XwPSpf-kb3ZhyJPFGgTRzhA_pmGQctQuKPllwg6wqWquLnKmXxiZGerTjC0BB--eumLYsAdXsbLjw5U-vsuhEngRWVUiqSYt9LNgbnXbI9n7X-xf2KuNzVwepvAm7HTkgyHOunMerLmelgkznN0yoJ9hdZXxjGISYMkrhoQIyNzlNoWCvyoGuxo6IQ3aiHbxKFWuDzFA4KlR8XzmehBB1dDOCpxqMNosR5lvpHocRpQrs0wI44EERHGk4da3hpDyxyKd47lOfzxDAjcA_KRb_D3TsIAty2Z1yRrsflqnqQDUgtD6xXL0BMjnPVNMC98__Zo_gFN6IUfaatuYv5fsu5EL0WDSFVvXC4JOyh2aKsqqYWWwNVIyjuv7ITuLMan27KEy2BzKLWyyz_w9i259RQ-tpyO7-rGsy3-Gqu1TWxIQSMCmglTigCdHmnhv55B7915bHeVXnsfsgtjNAgjqLEJGwpNk8k"
-    request["Accept"] = ""
-    request["Cookie"] = "__RequestVerificationToken_L3YxL0tvbjIw0=4V2JGMlaK6nAfEM8GV-FleAiuyDFB1BPI2cHuF0uoU8QdeksyDMeWjd98TeiBsHiyt1o11jgxwNl5elC1edSBfnGl-Q1"
     
     response = https.request(request)
+    
     @api_info = response.read_body
-
   end
   
   # 新規登録時(sign_up時)にnameキーのパラメーターを追加で許可

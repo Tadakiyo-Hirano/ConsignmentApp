@@ -1,6 +1,7 @@
 class StocksController < ApplicationController
   before_action :signed_in_user
   before_action :set_user_stocks
+  before_action :set_stock, only: %i(edit update destroy)
   # before_action :set_consignment_stocks
   before_action :signed_in_correct_user
   
@@ -28,12 +29,10 @@ class StocksController < ApplicationController
   
   def edit
     @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
-    @stock = Stock.find(params[:id])
   end
   
   def update
     @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
-    @stock = Stock.find(params[:id])
     ActiveRecord::Base.transaction do
       @stock.update_attributes!(stock_params)
       flash[:notice] = "更新"
@@ -44,10 +43,20 @@ class StocksController < ApplicationController
     render :edit
   end
   
+  def destroy
+    @stock.destroy
+    flash[:alert] = "#{@stock.processing_date}の在庫受払データを削除しました。"
+    redirect_to user_consignment_stocks_url
+  end
+  
   private
     
     def set_user_stocks
       @user = User.find(params[:user_id])
+    end
+    
+    def set_stock
+      @stock = Stock.find(params[:id])
     end
     
     def stock_params

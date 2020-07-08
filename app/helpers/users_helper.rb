@@ -2,7 +2,7 @@ module UsersHelper
   
   # 委託残数合計
   def total_consignment_balance(c)
-    @stocks = @user.consignments.find(params[:id]).stocks
+    @stocks = @user.consignments.find_by(params[:consignment_id]).stocks
     c.quantity - c.stocks.map { |s| s.return_quantity }.sum - c.stocks.map { |s| s.sales_quantity }.sum
   end
   
