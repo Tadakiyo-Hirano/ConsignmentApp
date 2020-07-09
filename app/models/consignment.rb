@@ -10,7 +10,7 @@ class Consignment < ApplicationRecord
   validates :product_id_number, presence: true
   validates :product_code, presence: true, length: {maximum: 13 }
   validates :product_name, presence: true, length: {maximum: 40 }
-  validates :quantity, presence: true
+  validates :quantity, presence: true, numericality: { greater_than: 0 }
   validates :serial_number, length: { maximum: 50 }
   validates :note, length: { maximum: 100 }
 end

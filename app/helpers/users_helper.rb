@@ -1,11 +1,11 @@
 module UsersHelper
   
-  # 委託残数合計
+  # 委託残数合計 consignment.quantityがnilの場合、計算を飛ばして表示させエラーを回避
   def total_consignment_balance(c)
-    # if c.quantity != nil
+    if c.quantity != nil
       @stocks = @user.consignments.find_by(params[:consignment_id]).stocks
       c.quantity - c.stocks.map { |s| s.return_quantity }.sum - c.stocks.map { |s| s.sales_quantity }.sum
-    # end
+    end
   end
   
   # 0以外の委託残数

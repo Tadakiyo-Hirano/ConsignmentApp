@@ -26,6 +26,9 @@ class ConsignmentsController < ApplicationController
       flash.now[:alert] = "登録に失敗しました、赤枠内は必須です。<br>" + @consignment.errors.full_messages.join("<br>")
       render :new
     end
+  rescue ActiveRecord::NotNullViolation
+    flash[:alert] = "委託数量が入力されていません。"
+    render :new
   end
   
   def edit
