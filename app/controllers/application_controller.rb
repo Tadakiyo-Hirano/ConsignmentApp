@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
+  include UsersHelper
+  
   before_action :configure_permitted_parameters, if: :devise_controller?
   
   # PCA-Web API
