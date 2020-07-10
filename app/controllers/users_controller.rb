@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user_consignments = @user.consignments.page(params[:page]).per(10).order(ship_date: :desc).order(created_at: :desc)
+    @user_consignments = @user.consignments.where(done: false).page(params[:page]).per(10).order(ship_date: :desc).order(created_at: :desc)
   end
   
   def update
