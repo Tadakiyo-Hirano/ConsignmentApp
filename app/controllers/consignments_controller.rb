@@ -39,7 +39,7 @@ class ConsignmentsController < ApplicationController
   def update
     ActiveRecord::Base.transaction do
       @consignment.update_attributes!(consignment_params)
-      flash[:notice] = "委託情報を更新しました。"
+      flash[:notice] = "委託情報を更新しました。" + @consignment.done.to_s
       redirect_to @user
     end
   rescue ActiveRecord::RecordInvalid

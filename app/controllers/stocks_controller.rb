@@ -19,7 +19,13 @@ class StocksController < ApplicationController
     @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
     @stock = @consignment.stocks.build(stock_params)
     if @stock.save
-      flash[:notice] = "登録完了。"
+      # unless none_zero_total(@consignment)
+        # @consignment.done = true
+        @consignment.update_attribute(:done, true)
+      # end
+      # @aaa = @consignment.quantity - @consignment.stocks.map { |s| s.return_quantity }.sum - @consignment.stocks.map { |s| s.sales_quantity }.sum
+      
+      flash[:notice] = "登録完了。" + @consignment.done.to_s
       redirect_to user_consignment_stocks_path
     else
       flash.now[:alert] = "登録に失敗しました。<br> " + @stock.errors.full_messages.join("<br>")
@@ -61,6 +67,10 @@ class StocksController < ApplicationController
     
     def stock_params
       params.require(:stock).permit(:processing_date, :return_quantity, :sales_quantity, :consignment_id)
+    end
+    
+    def consignment_params
+      params.require(:consignment).permit(:done)
     end
     
     # def set_consignment_stocks
