@@ -6,7 +6,7 @@ class StocksController < ApplicationController
   before_action :signed_in_correct_user
   
   def index
-    @stocks = @user.consignments.find(params[:consignment_id]).stocks
+    @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
   end
   
   def new
@@ -15,16 +15,11 @@ class StocksController < ApplicationController
   end
   
   def create
-    @consignment = Consignment.find(params[:consignment_id])
+    @consignment = Consignment.find(params[:consignment_id]) # befor action
     @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
     @stock = @consignment.stocks.build(stock_params)
     if @stock.save
-      # unless none_zero_total(@consignment)
-        # @consignment.done = true
-        @consignment.update_attribute(:done, true)
-      # end
-      # @aaa = @consignment.quantity - @consignment.stocks.map { |s| s.return_quantity }.sum - @consignment.stocks.map { |s| s.sales_quantity }.sum
-      
+      done_decision
       flash[:notice] = "登録完了。" + @consignment.done.to_s
       redirect_to user_consignment_stocks_path
     else
@@ -50,8 +45,11 @@ class StocksController < ApplicationController
   end
   
   def destroy
+    @consignment = Consignment.find(params[:consignment_id]) # befor action
+    @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
     @stock.destroy
-    flash[:alert] = "#{@stock.processing_date}の在庫受払データを削除しました。"
+    done_decision
+    flash[:alert] = "#{@stock.processing_date}の在庫受払データを削除しました。" + @consignment.done.to_s
     redirect_to user_consignment_stocks_url
   end
   
