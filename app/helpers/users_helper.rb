@@ -8,6 +8,13 @@ module UsersHelper
     end
   end
   
+  # 委託残数合計がマイナスの場合、文字色赤色にする。
+  def total_consignment_balance_color(c)
+    if total_consignment_balance(c) < 0
+      "minus"
+    end
+  end
+  
   # 0以外の委託残数
   def none_zero_total(c)
     total_consignment_balance(c) != 0

@@ -37,7 +37,7 @@
               <td class="pc-display"><%= c.product_id_num&.code %></td>
               <td><%= c.product_id_num&.name %></td>
               <td>
-                <%= link_to total_consignment_balance(c), user_consignment_stocks_path(@user, c) %>
+                <%= link_to total_consignment_balance(c), user_consignment_stocks_path(@user, c), class: "#{total_consignment_balance_color(c)}" %>
               </td>
               <td class="pc-display"><%= c.serial_number %></td>
               <td class="pc-display"><%= c.customer_id_num&.code %></td>
