@@ -20,7 +20,7 @@ class StocksController < ApplicationController
     @stock = @consignment.stocks.build(stock_params)
     if @stock.save
       done_decision
-      flash[:notice] = "登録完了。" + @consignment.done.to_s
+      flash[:notice] = "在庫受払を登録しました。" + @consignment.done.to_s
       redirect_to user_consignment_stocks_path
     else
       flash.now[:alert] = "登録に失敗しました。<br> " + @stock.errors.full_messages.join("<br>")
@@ -33,14 +33,16 @@ class StocksController < ApplicationController
   end
   
   def update
+    @consignment = Consignment.find(params[:consignment_id])
     @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
     ActiveRecord::Base.transaction do
       @stock.update_attributes!(stock_params)
-      flash[:notice] = "更新"
+      done_decision
+      flash[:notice] = "#{@stock.processing_date}の在庫受払を更新しました。" + @consignment.done.to_s
       redirect_to user_consignment_stocks_path
     end
   rescue ActiveRecord::RecordInvalid
-    flash[:alert] = "失敗"
+    flash[:alert] = "登録に失敗しました。<br> " + @stock.errors.full_messages.join("<br>")
     render :edit
   end
   
@@ -49,7 +51,7 @@ class StocksController < ApplicationController
     @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
     @stock.destroy
     done_decision
-    flash[:alert] = "#{@stock.processing_date}の在庫受払データを削除しました。" + @consignment.done.to_s
+    flash[:alert] = "#{@stock.processing_date}の在庫受払を削除しました。" + @consignment.done.to_s
     redirect_to user_consignment_stocks_url
   end
   
