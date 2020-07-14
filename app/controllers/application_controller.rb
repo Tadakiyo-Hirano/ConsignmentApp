@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   include UsersHelper
+  include CustomersHelper
+  include ProductsHelper
+  include ConsignmentsHelper
   include StocksHelper
   
   before_action :configure_permitted_parameters, if: :devise_controller?
