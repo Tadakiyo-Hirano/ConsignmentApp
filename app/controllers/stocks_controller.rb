@@ -1,22 +1,27 @@
 class StocksController < ApplicationController
   before_action :signed_in_user
-  before_action :set_user_stocks
+  before_action :set_user
+  before_action :set_user_consignment, only: %i(index new edit)
+  before_action :set_consignment, only: %i(index create edit update destroy)
+  before_action :set_user_consignments_stocks, only: %i(index new create edit update destroy)
   before_action :set_stock, only: %i(edit update destroy)
-  # before_action :set_consignment_stocks
   before_action :signed_in_correct_user
   
   def index
-    @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
+    # @user_consignment = @user.consignments.find(params[:consignment_id])
+    # @consignment = Consignment.find(params[:consignment_id])
+    # @stocks = @user.consignments.find(params[:consignment_id]).stocks
   end
   
   def new
-    @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
+    # @user_consignment = @user.consignments.find(params[:consignment_id])
+    # @stocks = @user.consignments.find(params[:consignment_id]).stocks
     @stock = Stock.new
   end
   
   def create
-    @consignment = Consignment.find(params[:consignment_id]) # befor action
-    @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
+    # @consignment = Consignment.find(params[:consignment_id])
+    # @stocks = @user.consignments.find(params[:consignment_id]).stocks
     @stock = @consignment.stocks.build(stock_params)
     if @stock.save
       done_decision
@@ -29,12 +34,14 @@ class StocksController < ApplicationController
   end
   
   def edit
-    @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
+    # @user_consignment = @user.consignments.find(params[:consignment_id])
+    # @consignment = Consignment.find(params[:consignment_id])
+    # @stocks = @user.consignments.find(params[:consignment_id]).stocks
   end
   
   def update
-    @consignment = Consignment.find(params[:consignment_id])
-    @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
+    # @consignment = Consignment.find(params[:consignment_id])
+    # @stocks = @user.consignments.find(params[:consignment_id]).stocks
     ActiveRecord::Base.transaction do
       @stock.update_attributes!(stock_params)
       done_decision
@@ -47,8 +54,8 @@ class StocksController < ApplicationController
   end
   
   def destroy
-    @consignment = Consignment.find(params[:consignment_id]) # befor action
-    @stocks = @user.consignments.find(params[:consignment_id]).stocks # befor actionに設定する
+    # @consignment = Consignment.find(params[:consignment_id])
+    # @stocks = @user.consignments.find(params[:consignment_id]).stocks
     @stock.destroy
     done_decision
     flash[:alert] = "#{@stock.processing_date}の在庫受払を削除しました。" + @consignment.done.to_s
@@ -57,8 +64,20 @@ class StocksController < ApplicationController
   
   private
     
-    def set_user_stocks
+    def set_user_consignments_stocks
+      @stocks = @user.consignments.find(params[:consignment_id]).stocks
+    end
+    
+    def set_user_consignment
+      @user_consignment = @user.consignments.find(params[:consignment_id])
+    end
+    
+    def set_user
       @user = User.find(params[:user_id])
+    end
+    
+    def set_consignment
+      @consignment = Consignment.find(params[:consignment_id])
     end
     
     def set_stock
@@ -72,8 +91,4 @@ class StocksController < ApplicationController
     def consignment_params
       params.require(:consignment).permit(:done)
     end
-    
-    # def set_consignment_stocks
-    #   @consignment = Consignment(params[:consignment_id])
-    # end
 end

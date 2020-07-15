@@ -16,11 +16,11 @@
         </tr>
         <tr>
             <th><%= Consignment.human_attribute_name :serial_number %></th>
-            <td colspan="3"><%= @user.consignments.find(params[:consignment_id]).serial_number %></td>
+            <td colspan="3"><%= @user_consignment&.serial_number %></td>
           </tr>
           <tr>
             <th><%= Consignment.human_attribute_name :note %></th>
-            <td colspan="3"><%= @user.consignments.find(params[:consignment_id]).note %></td>
+            <td colspan="3"><%= @user_consignment&.note %></td>
           </tr>
           <tr>
             <th>委託残数</th>

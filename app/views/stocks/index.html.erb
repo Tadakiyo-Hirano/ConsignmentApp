@@ -16,11 +16,11 @@
         </tr>
         <tr>
             <th><%= Consignment.human_attribute_name :serial_number %></th>
-            <td colspan="3"><%= @user.consignments.find(params[:consignment_id]).serial_number %></td>
+            <td colspan="3"><%= @user_consignment.serial_number %></td>
           </tr>
           <tr>
             <th><%= Consignment.human_attribute_name :note %></th>
-            <td colspan="3"><%= @user.consignments.find(params[:consignment_id]).note %></td>
+            <td colspan="3"><%= @user_consignment.note %></td>
           </tr>
           <tr>
             <th>委託残数</th>
@@ -47,11 +47,11 @@
       <tbody>
         <% @stocks.decorate.each do |stock| %>
           <tr>
-            <td><%= link_to "", edit_user_consignment_stock_path(User.find(params[:user_id]), Consignment.find(params[:consignment_id]), stock), class: "far fa-edit" %></td>
+            <td><%= link_to "", edit_user_consignment_stock_path(@user, @consignment, stock), class: "far fa-edit" %></td>
             <td><%= stock.processing_date %><a class=<%= stamp(stock.created_at, stock.updated_at) %>></a></td>
             <td><%= stock.return_quantity %></td>
             <td><%= stock.sales_quantity %></td>
-            <td><%= link_to "", user_consignment_stock_path(User.find(params[:user_id]), Consignment.find(params[:consignment_id]), stock), method: :delete,
+            <td><%= link_to "", user_consignment_stock_path(@user, @consignment, stock), method: :delete,
                                 data: { confirm: "#{stock.processing_date}の在庫受払データを削除しますか？" }, class: "fas fa-trash-alt" %></td>
           </tr>
         <% end %>
