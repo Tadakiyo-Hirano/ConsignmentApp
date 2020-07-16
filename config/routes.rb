@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'consignments/new'
+  # get 'consignments/new'
   root 'top_pages#top'
   
   devise_for :admins, controllers: {
@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   
   resources :users, only: %i(index show update) do
     resources :consignments do
+      collection do
+        get 'all', to: 'consignments#all'
+      end
       resources :stocks
     end
     member do
