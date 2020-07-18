@@ -242,6 +242,15 @@ body {
   height: 70%;
 }
 
+.search-link-form {
+  text-align: left;
+}
+
+.search-link {
+  display: inline-block;
+  margin: 0 10px 20px 0;
+}
+
 /* ユーザー一覧 users/index */
 
 #table-usres {

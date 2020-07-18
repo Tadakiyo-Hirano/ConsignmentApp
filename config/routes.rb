@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :users, only: %i(index show update) do
     resources :consignments do
       collection do
-        get 'all', to: 'consignments#all'
+        get 'by_customer', to: 'consignments#by_customer'
       end
       resources :stocks
     end

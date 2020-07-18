@@ -1,0 +1,35 @@
+<% provide(:title, "得意先別委託情報") %>
+
+<h1>委託商品情報</h1>
+<div class="container">
+  <div class="col col-md-12 user-menu">
+    <div class="search-link-form">
+      <div class="search-link"><%= link_to "#{@user.name} 委託", @user, class: "btn btn-secondary" %></div>
+      <div class="search-link"><%= link_to "商品別", '#', class: "btn btn-secondary" %></div>
+    </div>
+    
+    <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
+      <thead>
+        <tr>
+          <th class="pc-display"><%= Consignment.human_attribute_name :customer_code %></th>
+          <th class="pc-display"><%= Consignment.human_attribute_name :customer_name %></th>
+          <th class="pc-display"><%= Product.human_attribute_name :code %></th>
+          <th><%= Product.human_attribute_name :name %></th>
+          <th><%= Consignment.human_attribute_name :quantity %></th>
+        </tr>
+      </thead>
+      
+    </table>
+  </div>
+</div>
+
+<%= @user.name %>
+<% @consignments.each do |consignment| %>
+  <p><%= consignment.ship_date %></p>
+  <p><%= User.find(consignment.user_id).name %></p>
+  <p><%= Customer.find(consignment.customer_id_number).name %></p>
+  <p><%= Product.find(consignment.product_id_number).name %></p>
+  <p><%= consignment.quantity %>台</p>
+  <p><%= consignment.done %></p>
+  -------------------
+<% end %>

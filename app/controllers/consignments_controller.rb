@@ -8,7 +8,7 @@ class ConsignmentsController < ApplicationController
     # redirect_to new_user_consignment_path
   end
   
-  def all
+  def by_customer
     @consignments = Consignment.all.order(user_id: :asc)
   end
   
