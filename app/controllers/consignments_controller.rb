@@ -10,7 +10,8 @@ class ConsignmentsController < ApplicationController
   
   def by_customer
     # @consignments = Consignment.all.order(customer_id_number: :asc)
-    @consignments = Consignment.all.order(customer_id_number: :asc).group(:customer_id_number)
+    # @consignments = Consignment.all.group(:customer_id_number).order(customer_id_number: :asc)
+    @consignments = Consignment.all.order(customer_id_number: :asc).group_by(&:customer_id_number)
   end
   
   def new

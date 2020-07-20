@@ -21,15 +21,22 @@
       </thead>
       
       <tbody>
-        <% @consignments.group_by do |consignment| %>
-        <tr>
-          <td><%= Customer.find(consignment.customer_id_number).code %></td>
-          <td><%= Customer.find(consignment.customer_id_number).name %></td>
-          <td><%= Product.find(consignment.product_id_number).code %></td>
-          <td><%= Product.find(consignment.product_id_number).name %></td>
-          <td><%= consignment.quantity %>台</td>
-          <td><%= User.find(consignment.user_id).name %></td>
-        </tr>
+        <% @consignments.each do |customer_id_number, consignments| %>
+          <tr>
+            <td><%= Customer.find(customer_id_number).code %></td>
+            <td><%= Customer.find(customer_id_number).name %></td>
+          </tr>
+
+          <% consignments.each do |consignment| %>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><%= Product.find(consignment.product_id_number).code %></td>
+              <td><%= Product.find(consignment.product_id_number).name %></td>
+              <td><%= consignment.quantity %>台</td>
+              <td><%= User.find(consignment.user_id).name %></td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>
