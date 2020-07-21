@@ -1,6 +1,6 @@
 <% provide(:title, "得意先別委託情報") %>
 
-<h1>委託商品情報</h1>
+<h1>得意先別委託商品情報</h1>
 <div class="container">
   <div class="col col-md-12 user-menu">
     <div class="search-link-form">
@@ -8,37 +8,78 @@
       <div class="search-link"><%= link_to "商品別", '#', class: "btn btn-secondary" %></div>
     </div>
     
-    <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
-      <thead>
-        <tr>
-          <th><%= Consignment.human_attribute_name :customer_code %></th>
-          <th><%= Consignment.human_attribute_name :customer_name %></th>
-          <th><%= Product.human_attribute_name :code %></th>
-          <th><%= Product.human_attribute_name :name %></th>
-          <th><%= Consignment.human_attribute_name :quantity %></th>
-          <th></th>
-        </tr>
-      </thead>
-      
-      <tbody>
-        <% @consignments.each do |customer_id_number, consignments| %>
+    <% @consignments.each do |customer_id_number, consignments| %>
+      <table class="table-bordered table-condensed bg-light" width="50%">
+        <tbody>
+          <tr>
+            <th width="50%"><%= Consignment.human_attribute_name :customer_code %></th>
+            <th width="50%"><%= Consignment.human_attribute_name :customer_name %></th>
+          </tr>
           <tr>
             <td><%= Customer.find(customer_id_number).code %></td>
             <td><%= Customer.find(customer_id_number).name %></td>
           </tr>
-
+        </tbody>
+      </table>
+      
+      <table class="table-responsive table-bordered table-condensed bg-light">
+        <tbody>
+          <tr>
+            <th width="25%"><%= Product.human_attribute_name :code %></th>
+            <th width="25%"><%= Product.human_attribute_name :name %></th>
+            <th width="25%"><%= Consignment.human_attribute_name :quantity %></th>
+            <th width="25%">担当者</th>
+          </tr>
           <% consignments.each do |consignment| %>
             <tr>
-              <td></td>
-              <td></td>
               <td><%= Product.find(consignment.product_id_number).code %></td>
               <td><%= Product.find(consignment.product_id_number).name %></td>
               <td><%= consignment.quantity %>台</td>
               <td><%= User.find(consignment.user_id).name %></td>
             </tr>
           <% end %>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+      <br>
+    <% end %>
   </div>
 </div>
+
+
+
+
+<!-- 消す -->
+<br>
+<br>
+<table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
+  <thead>
+    <tr>
+      <th><%= Consignment.human_attribute_name :customer_code %></th>
+      <th><%= Consignment.human_attribute_name :customer_name %></th>
+      <th><%= Product.human_attribute_name :code %></th>
+      <th><%= Product.human_attribute_name :name %></th>
+      <th><%= Consignment.human_attribute_name :quantity %></th>
+      <th></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @consignments.each do |customer_id_number, consignments| %>
+      <tr>
+        <td><%= Customer.find(customer_id_number).code %></td>
+        <td><%= Customer.find(customer_id_number).name %></td>
+      </tr>
+
+      <% consignments.each do |consignment| %>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= Product.find(consignment.product_id_number).code %></td>
+          <td><%= Product.find(consignment.product_id_number).name %></td>
+          <td><%= consignment.quantity %>台</td>
+          <td><%= User.find(consignment.user_id).name %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
