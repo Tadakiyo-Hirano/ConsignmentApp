@@ -12,6 +12,12 @@ class ConsignmentsController < ApplicationController
     # @consignments = Consignment.all.order(customer_id_number: :asc)
     # @consignments = Consignment.all.group(:customer_id_number).order(customer_id_number: :asc)
     @consignments = Consignment.all.order(customer_id_number: :asc).group_by(&:customer_id_number)
+    # @consignments = Consignment.where(done: false).order(customer_id_number: :asc).group_by(&:customer_id_number)
+  end
+  
+  def by_product
+    @consignments = Consignment.all.order(product_id_number: :asc).group_by(&:product_id_number)
+    # @consignments = Consignment.where(done: false).order(product_id_number: :asc).group_by(&:product_id_number)
   end
   
   def new

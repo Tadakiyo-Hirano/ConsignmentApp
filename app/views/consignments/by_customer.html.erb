@@ -1,22 +1,22 @@
 <% provide(:title, "得意先別委託情報") %>
 
-<h1>得意先別委託商品情報</h1>
+<h1><i class="fas fa-building"></i>&nbsp;得意先別委託</h1>
 <div class="container">
   <div class="col col-md-12 user-menu">
     <div class="search-link-form">
       <div class="search-link"><%= link_to "#{@user.name} 委託", @user, class: "btn btn-secondary" %></div>
-      <div class="search-link"><%= link_to "商品別", '#', class: "btn btn-secondary" %></div>
+      <div class="search-link"><%= link_to "商品別", by_product_user_consignments_path(@user), class: "btn btn-secondary" %></div>
     </div>
     
     <% @consignments.each do |customer_id_number, consignments| %>
       <table class="table-bordered table-condensed bg-light" width="50%">
         <tbody>
           <tr>
-            <th width="50%"><%= Consignment.human_attribute_name :customer_code %></th>
-            <th width="50%"><%= Consignment.human_attribute_name :customer_name %></th>
+            <th width="50%" class="pc-display"><%= Consignment.human_attribute_name :customer_code %></th>
+            <th width="50%" class="pc-display"><%= Consignment.human_attribute_name :customer_name %></th>
           </tr>
           <tr>
-            <td><%= Customer.find(customer_id_number).code %></td>
+            <td class="pc-display"><%= Customer.find(customer_id_number).code %></td>
             <td><%= Customer.find(customer_id_number).name %></td>
           </tr>
         </tbody>
@@ -25,16 +25,16 @@
       <table class="table-responsive table-bordered table-condensed bg-light">
         <tbody>
           <tr>
-            <th width="25%"><%= Product.human_attribute_name :code %></th>
+            <th width="25%" class="pc-display"><%= Product.human_attribute_name :code %></th>
             <th width="25%"><%= Product.human_attribute_name :name %></th>
-            <th width="25%"><%= Consignment.human_attribute_name :quantity %></th>
+            <th width="25%">委託残</th>
             <th width="25%">担当者</th>
           </tr>
           <% consignments.each do |consignment| %>
             <tr>
-              <td><%= Product.find(consignment.product_id_number).code %></td>
+              <td class="pc-display"><%= Product.find(consignment.product_id_number).code %></td>
               <td><%= Product.find(consignment.product_id_number).name %></td>
-              <td><%= consignment.quantity %>台</td>
+              <td><%= total_consignment_balance(consignment) %>台</td>
               <td><%= User.find(consignment.user_id).name %></td>
             </tr>
           <% end %>
