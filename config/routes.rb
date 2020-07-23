@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     end
     member do
       patch 'password_update' # パスワード更新
+      get 'end_tasks'
     end
   end
   

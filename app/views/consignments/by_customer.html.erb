@@ -34,7 +34,9 @@
             <tr>
               <td class="pc-display"><%= Product.find(consignment.product_id_number).code %></td>
               <td><%= Product.find(consignment.product_id_number).name %></td>
-              <td><%= total_consignment_balance(consignment) %>台</td>
+              <td class="<%= total_consignment_balance_color(consignment) %>">
+                <%= total_consignment_balance(consignment) %>
+              </td>
               <td><%= User.find(consignment.user_id).name %></td>
             </tr>
           <% end %>

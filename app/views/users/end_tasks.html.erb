@@ -1,22 +1,13 @@
 <% provide(:title, @user.name) %>
 
-<h1>委託情報</h1>
+<h1>処理済</h1>
 <h4><%= @user.name %></h4>
 <div class="container">
   <div class="col col-md-12 user-menu">
     <div class="search-link-form">
-      <div class="search-link"><%= link_to "得意先別", by_customer_user_consignments_path(@user), class: "btn btn-secondary" %></div>
-      <div class="search-link"><%= link_to "商品別",  by_product_user_consignments_path(@user), class: "btn btn-secondary" %></div>
-      <div class="search-link"><%= link_to "完了済",  end_tasks_user_path(@user), class: "btn btn-secondary" %></div>
+      <div class="search-link"><%= link_to "戻る", @user, class: "btn btn-secondary" %></div>
     </div>
-    <table class="table-bordered table-condensed bg-light" width="50%">
-      <tr>
-        <th class="pc-display"><%= code(@user) %></th>
-        <th class="pc-display"><%= @user.name %></th>
-        <th><%= link_to "委託登録", new_user_consignment_path(@user), class: "btn btn-sm btn-default" %></th>
-      </tr>
-    </table>
-    <br>
+
     <%= paginate @user_consignments %>
     <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
       <thead>
@@ -56,5 +47,3 @@
     </table>
   </div>
 </div>
-<%# encoding: UTF-8 %>
-<%= @api_info.force_encoding("UTF-8") %>

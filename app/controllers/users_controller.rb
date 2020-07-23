@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :signed_in_user
   before_action :authenticate_admin!, only: %i(index update password_update)
-  before_action :set_user, only: %i(show update password_update)
-  before_action :signed_in_correct_user, only: %i(show)
+  before_action :set_user, only: %i(show end_tasks update password_update)
+  before_action :signed_in_correct_user, only: %i(show end_tasks)
   before_action :pca_api
   
   def index
@@ -10,8 +10,12 @@ class UsersController < ApplicationController
   end
   
   def show
-    # @user_consignments = @user.consignments.where(done: false).page(params[:page]).per(10).order(ship_date: :desc).order(created_at: :desc)
-    @user_consignments = @user.consignments.page(params[:page]).per(10).order(ship_date: :desc).order(created_at: :desc)
+    @user_consignments = @user.consignments.where(done: false).page(params[:page]).per(10).order(ship_date: :desc).order(created_at: :desc)
+    # @user_consignments = @user.consignments.page(params[:page]).per(10).order(ship_date: :desc).order(created_at: :desc)
+  end
+  
+  def end_tasks
+    @user_consignments = @user.consignments.where(done: true).page(params[:page]).per(10).order(ship_date: :desc).order(created_at: :desc)
   end
   
   def update
