@@ -15,7 +15,7 @@
         </tr>
         <tr>
           <th><%= Consignment.human_attribute_name :customer_name %></th>
-          <td><%= @consignment.customer_id_num.name %></td>
+          <td><%= @consignment.customer_id_num.name %><%= @consignment.customer_name %></td>
         </tr>
         <tr>
           <th><%= Consignment.human_attribute_name :product_code %></th>
