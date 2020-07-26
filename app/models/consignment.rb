@@ -17,8 +17,8 @@ class Consignment < ApplicationRecord
   # 検索
   scope :search, -> (search_params) do
     return if search_params.blank?
-    customer_like(search_params[Customer.find([:customer_id_number]).name]).product_like(search_params[Product.find([:product_id_number]).name])
+    customer_name_like(search_params[:customer_name]).customer_code_like(search_params[:customer_code])
   end
-  scope :customer_like, -> (customer) { where('name LIKE ?', "%#{customer}%") if customer.present? }
-  scope :product_like, -> (product) { where('code LIKE ?', "%#{product}%") if product.present? }
+  scope :customer_name_like, -> (customer_name) { where('customer_name LIKE ?', "%#{customer_name}%") if customer_name.present? }
+  scope :customer_code_like, -> (customer_code) { where('customer_code LIKE ?', "%#{customer_code}%") if customer_code.present? }
 end

@@ -31,4 +31,26 @@ module ConsignmentsHelper
   def none_zero_total(c)
     total_consignment_balance(c) != 0
   end
+  
+  # 検索フォームが未入力の時
+  def consignment_search_none
+    @search_params.blank? || @search_params[:customer_code] == "" && @search_params[:customer_name] == ""
+  end
+  
+  # 検索結果の表示
+  def consignment_search_results_text(search_hash)
+    if @search_params[:customer_code] == "" && @search_params[:customer_name] == ""
+      "検索ワードを入力してください。"
+    elsif params[:search].present?
+      "検索結果 #{search_hash.count}件"
+    end
+  end
+  
+  def consignment_search_results_link(path)
+    if @search_params[:customer_code] == "" && @search_params[:customer_name] == ""
+      return
+    elsif params[:search].present?
+      link_to "戻る", path
+    end
+  end
 end

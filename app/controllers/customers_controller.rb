@@ -35,8 +35,8 @@ class CustomersController < ApplicationController
   
   def update
     if @customer.update_attributes(customer_params)
-      # 得意先モデル(Customer)を更新した場合、更新したCustomer.idとConsignment.customer_id_numberと同じ委託(モデルconsignment)の得意先名も同時更新する。
-      Consignment.where(['customer_id_number == ?', @customer.id]).update_all(customer_name: Customer.find(@customer.id).name)
+      # 得意先モデル(Customer)を更新した場合、更新したCustomer.idとConsignment.customer_id_numberと同じ委託(モデルconsignment)の得意先コード、得意先名も同時更新する。
+      Consignment.where(['customer_id_number == ?', @customer.id]).update_all(customer_code: Customer.find(@customer.id).code ,customer_name: Customer.find(@customer.id).name)
       flash[:notice] = "【#{@customer.code}】#{@customer.name}&emsp;得意先情報更新完了。"
       redirect_to customers_url
     elsif @customer.name.blank?

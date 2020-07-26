@@ -37,12 +37,12 @@ module ApplicationHelper
     end
   end
   
-  # 検索フォームが未入力の時
+  # 得意先、商品検索フォームが未入力の時
   def search_none
     @search_params.blank? || @search_params[:code] == "" && @search_params[:name] == ""
   end
   
-  # 検索結果の表示
+  # 得意先、商品検索結果の表示
   def search_results_text(search_hash)
     if @search_params[:code] == "" && @search_params[:name] == ""
       "検索ワードを入力してください。"
