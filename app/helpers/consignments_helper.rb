@@ -34,12 +34,12 @@ module ConsignmentsHelper
   
   # 検索フォームが未入力の時
   def consignment_search_none
-    @search_params.blank? || @search_params[:customer_code] == "" && @search_params[:customer_name] == ""
+    @search_params.blank? || @search_params[:customer_name] == "" && @search_params[:product_name] == ""
   end
   
   # 検索結果の表示
   def consignment_search_results_text(search_hash)
-    if @search_params[:customer_code] == "" && @search_params[:customer_name] == ""
+    if @search_params[:customer_name] == "" && @search_params[:product_name] == ""
       "検索ワードを入力してください。"
     elsif params[:search].present?
       "検索結果 #{search_hash.count}件"
@@ -47,7 +47,7 @@ module ConsignmentsHelper
   end
   
   def consignment_search_results_link(path)
-    if @search_params[:customer_code] == "" && @search_params[:customer_name] == ""
+    if @search_params[:customer_name] == "" && @search_params[:product_name] == ""
       return
     elsif params[:search].present?
       link_to "戻る", path
