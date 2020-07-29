@@ -9,9 +9,13 @@ class ConsignmentsController < ApplicationController
   end
   
   def by_customer
+    @search_params = consignment_search_params
+    @search_none = consignment_search_none
+    @consignments = @search_none ? @user.consignments.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number) : 
+                                   @user.consignments.where(done: false).search(@search_params).order(customer_code: :asc).group_by(&:customer_id_number)
     # @consignments = Consignment.all.order(customer_id_number: :asc)
     # @consignments = Consignment.all.group(:customer_id_number).order(customer_id_number: :asc)
-    @consignments = Consignment.all.order(customer_id_number: :asc).group_by(&:customer_id_number)
+    # @consignments = Consignment.all.order(customer_id_number: :asc).group_by(&:customer_id_number)
     # @consignments = Consignment.where(done: false).order(customer_id_number: :asc).group_by(&:customer_id_number)
   end
   
@@ -86,5 +90,10 @@ class ConsignmentsController < ApplicationController
         flash[:alert] = "アクセス権限がありません。"
         redirect_to @user
       end
+    end
+    
+    # 検索用
+    def consignment_search_params
+      params.fetch(:search, {}).permit(:customer_code, :customer_name, :product_code, :product_name)
     end
 end
