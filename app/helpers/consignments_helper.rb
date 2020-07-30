@@ -54,6 +54,7 @@ module ConsignmentsHelper
     end
   end
   
+  # 得意先別の検索
   def by_customer_search_none
     @search_params.blank? || @search_params[:customer_name] == ""
   end
@@ -68,6 +69,27 @@ module ConsignmentsHelper
   
   def by_customer_search_results_link(path)
     if @search_params[:customer_name] == ""
+      return
+    elsif params[:search].present?
+      link_to "戻る", path
+    end
+  end
+  
+  # 商品別の検索
+  def by_product_search_none
+    @search_params.blank? || @search_params[:product_name] == ""
+  end
+  
+  def by_product_search_results_text(search_hash)
+    if @search_params[:product_name] == ""
+      "検索ワードを入力してください。"
+    elsif params[:search].present?
+      "検索結果 #{search_hash.count}件"
+    end
+  end
+  
+  def by_product_search_results_link(path)
+    if @search_params[:product_name] == ""
       return
     elsif params[:search].present?
       link_to "戻る", path

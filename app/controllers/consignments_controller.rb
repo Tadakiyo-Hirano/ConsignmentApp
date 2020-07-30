@@ -20,7 +20,11 @@ class ConsignmentsController < ApplicationController
   end
   
   def by_product
-    @consignments = Consignment.all.order(product_id_number: :asc).group_by(&:product_id_number)
+    @search_params = consignment_search_params
+    @search_none = consignment_search_none
+    @consignments = @search_none ? @user.consignments.where(done: false).order(product_code: :asc).group_by(&:product_id_number) : 
+                                   @user.consignments.where(done: false).search(@search_params).order(product_code: :asc).group_by(&:product_id_number)
+    # @consignments = Consignment.all.order(product_id_number: :asc).group_by(&:product_id_number)
     # @consignments = Consignment.where(done: false).order(product_id_number: :asc).group_by(&:product_id_number)
   end
   
