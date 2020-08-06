@@ -21,6 +21,8 @@ gem 'devise-i18n-views'
 gem "kaminari", ">= 1.2.1"
 gem 'draper'
 gem 'oauth2'
+gem 'prawn'
+gem 'prawn-table'
 
 group :development, :test do
   gem 'awesome_print' # コンソールで ap User.all等とすると、User.allより見やすい。

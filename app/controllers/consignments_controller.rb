@@ -19,6 +19,24 @@ class ConsignmentsController < ApplicationController
     # @consignments = Consignment.where(done: false).order(customer_id_number: :asc).group_by(&:customer_id_number)
   end
   
+  def by_customer_pdfs
+    @customers_pdf = Consignment.all
+    # @customers = @user.consignments.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number) # pdf上で使用するレコードのインスタンスを作成
+    respond_to do |format|
+      format.html
+      format.pdf do
+
+        # pdfを新規作成。インスタンスを渡す。
+        pdf = ConsignmentPdf.new(@customers_pdf)
+
+        send_data pdf.render,
+          filename:    "sample.pdf",
+          type:        "application/pdf",
+          disposition: "inline" # 画面に表示。外すとダウンロードされる。
+      end
+    end
+  end
+  
   def by_product
     @search_params = consignment_search_params
     @search_none = consignment_search_none
