@@ -11,8 +11,8 @@ class ConsignmentsController < ApplicationController
   def by_customer
     @search_params = consignment_search_params
     @search_none = consignment_search_none
-    @consignments = @search_none ? @user.consignments.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number) : 
-                                   @user.consignments.where(done: false).search(@search_params).order(customer_code: :asc).group_by(&:customer_id_number)
+    @consignments = @search_none ? Consignment.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number) : 
+                                   Consignment.where(done: false).search(@search_params).order(customer_code: :asc).group_by(&:customer_id_number)
     # @consignments = Consignment.all.order(customer_id_number: :asc)
     # @consignments = Consignment.all.group(:customer_id_number).order(customer_id_number: :asc)
     # @consignments = Consignment.all.order(customer_id_number: :asc).group_by(&:customer_id_number)
@@ -20,7 +20,7 @@ class ConsignmentsController < ApplicationController
   end
   
   def by_customer_pdfs
-    @customers_pdf = Consignment.all
+    @customers_pdf = Consignment.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number)
     # @customers = @user.consignments.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number) # pdf上で使用するレコードのインスタンスを作成
     respond_to do |format|
       format.html

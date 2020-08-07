@@ -1,5 +1,6 @@
 class ConsignmentPdf < Prawn::Document
   include ApplicationHelper
+  include ConsignmentsHelper
   
   # customerにモデルなどのデータを渡します
   def initialize(customers)
@@ -62,9 +63,20 @@ class ConsignmentPdf < Prawn::Document
             "#{Consignment.human_attribute_name :note}"
           ]]
     
-    @customers_pdf.each do |cp|
-      arr << [cp.customer_code]
+    @customers_pdf.each do |customer_id_number, consignments|
+       consignments.each do |consignment|
+        arr << [Customer.find(customer_id_number).code,
+                Customer.find(customer_id_number).name,
+                Product.find(consignment.product_id_number).code,
+                Product.find(consignment.product_id_number).name,
+                consignment.quantity - consignment.stocks.map { |s| s.return_quantity }.sum - consignment.stocks.map { |s| s.sales_quantity }.sum,
+                User.find(consignment.user_id).name,
+                consignment.ship_date,
+                consignment.note
+              ]
+       end
     end
+    return arr
   end
 
     # テーブルのデータ部
