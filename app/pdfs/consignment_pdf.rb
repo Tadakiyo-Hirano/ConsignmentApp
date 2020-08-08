@@ -37,18 +37,23 @@ class ConsignmentPdf < Prawn::Document
       # 個別設定
       # row(0)は0行目、row(1)は1行目、row(-1)は最後の行、row(-2)は最後から2行目を表す
       row(0).border_width = 0.5
-      columns(0).align = :right
-      columns(1).align = :right
+      columns(0).align = :center
+      columns(1).align = :center
       columns(2).align = :center
-      columns(3).align = :right
+      columns(3).align = :center
+      columns(4).align = :center
+      columns(5).align = :center
+      columns(6).align = :center
+      columns(7).align = :center
+      columns(8).align = :center
       row(0).align = :center
       # row(-2).border_width = 1.5
       # row(-1).background_color = "cdd3e2"
       # row(-1).borders = []
 
       self.header     = true  # 1行目をヘッダーとするか否か
-      self.row_colors = ['f5f5f5', 'ffffff'] # 列の色
-      self.column_widths = [100, 100, 100, 100, 50, 80, 100, 130] # 列の幅
+      self.row_colors = ['ffffff'] # 列の色
+      self.column_widths = [60, 100, 60, 100, 40, 50, 60, 100, 190] # 列の幅
     end
   end
   
@@ -60,21 +65,24 @@ class ConsignmentPdf < Prawn::Document
             "委託残",
             "#{User.human_attribute_name :name}",
             "#{Consignment.human_attribute_name :ship_date}",
+            "#{Consignment.human_attribute_name :serial_number}",
             "#{Consignment.human_attribute_name :note}"
           ]]
     
     @customers_pdf.each do |customer_id_number, consignments|
-       consignments.each do |consignment|
-        arr << [Customer.find(customer_id_number).code,
-                Customer.find(customer_id_number).name,
-                Product.find(consignment.product_id_number).code,
-                Product.find(consignment.product_id_number).name,
-                consignment.quantity - consignment.stocks.map { |s| s.return_quantity }.sum - consignment.stocks.map { |s| s.sales_quantity }.sum,
-                User.find(consignment.user_id).name,
-                consignment.ship_date,
-                consignment.note
-              ]
-       end
+      arr << [Customer.find(customer_id_number).code, Customer.find(customer_id_number).name, "", "", "", "", "", "", ""]
+      consignments.each do |consignment|
+      arr << ["",
+              "",
+              Product.find(consignment.product_id_number).code,
+              Product.find(consignment.product_id_number).name,
+              consignment.quantity - consignment.stocks.map { |s| s.return_quantity }.sum - consignment.stocks.map { |s| s.sales_quantity }.sum,
+              User.find(consignment.user_id).name,
+              consignment.ship_date.strftime("%Y年%m月%d日"),
+              consignment.serial_number,
+              consignment.note
+            ]
+      end
     end
     return arr
   end
