@@ -17,17 +17,19 @@ class ConsignmentsController < ApplicationController
     # @consignments = Consignment.all.group(:customer_id_number).order(customer_id_number: :asc)
     # @consignments = Consignment.all.order(customer_id_number: :asc).group_by(&:customer_id_number)
     # @consignments = Consignment.where(done: false).order(customer_id_number: :asc).group_by(&:customer_id_number)
+    @customers_pdf = Consignment.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number)
   end
   
-  def by_customer_pdfs
+  def pdf
     @customers_pdf = Consignment.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number)
+    @products_pdf = Consignment.where(done: false).order(product_code: :asc).group_by(&:product_id_number)
     # @customers = @user.consignments.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number) # pdf上で使用するレコードのインスタンスを作成
     respond_to do |format|
       format.html
       format.pdf do
 
         # pdfを新規作成。インスタンスを渡す。
-        pdf = ConsignmentPdf.new(@customers_pdf)
+        pdf = ConsignmentPdf.new(@customers_pdf, @products_pdf)
 
         send_data pdf.render,
           filename:    "sample.pdf",
@@ -44,6 +46,7 @@ class ConsignmentsController < ApplicationController
                                    @user.consignments.where(done: false).search(@search_params).order(product_code: :asc).group_by(&:product_id_number)
     # @consignments = Consignment.all.order(product_id_number: :asc).group_by(&:product_id_number)
     # @consignments = Consignment.where(done: false).order(product_id_number: :asc).group_by(&:product_id_number)
+    @products_pdf = Consignment.where(done: false).order(product_code: :asc).group_by(&:product_id_number)
   end
   
   def new

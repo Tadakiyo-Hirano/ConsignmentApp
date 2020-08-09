@@ -3,15 +3,24 @@ class ConsignmentPdf < Prawn::Document
   include ConsignmentsHelper
   
   # customerにモデルなどのデータを渡します
-  def initialize(customers)
+  def initialize(customers, products)
     # superで初期設定を指定(ページサイズ、マージン等)
     super(page_size: 'A4', page_layout: :landscape)
     @customers_pdf = customers # インスタンスを受け取り。コンポーネント作成時などにレコード内のデータを使える
+    @products_pdf = products
     font "vendor/fonts/ipaexm.ttf"
     stroke_axis if Rails.env.development? # 目盛りの表示(開発環境のみ)
+    
+    # if @customers_pdf.present? && @products_pdf.nil?
+    #   customer_header
+    #   customer_table_content
+    # elsif @products_pdf.present? && @customers_pdf.nil?
+    #   product_header
+    #   product_table_content
+    # end
+    
     header
     table_content
-    
     # text 'テストテスト'
   end
   
@@ -21,8 +30,13 @@ class ConsignmentPdf < Prawn::Document
     # bounding_boxで記載箇所を指定して、textメソッドでテキストを記載
     bounding_box([0, 500, y_position], width: 270, height: 20) do
       font_size 10.5
-      draw_text "得意先別･委託商品一覧", size: 25, at: [0, 20]
-      # draw_text "#{@year_count}", at: [400, 50]
+      
+      if @customers_pdf.present?
+        draw_text "得意先別･委託商品一覧", size: 25, at: [0, 20]
+      elsif @products_pdf.present?
+        draw_text "商品別･委託商品一覧", size: 25, at: [0, 20]
+      end
+      
       draw_text "出力日:  #{Date.current.strftime("%Y年%-m月%-d日")}", at: [620, 20]
     end
   end
@@ -76,6 +90,23 @@ class ConsignmentPdf < Prawn::Document
               "",
               Product.find(consignment.product_id_number).code,
               Product.find(consignment.product_id_number).name,
+              consignment.quantity - consignment.stocks.map { |s| s.return_quantity }.sum - consignment.stocks.map { |s| s.sales_quantity }.sum,
+              User.find(consignment.user_id).name,
+              consignment.ship_date.strftime("%Y年%m月%d日"),
+              consignment.serial_number,
+              consignment.note
+            ]
+      end
+    end
+    return arr
+    
+    @products_pdf.each do |customer_id_number, consignments|
+      arr << [Product.find(product_id_number).code, Product.find(product_id_number).name, "", "", "", "", "", "", ""]
+      consignments.each do |consignment|
+      arr << ["",
+              "",
+              Customer.find(consignment.customer_id_number).code,
+              Customer.find(consignment.customer_id_number).name,
               consignment.quantity - consignment.stocks.map { |s| s.return_quantity }.sum - consignment.stocks.map { |s| s.sales_quantity }.sum,
               User.find(consignment.user_id).name,
               consignment.ship_date.strftime("%Y年%m月%d日"),
