@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resources :consignments do
       collection do
         get 'by_customer', to: 'consignments#by_customer'
-        get 'documents', to: 'consignments#pdf'
+        get 'documents'
         get 'by_product', to: 'consignments#by_product'
       end
       resources :stocks

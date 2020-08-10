@@ -20,25 +20,6 @@ class ConsignmentsController < ApplicationController
     @customers_pdf = Consignment.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number)
   end
   
-  def pdf
-    @customers_pdf = Consignment.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number)
-    @products_pdf = Consignment.where(done: false).order(product_code: :asc).group_by(&:product_id_number)
-    # @customers = @user.consignments.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number) # pdf上で使用するレコードのインスタンスを作成
-    respond_to do |format|
-      format.html
-      format.pdf do
-
-        # pdfを新規作成。インスタンスを渡す。
-        pdf = ConsignmentPdf.new(@customers_pdf, @products_pdf)
-
-        send_data pdf.render,
-          filename:    "sample.pdf",
-          type:        "application/pdf",
-          disposition: "inline" # 画面に表示。外すとダウンロードされる。
-      end
-    end
-  end
-  
   def by_product
     @search_params = consignment_search_params
     @search_none = consignment_search_none
@@ -47,6 +28,26 @@ class ConsignmentsController < ApplicationController
     # @consignments = Consignment.all.order(product_id_number: :asc).group_by(&:product_id_number)
     # @consignments = Consignment.where(done: false).order(product_id_number: :asc).group_by(&:product_id_number)
     @products_pdf = Consignment.where(done: false).order(product_code: :asc).group_by(&:product_id_number)
+  end
+  
+  def documents
+    @documents = params[:text]
+    @customers_pdf = Consignment.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number)
+    @products_pdf = Consignment.where(done: false).order(product_code: :asc).group_by(&:product_id_number)
+    # @customers = @user.consignments.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number) # pdf上で使用するレコードのインスタンスを作成
+    respond_to do |format|
+      format.html
+      format.pdf do
+
+        # pdfを新規作成。インスタンスを渡す。
+        pdf = ConsignmentPdf.new(@customers_pdf, @products_pdf, @documents)
+
+        send_data pdf.render,
+          filename:    "委託一覧表(#{Date.current}).pdf",
+          type:        "application/pdf",
+          disposition: "inline" # 画面に表示。外すとダウンロードされる。
+      end
+    end
   end
   
   def new

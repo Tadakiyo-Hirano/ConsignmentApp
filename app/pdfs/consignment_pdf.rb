@@ -2,26 +2,21 @@ class ConsignmentPdf < Prawn::Document
   include ApplicationHelper
   include ConsignmentsHelper
   
-  # customerにモデルなどのデータを渡します
-  def initialize(customers, products)
-    # superで初期設定を指定(ページサイズ、マージン等)
-    super(page_size: 'A4', page_layout: :landscape)
+  # 引数にモデルなどのデータを渡す
+  def initialize(customers, products, documents)
+    super(page_size: 'A4', page_layout: :landscape) # superで初期設定を指定(ページサイズ、マージン等)
+    @documents = documents
     @customers_pdf = customers # インスタンスを受け取り。コンポーネント作成時などにレコード内のデータを使える
     @products_pdf = products
     font "vendor/fonts/ipaexm.ttf"
     stroke_axis if Rails.env.development? # 目盛りの表示(開発環境のみ)
     
-    # if @customers_pdf.present? && @products_pdf.nil?
-    #   customer_header
-    #   customer_table_content
-    # elsif @products_pdf.present? && @customers_pdf.nil?
-    #   product_header
-    #   product_table_content
-    # end
-    
-    header
-    table_content
-    # text 'テストテスト'
+    if @documents == "customers_pdf" || @documents == "products_pdf"
+      header
+      table_content
+    else
+      text "表示エラーです。ページを閉じてください。", size: 25
+    end
   end
   
   def header
@@ -31,9 +26,9 @@ class ConsignmentPdf < Prawn::Document
     bounding_box([0, 500, y_position], width: 270, height: 20) do
       font_size 10.5
       
-      if @customers_pdf.present?
+      if @documents == "customers_pdf"
         draw_text "得意先別･委託商品一覧", size: 25, at: [0, 20]
-      elsif @products_pdf.present?
+      elsif @documents == "products_pdf"
         draw_text "商品別･委託商品一覧", size: 25, at: [0, 20]
       end
       
@@ -42,7 +37,7 @@ class ConsignmentPdf < Prawn::Document
   end
   
   def table_content
-    table customer_rows do
+    table consignment_rows do
       cells.size = 6 # 文字サイズ
       cells.padding = 3 # セルのpadding幅
       cells.borders = [:top, :bottom, :right, :left] # 表示するボーダーの向き(top, bottom, right, leftがある)
@@ -71,72 +66,65 @@ class ConsignmentPdf < Prawn::Document
     end
   end
   
-  def customer_rows
-    arr = [["#{Consignment.human_attribute_name :customer_code}",
-            "#{Consignment.human_attribute_name :customer_name}",
-            "#{Consignment.human_attribute_name :product_code}",
-            "#{Consignment.human_attribute_name :product_name}",
-            "委託残",
-            "#{User.human_attribute_name :name}",
-            "#{Consignment.human_attribute_name :ship_date}",
-            "#{Consignment.human_attribute_name :serial_number}",
-            "#{Consignment.human_attribute_name :note}"
-          ]]
-    
-    @customers_pdf.each do |customer_id_number, consignments|
-      arr << [Customer.find(customer_id_number).code, Customer.find(customer_id_number).name, "", "", "", "", "", "", ""]
-      consignments.each do |consignment|
-      arr << ["",
-              "",
-              Product.find(consignment.product_id_number).code,
-              Product.find(consignment.product_id_number).name,
-              consignment.quantity - consignment.stocks.map { |s| s.return_quantity }.sum - consignment.stocks.map { |s| s.sales_quantity }.sum,
-              User.find(consignment.user_id).name,
-              consignment.ship_date.strftime("%Y年%m月%d日"),
-              consignment.serial_number,
-              consignment.note
-            ]
+  def consignment_rows
+    if @documents == "customers_pdf"
+      arr = [["#{Consignment.human_attribute_name :customer_code}",
+              "#{Consignment.human_attribute_name :customer_name}",
+              "#{Consignment.human_attribute_name :product_code}",
+              "#{Consignment.human_attribute_name :product_name}",
+              "委託残",
+              "#{User.human_attribute_name :name}",
+              "#{Consignment.human_attribute_name :ship_date}",
+              "#{Consignment.human_attribute_name :serial_number}",
+              "#{Consignment.human_attribute_name :note}"
+            ]]
+            
+      @customers_pdf.each do |customer_id_number, consignments|
+        arr << [Customer.find(customer_id_number).code, Customer.find(customer_id_number).name, "", "", "", "", "", "", ""]
+        consignments.each do |consignment|
+        arr << ["",
+                "",
+                Product.find(consignment.product_id_number).code,
+                Product.find(consignment.product_id_number).name,
+                consignment.quantity - consignment.stocks.map { |s| s.return_quantity }.sum - consignment.stocks.map { |s| s.sales_quantity }.sum,
+                User.find(consignment.user_id).name,
+                consignment.ship_date.strftime("%Y年%m月%d日"),
+                consignment.serial_number,
+                consignment.note
+              ]
+        end
       end
     end
-    return arr
+    # return arr
     
-    @products_pdf.each do |customer_id_number, consignments|
-      arr << [Product.find(product_id_number).code, Product.find(product_id_number).name, "", "", "", "", "", "", ""]
-      consignments.each do |consignment|
-      arr << ["",
-              "",
-              Customer.find(consignment.customer_id_number).code,
-              Customer.find(consignment.customer_id_number).name,
-              consignment.quantity - consignment.stocks.map { |s| s.return_quantity }.sum - consignment.stocks.map { |s| s.sales_quantity }.sum,
-              User.find(consignment.user_id).name,
-              consignment.ship_date.strftime("%Y年%m月%d日"),
-              consignment.serial_number,
-              consignment.note
-            ]
+    if @documents == "products_pdf"
+      arr = [["#{Consignment.human_attribute_name :product_code}",
+              "#{Consignment.human_attribute_name :product_name}",
+              "#{Consignment.human_attribute_name :customer_code}",
+              "#{Consignment.human_attribute_name :customer_name}",
+              "委託残",
+              "#{User.human_attribute_name :name}",
+              "#{Consignment.human_attribute_name :ship_date}",
+              "#{Consignment.human_attribute_name :serial_number}",
+              "#{Consignment.human_attribute_name :note}"
+            ]]
+      
+      @products_pdf.each do |product_id_number, consignments|
+        arr << [Product.find(product_id_number).code, Product.find(product_id_number).name, "", "", "", "", "", "", ""]
+        consignments.each do |consignment|
+        arr << ["",
+                "",
+                Customer.find(consignment.customer_id_number).code,
+                Customer.find(consignment.customer_id_number).name,
+                consignment.quantity - consignment.stocks.map { |s| s.return_quantity }.sum - consignment.stocks.map { |s| s.sales_quantity }.sum,
+                User.find(consignment.user_id).name,
+                consignment.ship_date.strftime("%Y年%m月%d日"),
+                consignment.serial_number,
+                consignment.note
+              ]
+        end
       end
     end
     return arr
   end
-
-    # テーブルのデータ部
-    # 1年分の出力
-    # @year_pdf.each do |yp, item|
-    #   item.each do |i|
-    #     if i.reception_day&.strftime("%Y") == @date
-    #       arr << [i.reception_day&.strftime("%-m/%-d"),
-    #               i.completed&.strftime("%-m/%-d"),
-    #               sumi_text(i.delivery),
-    #               blank_text(format_reception_number(i.reception_number)),
-    #               i.customer_name,
-    #               i.machine_model,
-    #               i.category,
-    #               i.repair_staff,
-    #               i.condition,
-    #               i.note,
-    #               i.address,
-    #               i.phone_number,
-    #               i.mobile_phone_number]
-    #     end
-    #   end
-    # end
 end
