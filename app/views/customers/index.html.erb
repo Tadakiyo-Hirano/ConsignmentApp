@@ -3,7 +3,7 @@
 <h2><i class="fas fa-building"></i>&nbsp;得意先一覧・編集</h2>
 <div class="container">
   <div class="col col-md-12 admin-menu">
-    <div>
+    <div class="form-row">
       <%= form_with(scope: :search, url: customers_path, class: "form-inline", method: :get, local: true) do |f| %>
         <div class="input-group mb-3">
           <%= f.text_field :code, placeholder: "#{Customer.human_attribute_name :code}", class: "form-control" %>
@@ -16,6 +16,16 @@
           <%= search_results_text(@customers) %>&emsp;<%= search_results_link(customers_path) %>
         </div>
       <% end %>
+      <div class="row">
+        <%= form_tag import_customers_path, multipart: true do %>
+          <div class="input-group">
+            <%= file_field_tag :file, class: "form-control" %>
+            <div class="input-group-append">
+              <%= submit_tag "CSVインポート", class: "btn btn-sm btn-default" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
     
     <%= paginate @customers if @search_none %>

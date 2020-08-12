@@ -36,7 +36,11 @@ Rails.application.routes.draw do
   end
   
   resources :products
-  resources :customers
+  resources :customers do
+    collection do
+      post 'import'
+    end
+  end
   resources :apis, only: :index
 
 end

@@ -59,6 +59,11 @@ class CustomersController < ApplicationController
     end
   end
   
+  def import
+    Customer.import(params[:file])
+    redirect_to customers_url
+  end
+  
   private
   
     def customer_params
