@@ -60,7 +60,16 @@ class CustomersController < ApplicationController
   end
   
   def import
-    Customer.import(params[:file])
+    if params[:file].blank?
+      flash[:alert] = "インポートするCSVファイルを選択してください。"
+      redirect_to customers_url
+    else
+      num = Customer.import(params[:file])
+      flash[:notice] = "#{num.to_s}件の得意先情報を追加/更新しました。"
+      redirect_to customers_url
+    end
+  rescue CSV::MalformedCSVError
+    flash[:alert] = "読み込みエラーが発生しました。"
     redirect_to customers_url
   end
   
