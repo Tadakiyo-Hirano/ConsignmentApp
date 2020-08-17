@@ -52,6 +52,20 @@ class ProductsController < ApplicationController
     redirect_to products_url
   end
   
+  def import
+    if params[:file].blank?
+      flash[:alert] = "インポートするCSVファイルを選択してください。"
+      redirect_to products_url
+    else
+      num = Product.import(params[:file])
+      flash[:notice] = "#{num.to_s}件の商品情報を追加/更新しました。"
+      redirect_to products_url
+    end
+  rescue CSV::MalformedCSVError
+    flash[:alert] = "読み込みエラーが発生しました。"
+    redirect_to products_url
+  end
+  
   private
   
     def product_params

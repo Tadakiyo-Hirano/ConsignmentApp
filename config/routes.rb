@@ -35,7 +35,12 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :products
+  resources :products do
+    collection do
+      post 'import'
+    end
+  end
+  
   resources :customers do
     collection do
       post 'import'
