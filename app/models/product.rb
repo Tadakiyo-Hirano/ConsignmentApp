@@ -23,16 +23,12 @@ class Product < ApplicationRecord
       # CSVからデータを取得し、設定する
       product.attributes = row.to_hash.slice(*updatable_attributes)
       product.save
-      if product.updated_at_changed?
-        imported_num += 1
-      else
-        imported_num = 0
-      end
+      imported_num += 1
     end
     imported_num
   end
   
   def self.updatable_attributes
-    ["code", "name"]
+    ["code", "name", "classification", "category"]
   end
 end
