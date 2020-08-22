@@ -1,7 +1,7 @@
 <%= form_with(model: product, local: true, method: :patch) do |f| %>
   <%= f.text_field :code, placeholder: "#{Product.human_attribute_name :code}", class: "form-control" %>
   <%= f.text_field :name, placeholder: "#{Product.human_attribute_name :name}", class: "form-control" %>
-  <%= f.text_field :classification, placeholder: "#{Product.human_attribute_name :classification}", class: "form-control" %>
-  <%= f.text_field :category, placeholder: "#{Product.human_attribute_name :category}", class: "form-control" %>
+  <%= f.select :classification, [["本機", "本機"], ["部品", "部品"], ["その他", "その他"]], {include_blank: "#{Product.human_attribute_name :classification}"}, class: "form-control" %>
+  <%= f.select :category, [["チェンソー", "チェンソー"], ["刈払機", "刈払機"], ["農林緑地", "農林緑地"], ["産業", "産業"]], {include_blank: "#{Product.human_attribute_name :category}"}, class: "form-control" %>
   <%= f.submit "更新", class: "btn btn-default btn-block" %>
 <% end %>
