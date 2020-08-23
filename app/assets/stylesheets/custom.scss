@@ -87,6 +87,15 @@ h1, h2, h3, h4, h5 {
   color: #d9534f;
 }
 
+.csv-export-form {
+  margin-left: 5px;
+  
+  .btn {
+    // font-size: 15px;
+    border-radius: 0;
+  }
+}
+
 /* トップページ */
 
 body {

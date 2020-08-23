@@ -8,6 +8,18 @@ class ProductsController < ApplicationController
     @search_none = search_none
     @products = @search_none ? Product.search(@search_params).page(params[:page]).per(10).order(code: :asc) : 
                                Product.search(@search_params).order(code: :asc)
+    @export_products = Product.all
+    respond_to do |format|
+      format.html
+      format.csv do
+        if admin_signed_in? # 管理者のみCVS出力可
+          send_data render_to_string.encode(Encoding::Windows_31J, undef: :replace, row_sep: "\r\n", force_quotes: true),
+          filename: "商品一覧(出力日#{DateTime.current&.strftime("%Y年%-m月%-d日%-H時%-M分")}).csv", type: :csv
+        else
+          redirect_to products_url
+        end
+      end
+    end
   end
   
   def show
