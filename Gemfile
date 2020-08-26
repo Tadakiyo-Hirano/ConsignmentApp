@@ -24,6 +24,7 @@ gem 'oauth2'
 gem 'prawn'
 gem 'prawn-table'
 gem 'roo'
+gem 'line-bot-api'
 
 group :development, :test do
   gem 'awesome_print' # コンソールで ap User.all等とすると、User.allより見やすい。
