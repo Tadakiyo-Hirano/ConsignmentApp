@@ -47,5 +47,7 @@ Rails.application.routes.draw do
     end
   end
   resources :apis, only: :index
+  
+  post 'callback', to: 'linebot#callback'
 
 end

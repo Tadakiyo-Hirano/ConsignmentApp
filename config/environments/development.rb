@@ -1,6 +1,7 @@
 Rails.application.configure do
   config.hosts << "a2abbb908755475aacf873d532c3015e.vfs.cloud9.us-east-1.amazonaws.com"
   config.i18n.fallbacks = [I18n.default_locale]
+  config.hosts << '.ngrok.io'
   
   # devise認証メール
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
