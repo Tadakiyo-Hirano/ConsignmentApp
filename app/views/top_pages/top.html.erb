@@ -2,14 +2,18 @@
 
 <div class="container container-top">
   <div class="col col-md-6 offset-3 login-top">
-    <div class="center jumbotron">
-      <p>
-        <i class="fas fa-cubes"></i>
-        委託商品管理システム
-      </p>
-      <%= render 'users/sessions/new' %>
-      <div class="admin-link"><%= link_to "", admin_session_path, class: "fas fa-user-cog fa-lg" %></div>
-    </div>
+    <% unless user_signed_in? %>
+      <div class="center jumbotron">
+        <p>
+          <i class="fas fa-cubes"></i>
+          委託商品管理システム
+        </p>
+        <%= render 'users/sessions/new' %>
+        <div class="admin-link"><%= link_to "", admin_session_path, class: "fas fa-user-cog fa-lg" %></div>
+      </div>
+    <% else %>
+      <h1>ログイン中です。</h1>
+    <% end %>
   </div>
 </div>
 
