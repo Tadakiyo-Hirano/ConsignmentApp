@@ -25,7 +25,7 @@
                role="button" aria-expanded="false" aria-controls="collapse2-<%= user.id %>">
             </a>
           </td>
-          <td class="pc-display"><%= format("%03d", user.code) %></td>
+          <td class="pc-display"><%= format("%03d", user.code) %><a class=<%= stamp(user.created_at, user.updated_at) %>></td>
           <td><%= user.name %></td>
           <td class="pc-display"><%= user.email %></td>
         </tr>

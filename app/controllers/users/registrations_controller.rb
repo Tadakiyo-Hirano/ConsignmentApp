@@ -2,17 +2,46 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
-  before_action :configure_account_update_params, only: [:update]
+  before_action :configure_account_update_params, only: %i(update)
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    unless admin_signed_in?
+      redirect_to root_url
+    else
+      super
+    end
+  end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    unless admin_signed_in?
+      redirect_to root_url
+    else
+      # super
+      build_resource(sign_up_params)
+
+      resource.save
+      yield resource if block_given?
+      if resource.persisted?
+        if resource.active_for_authentication?
+          flash[:notice] = "#{@user.name}さんのアカウントを登録しました。"
+          # set_flash_message! :notice, :signed_up
+          redirect_to users_url
+          # sign_up(resource_name, resource)
+          # respond_with resource, location: after_sign_up_path_for(resource)
+        else
+          set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+          expire_data_after_sign_in!
+          respond_with resource, location: after_inactive_sign_up_path_for(resource)
+        end
+      else
+        clean_up_passwords resource
+        set_minimum_password_length
+        respond_with resource
+      end
+    end
+  end
 
   # GET /resource/edit
   # def edit
