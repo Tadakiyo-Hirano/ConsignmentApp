@@ -11,6 +11,7 @@
           <th class="pc-display"><%= User.human_attribute_name :code %></th>
           <th><%= User.human_attribute_name :name %></th>
           <th class="pc-display"><%= User.human_attribute_name :email %></th>
+          <th></th>
         </tr>
       </thead>
       
@@ -28,6 +29,9 @@
           <td class="pc-display"><%= format("%03d", user.code) %><a class=<%= stamp(user.created_at, user.updated_at) %>></td>
           <td><%= user.name %></td>
           <td class="pc-display"><%= user.email %></td>
+          <td><%= link_to "削除", user_path(user), method: :delete,
+                                  data: { confirm: "【#{format("%03d", user.code)}】#{user.name}のデータを削除しますか？" },
+                                  class: "btn btn-danger btn-sm" %></td>
         </tr>
         <tr>
           <td colspan="4">

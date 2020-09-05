@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     passwords: 'users/passwords',
-    registrations: 'users/registrations' # ユーザー情報更新
+    # registrations: 'users/registrations' # ユーザー情報更新
   }
   
   devise_scope :user do
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   
   resources :admins, only: :show
   
-  resources :users, only: %i(index show update) do
+  resources :users, only: %i(index show update destroy) do
     resources :consignments do
       collection do
         get 'by_customer', to: 'consignments#by_customer'

@@ -7,7 +7,7 @@ class User < ApplicationRecord
          :timeoutable
          
   CODE_VALUES = 0..999
-  validates :code, presence: true, uniqueness: true, inclusion: { in: CODE_VALUES }, uniqueness: true
+  validates :code, presence: true, inclusion: { in: CODE_VALUES }, uniqueness: true
   validates :name, presence: true, length: { maximum: 50 }
   
   # パスワードの入力なしでユーザー情報更新

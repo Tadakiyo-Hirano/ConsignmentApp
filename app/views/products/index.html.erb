@@ -52,7 +52,9 @@
                role="button" aria-expanded="false" aria-controls="collapse1-<%= product.id %>">
               編集
             </a>
-            <%= link_to "削除", product, method: :delete, data: { confirm: "【#{product.code}】#{product.name}を削除しますか？" }, class: "btn btn-danger btn-sm btn-delete-products" %>
+            <%= link_to "削除", product, method: :delete,
+                                data: { confirm: "【#{product.code}】#{product.name}を削除しますか？" },
+                                class: "btn btn-danger btn-sm btn-delete-products" %>
           </td>
           <td><%= product.code %><a class=<%= stamp(product.created_at, product.updated_at) %>></td>
           <td><%= product.name %></td>

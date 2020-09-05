@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :signed_in_user
-  before_action :authenticate_admin!, only: %i(index create update password_update)
-  before_action :set_user, only: %i(show end_tasks update password_update)
+  before_action :authenticate_admin!, only: %i(index create update password_update destroy)
+  before_action :set_user, only: %i(show end_tasks update password_update destroy)
   before_action :signed_in_correct_user, only: %i(show end_tasks)
   
   def index
@@ -46,6 +46,12 @@ class UsersController < ApplicationController
       flash[:alert] = "#{@user.name}の更新に失敗しました。<br>" + @user.errors.full_messages.join("<br>")
       redirect_to users_url
     end
+  end
+  
+  def destroy
+    @user.destroy
+    flash[:alert] = "【#{format("%03d", @user.code)}】#{@user.name}のデータを削除しました。"
+    redirect_to users_url
   end
   
   private
