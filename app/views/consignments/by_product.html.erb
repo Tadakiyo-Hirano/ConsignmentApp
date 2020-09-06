@@ -4,9 +4,9 @@
 <div class="container">
   <div class="col col-md-12 user-menu">
     <div class="search-link-form">
-      <div class="search-link"><%= link_to "#{@user.name} 委託", @user, class: "btn btn-secondary" %></div>
-      <div class="search-link"><%= link_to "得意先別", by_customer_user_consignments_path(@user), class: "btn btn-secondary" %></div>
-      <div class="search-link"><%= link_to "PDF", documents_user_consignments_path(text: "products_pdf", format: "pdf"), :target=>["_blank"], class: "btn btn-danger" %></div>
+      <div class="search-link"><%= link_to "#{@user.name} 委託", @user, class: "btn btn-default" %></div>
+      <div class="search-link"><%= link_to "得意先別", by_customer_user_consignments_path(@user), class: "btn btn-default" %></div>
+      <div class="search-link"><p class="pc-display"><%= link_to "PDF", documents_user_consignments_path(text: "products_pdf", format: "pdf"), :target=>["_blank"], class: "btn btn-danger" %></p></div>
       <div class="search-link">
         <%= form_with(scope: :search, url: by_product_user_consignments_path(@user), class: "form-inline", method: :get, local: true) do |f| %>
           <div class="input-group mb-3">
@@ -23,26 +23,33 @@
     </div>
     
     <% @consignments.each do |product_id_number, consignments| %>
-      <table class="table-bordered table-condensed bg-light" width="50%">
-        <tbody>
-          <tr>
-            <th width="50%" class="pc-display"><%= Consignment.human_attribute_name :product_code %></th>
-            <th width="50%" class="pc-display"><%= Consignment.human_attribute_name :product_name %></th>
-          </tr>
-          <tr>
-            <td class="pc-display"><%= Product.find(product_id_number).code %></td>
-            <td><%= Product.find(product_id_number).name %></td>
-          </tr>
-        </tbody>
-      </table>
+      <!--<table class="table-bordered table-condensed bg-light" width="50%">-->
+      <!--  <tbody>-->
+      <!--    <tr>-->
+      <!--      <th width="50%" class="pc-display"><= Consignment.human_attribute_name :product_code %></th>-->
+      <!--      <th width="50%" class="pc-display"><= Consignment.human_attribute_name :product_name %></th>-->
+      <!--    </tr>-->
+      <!--    <tr>-->
+      <!--      <td class="pc-display"><= Product.find(product_id_number).code %></td>-->
+      <!--      <td><= Product.find(product_id_number).name %></td>-->
+      <!--    </tr>-->
+      <!--  </tbody>-->
+      <!--</table>-->
       
-      <table class="table-responsive table-bordered table-condensed bg-light">
+      <table class="table every default table-responsive table-bordered table-condensed bg-light">
+        <thead>
+          <tr>
+            <th colspan="4" class="every">【<%= Product.find(product_id_number).code %>】<%= Product.find(product_id_number).name %></th>
+          </tr>
+        </thead>
+        
         <tbody>
           <tr>
-            <th width="25%" class="pc-display"><%= Customer.human_attribute_name :code %></th>
-            <th width="25%"><%= Customer.human_attribute_name :name %></th>
-            <th width="25%">委託残</th>
-            <th width="25%">担当者</th>
+            <th width="15%" class="pc-display"><%= Customer.human_attribute_name :code %></th>
+            <th width="45%"><%= Customer.human_attribute_name :name %></th>
+            <th width="10%" class="pc-display">委託残</th>
+            <th width="10%" class="mobile-display">残</th>
+            <th width="230">担当者</th>
           </tr>
           <% consignments.each do |consignment| %>
             <tr>

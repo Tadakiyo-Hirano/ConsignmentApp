@@ -5,12 +5,12 @@
 <div class="container">
   <div class="col col-md-12 user-menu">
     <div class="search-link-form">
-      <div class="search-link"><%= link_to "委託登録", new_user_consignment_path(@user), class: "btn btn-default" %></div>
+      <div class="search-link"><%= link_to "委託登録", new_user_consignment_path(@user), class: "btn btn-primary" %></div>
     </div>
     <div class="search-link-form">
-      <div class="search-link"><%= link_to "得意先別", by_customer_user_consignments_path(@user), class: "btn btn-secondary" %></div>
-      <div class="search-link"><%= link_to "商品別",  by_product_user_consignments_path(@user), class: "btn btn-secondary" %></div>
-      <div class="search-link"><%= link_to "完了済",  end_tasks_user_path(@user), class: "btn btn-secondary" %></div>
+      <div class="search-link"><%= link_to "得意先別", by_customer_user_consignments_path(@user), class: "btn btn-default" %></div>
+      <div class="search-link"><%= link_to "商品別",  by_product_user_consignments_path(@user), class: "btn btn-default" %></div>
+      <div class="search-link"><%= link_to "完了済",  end_tasks_user_path(@user), class: "btn btn-default" %></div>
       <div class="search-link">
         <%= form_with(scope: :search, url: user_path(@user), class: "form-inline", method: :get, local: true) do |f| %>
           <div class="input-group mb-3">
@@ -34,14 +34,14 @@
     <!--  </tr>-->
     <!--</table>-->
     <%= paginate @user_consignments if @search_none %>
-    <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
+    <table class="table main table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
       <thead>
         <tr>
           <th>編集</th>
           <th><%= Consignment.human_attribute_name :ship_date %></th>
           <th class="pc-display"><%= Product.human_attribute_name :code %></th>
           <th><%= Product.human_attribute_name :name %></th>
-          <th><%= Consignment.human_attribute_name :quantity %></th>
+          <th>委託残数</th>
           <th class="pc-display"><%= Consignment.human_attribute_name :serial_number %></th>
           <th class="pc-display"><%= Consignment.human_attribute_name :customer_code %></th>
           <th class="pc-display"><%= Consignment.human_attribute_name :customer_name %></th>

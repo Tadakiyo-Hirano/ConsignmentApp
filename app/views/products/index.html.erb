@@ -36,7 +36,7 @@
     <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
       <thead>
         <tr>
-          <th class="pc-width"><%= link_to "登録", new_product_path, class: "btn btn-default btn-sm btn-new-products" %></th>
+          <th class="pc-width"><%= link_to "登録", new_product_path, class: "btn btn-primary btn-sm btn-new-products" %></th>
           <th class="mobile-display">商品ｺｰﾄﾞ</th>
           <th class="pc-display"><%= Product.human_attribute_name :code %></th>
           <th><%= Product.human_attribute_name :name %></th>
