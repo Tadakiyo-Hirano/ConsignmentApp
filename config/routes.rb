@@ -46,7 +46,6 @@ Rails.application.routes.draw do
       post 'import'
     end
   end
-  resources :apis, only: :index
   
   post 'callback', to: 'linebot#callback'
 
