@@ -1,10 +1,9 @@
 <% provide(:title, "#{customer_name} / #{product_name}") %>
-<%= code(@user) %><%= @user.name %>
 
-<h2>委託在庫受払 修正入力</h2>
+<h3>委託在庫受払 修正入力</h3>
 <div class="container">
   <div class="col col-md-8 offset-md-2 user-menu">
-    <table class="table-responsive table-bordered table-condensed bg-light">
+    <table class="table main table-responsive table-bordered table-condensed bg-light">
       <tbody>
         <tr>
           <th><%= Consignment.human_attribute_name :customer_name %></th>
@@ -32,7 +31,7 @@
     <br>
     
     <%= form_with(model: @stock, url: user_consignment_stock_path(@user, @consignment, @stock), local: true, method: :patch) do |f| %>
-      <table class="table-responsive table-bordered table-condensed bg-light">
+      <table class="table main table-responsive table-bordered table-condensed bg-light input-area">
         <thead>
           <tr>
             <th colspan="2"><%= Stock.human_attribute_name :processing_date %></th>
@@ -43,11 +42,7 @@
             <td colspan="2"><%= f.date_field :processing_date, class: "form-control" %></td>
           </tr>
         </tbody>
-      </table>
-      
-      <br>
-      
-      <table class="table-responsive table-bordered table-condensed bg-light">
+
         <thead>
           <tr>
             <th><%= Stock.human_attribute_name :return_quantity %></th>
@@ -61,7 +56,7 @@
           </tr>
         </tbody>
       </table>
-      <%= f.submit "編集", class: "btn btn-default btn-block" %>
+      <%= f.submit "編集", class: "btn btn-primary btn-block" %>
     <% end %>
     <%= link_to "戻る", user_consignment_stocks_path, class: "btn btn-secondary btn-block btn-stock" %>
   </div>

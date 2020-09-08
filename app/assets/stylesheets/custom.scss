@@ -41,6 +41,18 @@ table.every {
   }
 }
 
+th.nowrap {
+  white-space: nowrap;
+}
+
+td.nowrap {
+  white-space: nowrap;
+}
+
+table.input-area {
+  border: solid 3px #007bff;
+}
+
 .center {
   text-align: center;
 }

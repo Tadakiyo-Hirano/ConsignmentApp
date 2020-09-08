@@ -1,7 +1,6 @@
 <% provide(:title, @user.name) %>
 
-<h1>処理済</h1>
-<h4><%= @user.name %></h4>
+<h3>処理済</h3>
 <div class="container">
   <div class="col col-md-12 user-menu">
     <div class="search-link-form">
@@ -14,7 +13,7 @@
             <%= f.text_field :customer_name, placeholder: "#{Customer.human_attribute_name :name}", class: "form-control" %>
             <%= f.text_field :product_name, placeholder: "#{Product.human_attribute_name :name}", class: "form-control" %>
             <div class="input-group-append">
-              <%= f.submit "検索", class: "btn btn-sm btn-default" %>
+              <%= f.submit "検索", class: "btn btn-sm btn-primary" %>
             </div>
           </div>
           <div class="ml-3 mb-3">
@@ -25,7 +24,7 @@
     </div>
 
     <%= paginate @user_consignments if @search_none %>
-    <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
+    <table class="table table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
       <thead>
         <tr>
           <th>編集</th>

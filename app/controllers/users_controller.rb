@@ -11,8 +11,8 @@ class UsersController < ApplicationController
   def show
     @search_params = consignment_search_params
     @search_none = consignment_search_none
-    @user_consignments = @search_none ? @user.consignments.where(done: false).search(@search_params).page(params[:page]).per(10).order(ship_date: :desc).order(code: :desc) : 
-                               @user.consignments.where(done: false).search(@search_params).order(ship_date: :desc).order(code: :desc)
+    @user_consignments = @search_none ? @user.consignments.where(done: false).search(@search_params).page(params[:page]).per(10).order(ship_date: :desc).order(code: :desc).order(created_at: :desc) : 
+                               @user.consignments.where(done: false).search(@search_params).order(ship_date: :desc).order(code: :desc).order(created_at: :desc)
     # @user_consignments = @user.consignments.where(done: false).page(params[:page]).per(10).order(ship_date: :desc).order(created_at: :desc)
     # @user_consignments = @user.consignments.page(params[:page]).per(10).order(ship_date: :desc).order(created_at: :desc)
   end

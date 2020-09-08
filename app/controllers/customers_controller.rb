@@ -34,7 +34,7 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
     if @customer.save
-      flash[:notice] = "【#{@customer.code}】#{@customer.name}&emsp;得意先登録完了。"
+      flash[:notice] = "【#{@customer.code} / #{@customer.name}】を登録しました。"
       redirect_to customers_url
     else
       flash.now[:alert] = "更新に失敗しました。<br>" + @customer.errors.full_messages.join("<br>")
@@ -49,24 +49,24 @@ class CustomersController < ApplicationController
     if @customer.update_attributes(customer_params)
       # 得意先モデル(Customer)を更新した場合、更新したCustomer.idとConsignment.customer_id_numberと同じ委託(モデルconsignment)の得意先コード、得意先名も同時更新する。
       Consignment.where(['customer_id_number == ?', @customer.id]).update_all(customer_code: Customer.find(@customer.id).code ,customer_name: Customer.find(@customer.id).name)
-      flash[:notice] = "【#{@customer.code}】#{@customer.name}&emsp;得意先情報更新完了。"
+      flash[:notice] = "【#{@customer.code} / #{@customer.name}】の情報を更新しました。"
       redirect_to customers_url
     elsif @customer.name.blank?
       flash[:alert] = "更新に失敗しました。<br>" + @customer.errors.full_messages.join("<br>")
       redirect_to customers_url
     else
-      flash[:warning] = "#{@customer.name}の更新に失敗しました。<br>" + @customer.errors.full_messages.join("<br>")
+      flash[:warning] = "【#{@customer.code} / #{@customer.name}】の更新に失敗しました。<br>" + @customer.errors.full_messages.join("<br>")
       redirect_to customers_url
     end
   end
   
   def destroy
     if in_use_customer_id
-      flash[:warning] = "委託情報に使用されている顧客情報です。削除できません。"
+      flash[:warning] = "【#{@customer.code} / #{@customer.name}】は委託情報に使用されている顧客情報です。削除できません。"
       redirect_back(fallback_location: customers_url)
     else
       @customer.destroy
-      flash[:alert] = "【#{@customer.code}】#{@customer.name}&emsp;削除完了。"
+      flash[:alert] = "【#{@customer.code} / #{@customer.name}】を削除しました。"
       redirect_to customers_url
     end
   end

@@ -32,7 +32,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      flash[:notice] = "【#{@product.code}】#{@product.name}&emsp;商品登録完了。"
+      flash[:notice] = "【#{@product.code} / #{@product.name}】を登録しました。"
       redirect_to products_url
     else
       flash.now[:alert] = "更新に失敗しました。<br>" + @product.errors.full_messages.join("<br>")
@@ -47,21 +47,26 @@ class ProductsController < ApplicationController
     if @product.update_attributes(product_params)
       # 商品モデル(Product)を更新した場合、更新したProduct.idとProduct.product_id_numberと同じ委託(モデルconsignment)の商品コード、商品名も同時更新する。
       Consignment.where(['product_id_number == ?', @product.id]).update_all(product_code: Product.find(@product.id).code ,product_name: Product.find(@product.id).name)
-      flash[:notice] = "【#{@product.code}】#{@product.name}&emsp;商品情報更新完了。"
+      flash[:notice] = "【#{@product.code} / #{@product.name}】の情報を更新しました。"
       redirect_to products_url
     elsif @product.name.blank?
       flash[:alert] = "更新に失敗しました。<br>" + @product.errors.full_messages.join("<br>")
       redirect_to products_url
     else
-      flash[:alert] = "#{@product.name}の更新に失敗しました。<br>" + @product.errors.full_messages.join("<br>")
+      flash[:alert] = "【#{@product.code} / #{@product.name}】の更新に失敗しました。<br>" + @product.errors.full_messages.join("<br>")
       redirect_to products_url
     end
   end
   
   def destroy
-    @product.destroy
-    flash[:alert] = "【#{@product.code}】#{@product.name}&emsp;削除完了。"
-    redirect_to products_url
+    if in_use_product_id
+      flash[:warning] = "【#{@product.code} / #{@product.name}】は委託情報に使用されている商品情報です。削除できません。"
+      redirect_back(fallback_location: products_url)
+    else
+      @product.destroy
+      flash[:alert] = "【#{@product.code} / #{@product.name}】を削除しました。"
+      redirect_to products_url
+    end
   end
   
   def import

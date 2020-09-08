@@ -1,6 +1,5 @@
 <% provide(:title, @user.name) %>
 
-<h1>委託情報</h1>
 <h4><%= @user.name %></h4>
 <div class="container">
   <div class="col col-md-12 user-menu">
@@ -8,16 +7,16 @@
       <div class="search-link"><%= link_to "委託登録", new_user_consignment_path(@user), class: "btn btn-primary" %></div>
     </div>
     <div class="search-link-form">
-      <div class="search-link"><%= link_to "得意先別", by_customer_user_consignments_path(@user), class: "btn btn-default" %></div>
-      <div class="search-link"><%= link_to "商品別",  by_product_user_consignments_path(@user), class: "btn btn-default" %></div>
-      <div class="search-link"><%= link_to "完了済",  end_tasks_user_path(@user), class: "btn btn-default" %></div>
+      <div class="search-link"><%= link_to "得意先別", by_customer_user_consignments_path(@user), class: "btn btn-outline-primary" %></div>
+      <div class="search-link"><%= link_to "商品別",  by_product_user_consignments_path(@user), class: "btn btn-outline-primary" %></div>
+      <div class="search-link"><%= link_to "処理済",  end_tasks_user_path(@user), class: "btn btn-outline-secondary" %></div>
       <div class="search-link">
         <%= form_with(scope: :search, url: user_path(@user), class: "form-inline", method: :get, local: true) do |f| %>
           <div class="input-group mb-3">
             <%= f.text_field :customer_name, placeholder: "#{Customer.human_attribute_name :name}", class: "form-control" %>
             <%= f.text_field :product_name, placeholder: "#{Product.human_attribute_name :name}", class: "form-control" %>
             <div class="input-group-append">
-              <%= f.submit "検索", class: "btn btn-sm btn-default" %>
+              <%= f.submit "検索", class: "btn btn-sm btn-primary" %>
             </div>
           </div>
           <div class="ml-3 mb-3">
