@@ -2,9 +2,13 @@ class User < ApplicationRecord
   has_many :consignments, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :timeoutable
+  
+  # devise :database_authenticatable, :registerable,
+  #       :recoverable, :rememberable, :validatable,
+  #       :timeoutable
+         
+ devise :database_authenticatable, :registerable,
+         :rememberable, :validatable
          
   CODE_VALUES = 0..999
   validates :code, presence: true, inclusion: { in: CODE_VALUES }, uniqueness: true

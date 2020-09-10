@@ -13,12 +13,9 @@ class UsersController < ApplicationController
     @search_none = consignment_search_none
     @user_consignments = @search_none ? @user.consignments.where(done: false).search(@search_params).page(params[:page]).per(10).order(ship_date: :desc).order(code: :desc).order(created_at: :desc) : 
                                @user.consignments.where(done: false).search(@search_params).order(ship_date: :desc).order(code: :desc).order(created_at: :desc)
-    # @user_consignments = @user.consignments.where(done: false).page(params[:page]).per(10).order(ship_date: :desc).order(created_at: :desc)
-    # @user_consignments = @user.consignments.page(params[:page]).per(10).order(ship_date: :desc).order(created_at: :desc)
   end
   
   def end_tasks
-    # @user_consignments = @user.consignments.where(done: true).page(params[:page]).per(10).order(ship_date: :desc).order(created_at: :desc)
     @search_params = consignment_search_params
     @search_none = consignment_search_none
     @user_consignments = @search_none ? @user.consignments.where(done: true).search(@search_params).page(params[:page]).per(10).order(ship_date: :desc).order(code: :desc) : 

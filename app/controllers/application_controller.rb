@@ -8,24 +8,6 @@ class ApplicationController < ActionController::Base
   
   before_action :configure_permitted_parameters, if: :devise_controller?
   
-  # PCA-Web API
-  # def pca_api
-  #   require "uri"
-  #   require "net/http"
-    
-  #   url = URI("https://east02.pcawebapi.jp/v1/Kon20/Hello")
-    
-  #   https = Net::HTTP.new(url.host, url.port);
-  #   https.use_ssl = true
-    
-  #   request = Net::HTTP::Get.new(url)
-    
-  #   response = https.request(request)
-    
-  #   @api_info = response.read_body
-  # end
-  
-  
   protected
     # 新規登録時(sign_up時)にnameキーのパラメーターを追加で許可
     def configure_permitted_parameters

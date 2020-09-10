@@ -36,11 +36,13 @@
     <table class="table main table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
       <thead>
         <tr>
-          <th>編集</th>
-          <th><%= Consignment.human_attribute_name :ship_date %></th>
+          <th class="pc-display">編集</th>
+          <th class="mobile-display"></th>
+          <th class="nowrap"><%= Consignment.human_attribute_name :ship_date %></th>
           <th class="pc-display"><%= Product.human_attribute_name :code %></th>
           <th><%= Product.human_attribute_name :name %></th>
-          <th>委託残数</th>
+          <th class="pc-display">委託残数</th>
+          <th class="mobile-display nowrap">残数</th>
           <th class="pc-display"><%= Consignment.human_attribute_name :serial_number %></th>
           <th class="pc-display"><%= Consignment.human_attribute_name :customer_code %></th>
           <th class="pc-display"><%= Consignment.human_attribute_name :customer_name %></th>

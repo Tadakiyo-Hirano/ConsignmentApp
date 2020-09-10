@@ -8,9 +8,10 @@
 
 table.main {
   border: solid 2px #e3e3e3;
-  border-radius: 4px;
+  // border-collapse: separate;
+  // border-radius: 4px;
   th {
-    border: solid 2px #e3e3e3;
+    border: solid 1px #e3e3e3;
     background-color: #52c2d0;
     color: #fff;
   }
@@ -25,15 +26,18 @@ table.main {
 
 table.every {
   border: solid 1px #e3e3e3;
-  border-collapse: separate;
-  border-radius: 4px;
+  // border-collapse: separate;
+  // border-radius: 4px;
   th {
     border: solid 1px #e3e3e3;
     background-color: #52c2d0;
+    opacity: .8;
     color: #fff;
   }
   th.every {
+    background-color: #52c2d0;
     text-align: left;
+    opacity: 1;
   }
   td {
     border: solid 1px #e3e3e3;
@@ -51,6 +55,20 @@ td.nowrap {
 
 table.input-area {
   border: solid 3px #007bff;
+  // border-collapse: separate;
+  // border-radius: 4px;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-top: 20px solid #007bff;
+  
+  margin: auto;
+  margin-top: -16px;
+  margin-bottom: 10px;
 }
 
 .center {
@@ -138,7 +156,6 @@ h1, h2, h3, h4, h5 {
   margin-left: 5px;
   
   .btn {
-    // font-size: 15px;
     border-radius: 0;
   }
 }
