@@ -2,6 +2,7 @@ class CustomersController < ApplicationController
   include CustomersHelper
   
   before_action :signed_in_user
+  before_action :signed_in_admin, only: %i(new create edit update destroy import)
   before_action :set_customer, only: %i(update destroy)
   
   def index

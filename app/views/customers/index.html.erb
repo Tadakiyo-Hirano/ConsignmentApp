@@ -1,6 +1,6 @@
 <% provide(:title, "得意先一覧") %>
 
-<h2><i class="fas fa-building"></i>&nbsp;得意先一覧・編集</h2>
+<h2><%= customer_page_title %></h2>
 <div class="container">
   <div class="col col-md-12 admin-menu">
     <div class="form-row">
@@ -11,24 +11,32 @@
           <div class="input-group-append">
             <%= f.submit "検索", class: "btn btn-sm btn-default" %>
           </div>
+          <% if admin_signed_in?  %>
+            <div class="input-group hidden-btn">
+              <%= button_tag "CSV処理", type: "button", class: "btn btn-sm btn-success pc-display", onclick: "clickBtn()" %>
+            </div>
+          <% end %>
         </div>
         <div class="ml-3 mb-3">
           <%= search_results_text(@customers) %>&emsp;<%= search_results_link(customers_path) %>
         </div>
       <% end %>
-      <div class="row">
-        <%= form_tag import_customers_path, multipart: true do %>
-          <div class="input-group">
-            <%= file_field_tag :file, class: "form-control" %>
-            <div class="input-group-append">
-              <%= submit_tag "CSV読込", class: "btn btn-sm btn-default" %>
+      
+      <% if admin_signed_in?  %>
+        <div id="csv" class="row">
+          <%= form_tag import_customers_path, multipart: true do %>
+            <div class="input-group">
+              <%= file_field_tag :file, class: "form-control" %>
+              <div class="input-group-append">
+                <%= submit_tag "CSV読込", class: "btn btn-sm btn-default" %>
+              </div>
+              <div class="row csv-export-form">
+                <%= link_to "CSV出力", customers_path(format: :csv), class: "btn btn-success" %>
+              </div>
             </div>
-            <div class="row csv-export-form">
-              <%= link_to "CSV出力", customers_path(format: :csv), class: "btn btn-success" %>
-            </div>
-          </div>
-        <% end %>
-      </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
     
     <%= paginate @customers if @search_none %>
@@ -36,7 +44,9 @@
     <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-customers">
       <thead>
         <tr>
-          <th class="pc-width"><%= link_to "登録", new_customer_path, class: "btn btn-primary btn-sm btn-new-customers" %></th>
+          <% if admin_signed_in?  %>
+            <th class="pc-width"><%= link_to "登録", new_customer_path, class: "btn btn-primary btn-sm btn-new-customers" %></th>
+          <% end %>
           <th><%= Customer.human_attribute_name :code %></th>
           <th><%= Customer.human_attribute_name :name %></th>
         </tr>
@@ -44,13 +54,15 @@
       
       <% @customers.each do |customer| %>
         <tr>
-          <td>
-            <a class="btn btn-default btn-sm" data-toggle="collapse" href="#collapse1-<%= customer.id %>"
-               role="button" aria-expanded="false" aria-controls="collapse1-<%= customer.id %>">
-              編集
-            </a>
-            <%= link_to "削除", customer, method: :delete, data: { confirm: "【#{customer.code}】#{customer.name}を削除しますか？" }, class: "btn btn-danger btn-sm btn-delete-customers" %>
-          </td>
+          <% if admin_signed_in?  %>
+            <td>
+              <a class="btn btn-default btn-sm" data-toggle="collapse" href="#collapse1-<%= customer.id %>"
+                 role="button" aria-expanded="false" aria-controls="collapse1-<%= customer.id %>">
+                編集
+              </a>
+              <%= link_to "削除", customer, method: :delete, data: { confirm: "【#{customer.code}】#{customer.name}を削除しますか？" }, class: "btn btn-danger btn-sm btn-delete-customers" %>
+            </td>
+          <% end %>
           <td><%= customer.code %><a class=<%= stamp(customer.created_at, customer.updated_at) %>></td>
           <td><%= customer.name %></td>
         </tr>
@@ -67,3 +79,20 @@
     </table>
   </div>
 </div>
+
+<script>
+//初期表示は非表示
+document.getElementById("csv").style.visibility ="hidden";
+
+function clickBtn(){
+	const csv = document.getElementById("csv");
+
+	if(csv.style.visibility=="visible"){
+		// hiddenで非表示
+		csv.style.visibility ="hidden";
+	}else{
+		// visibleで表示
+		csv.style.visibility ="visible";
+	}
+}
+</script>

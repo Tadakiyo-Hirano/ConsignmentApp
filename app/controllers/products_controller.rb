@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
   before_action :signed_in_user
-  before_action :set_product, only: %i(show edit update destroy)
+  before_action :signed_in_admin, only: %i(new create edit update destroy import)
+  before_action :set_product, only: %i(update destroy)
   
   def index
     @search_params = product_search_params
-    # @search_none = @search_params.blank? || @search_params[:code] == "" && @search_params[:name] == ""
     @search_none = search_none
     @products = @search_none ? Product.search(@search_params).page(params[:page]).per(10).order(code: :asc) : 
                                Product.search(@search_params).order(code: :asc)

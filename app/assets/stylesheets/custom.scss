@@ -6,6 +6,10 @@
   font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 }
 
+.pagination {
+  flex-wrap: wrap;
+}
+
 table.main {
   border: solid 2px #e3e3e3;
   // border-collapse: separate;
@@ -501,6 +505,15 @@ body {
   .btn-delete-products {
     margin-top: 2px;
   }
+}
+
+.hidden-btn {
+  margin-left: 5px;
+}
+
+#csv {
+  margin-left: 0.5px;
+  margin-bottom: 5px;
 }
 
 /* 在庫登録,編集フォーム stocks/new edit */
