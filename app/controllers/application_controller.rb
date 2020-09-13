@@ -55,6 +55,13 @@ class ApplicationController < ActionController::Base
       end
     end
     
+    # adminでは無い場合、他ユーザーのpathにアクセスした場合は自分のメインページにリダイレクト
+    def signed_in_correct_user_or_admin
+      unless admin_signed_in?
+        signed_in_correct_user
+      end
+    end
+    
     # adminでない場合はroot_urlにリダイレクト
     def signed_in_admin
       unless admin_signed_in?
