@@ -2,7 +2,8 @@ class ConsignmentsController < ApplicationController
   before_action :signed_in_user
   before_action :set_user_consignments
   before_action :set_consignment, only: %i(show edit update destroy)
-  before_action :signed_in_correct_user
+  before_action :signed_in_correct_user, only: %i(index new create edit update destroy)
+  before_action :signed_in_correct_user_or_admin, only: %i(by_customer)
   
   def index
     # redirect_to new_user_consignment_path
@@ -23,8 +24,8 @@ class ConsignmentsController < ApplicationController
   def by_product
     @search_params = consignment_search_params
     @search_none = consignment_search_none
-    @consignments = @search_none ? @user.consignments.where(done: false).order(product_code: :asc).group_by(&:product_id_number) : 
-                                   @user.consignments.where(done: false).search(@search_params).order(product_code: :asc).group_by(&:product_id_number)
+    @consignments = @search_none ? Consignment.where(done: false).order(product_code: :asc).group_by(&:product_id_number) : 
+                                   Consignment.where(done: false).search(@search_params).order(product_code: :asc).group_by(&:product_id_number)
     # @consignments = Consignment.all.order(product_id_number: :asc).group_by(&:product_id_number)
     # @consignments = Consignment.where(done: false).order(product_id_number: :asc).group_by(&:product_id_number)
     @products_pdf = Consignment.where(done: false).order(product_code: :asc).group_by(&:product_id_number)

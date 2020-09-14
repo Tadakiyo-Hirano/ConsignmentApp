@@ -4,15 +4,28 @@
 <div class="container">
   <div class="col col-md-12 admin-menu">
     <table class="table">
-      <tr>
-        <td><%= link_to "担当者一覧", users_path %></td>
-      </tr>
-      <tr>
-        <td><%= link_to "得意先一覧", customers_path %></td>
-      </tr>
-      <tr>
-        <td><%= link_to "商品一覧", products_path %></td>
-      </tr>
+      <tdody>
+        <tr>
+          <th>詳細確認</th>
+          <th>設定</th>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= link_to " 担当者一覧・編集", users_path, class: "fas fa-cog" %></td>
+        </tr>
+        <tr>
+          <td><%= link_to "得意先別委情報", by_customer_user_consignments_path(@admin) %></td>
+          <td><%= link_to " 得意先一覧・編集", customers_path, class: "fas fa-cog" %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= link_to " 商品一覧・編集　", products_path, class: "fas fa-cog" %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+      </tdody>
     </table>
   </div>
 </div>

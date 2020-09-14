@@ -7,7 +7,7 @@
     <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-users">
       <thead>
         <tr>
-          <th class="pc-width"><%= link_to "新規", new_user_registration_path, class: "btn btn-primary btn-sm btn-new-users" %></th>
+          <th class="pc-width"><%= link_to "登録", new_user_registration_path, class: "btn btn-primary btn-sm btn-new-users" %></th>
           <th class="pc-display"><%= User.human_attribute_name :code %></th>
           <th><%= User.human_attribute_name :name %></th>
           <th class="pc-display"><%= User.human_attribute_name :email %></th>
