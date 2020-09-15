@@ -1,31 +1,37 @@
 <% provide(:title, "管理画面") %>
 
-<h3>管理画面</h3>
 <div class="container">
-  <div class="col col-md-12 admin-menu">
-    <table class="table">
-      <tdody>
-        <tr>
-          <th>詳細確認</th>
-          <th>設定</th>
-        </tr>
-        <tr>
-          <td></td>
-          <td><%= link_to " 担当者一覧・編集", users_path, class: "fas fa-cog" %></td>
-        </tr>
-        <tr>
-          <td><%= link_to "得意先別委情報", by_customer_user_consignments_path(@admin) %></td>
-          <td><%= link_to " 得意先一覧・編集", customers_path, class: "fas fa-cog" %></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><%= link_to " 商品一覧・編集　", products_path, class: "fas fa-cog" %></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-        </tr>
-      </tdody>
+  <div class="col col-md-6 offset-md-3 admin-menu">
+    <p>一般設定</p>
+    <table class="table table-condensed table-hover table-responsive">
+      <tr>
+        <th>担当者</th>
+        <td><%= link_to "登録･修正", users_path %></td>
+        <td>登録数&nbsp;<%= User.count %>件</td>
+      </tr>
+      <tr>
+        <th>得意先</th>
+        <td><%= link_to "登録･修正", customers_path %></td>
+        <td>登録数&nbsp;<%= Customer.count %>件</td>
+      </tr>
+      <tr>
+        <th>商品</th>
+        <td><%= link_to "登録･修正", products_path %></td>
+        <td>登録数&nbsp;<%= Product.count %>件</td>
+      </tr>
+    </table>
+  </div>
+  
+  <br>
+  
+  <div class="col col-md-6 offset-md-3 admin-menu">
+    <p>管理者設定</p>
+    <table class="table table-condensed table-hover table-responsive">
+      <tr>
+        <th>管理者</th>
+        <td><%= link_to "修正", '#' %></td>
+        <td>登録数&nbsp;<%= Admin.count %>件</td>
+      </tr>
     </table>
   </div>
 </div>

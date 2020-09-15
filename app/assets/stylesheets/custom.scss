@@ -168,6 +168,56 @@ p.pc-display {
   margin-left: -4px;
 }
 
+/* 登録アイコン */
+
+.fa-pulscircle {
+  border: 0px none;
+  outline:0;
+}
+
+.fa-plus-circle:hover {
+  text-decoration: none;
+}
+
+.fa-puls-circle:visited {
+  border: 0px none;
+  outline:0;
+}
+
+/* 編集アイコン */
+
+.fa-edit {
+  border: 0px none;
+  outline:0;
+}
+
+.fa-edit:hover {
+  text-decoration: none;
+}
+
+.fa-edit:visited {
+  border: 0px none;
+  outline:0;
+}
+
+/* 削除アイコン */
+
+.fa-times-circle {
+  border: 0px none red;
+  color: red;
+  outline:0;
+}
+
+.fa-times-circle:hover {
+  text-decoration: none;
+}
+
+.fa-times-circle:visited {
+  border: 0px none;
+  color: red;
+  outline:0;
+}
+
 /* トップページ */
 
 body {
@@ -525,35 +575,36 @@ body {
 /* 得意先一覧 customers/index */
 
 #table-customers {
+  height: 100px;
   td {
     vertical-align: middle;
   }
 }
 
-@media screen and (min-width: 767px) {
-  .pc-width {
-    width: 150px;
-  }
-  .btn-new-customers {
-    margin-left: -50px;
-  }
-}
+// @media screen and (min-width: 767px) {
+//   .pc-width {
+//     width: 150px;
+//   }
+//   .btn-new-customers {
+//     white-space: nowrap;
+//   }
+// }
 
-@media screen and (max-width: 767px) {
+// @media screen and (max-width: 767px) {
 
-}
+// }
 
-@media screen and (min-width: 479px) {
-  .btn-new-customers {
-    margin-left: -50px;
-  }
-}
+// @media screen and (min-width: 479px) {
+//   .btn-new-customers {
+//     white-space: nowrap;
+//   }
+// }
 
-@media screen and (max-width: 479px) {
-  .btn-delete-customers {
-    margin-top: 2px;
-  }
-}
+// @media screen and (max-width: 479px) {
+//   .btn-delete-customers {
+//     margin-top: 2px;
+//   }
+// }
 
 /* ハンバーガーメニュー _hambuger_button */
 

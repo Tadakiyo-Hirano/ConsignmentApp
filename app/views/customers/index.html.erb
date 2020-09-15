@@ -43,28 +43,37 @@
     
     <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-customers">
       <thead>
-        <tr>
+        <tr height="50">
           <% if admin_signed_in?  %>
-            <th class="pc-width"><%= link_to "登録", new_customer_path, class: "btn btn-primary btn-sm btn-new-customers" %></th>
+            <th>
+              <!-- 登録 -->
+              <%= link_to "", new_customer_path, class: "fas fa-plus-circle fa-lg" %>
+            </th>
           <% end %>
           <th><%= Customer.human_attribute_name :code %></th>
           <th><%= Customer.human_attribute_name :name %></th>
+          <th></th>
         </tr>
       </thead>
       
       <% @customers.each do |customer| %>
-        <tr>
+        <tr height="40">
           <% if admin_signed_in?  %>
             <td>
-              <a class="btn btn-default btn-sm" data-toggle="collapse" href="#collapse1-<%= customer.id %>"
+              <a class="fas fa-edit fa-lg" data-toggle="collapse" href="#collapse1-<%= customer.id %>"
                  role="button" aria-expanded="false" aria-controls="collapse1-<%= customer.id %>">
-                編集
+                <!-- 編集 -->
               </a>
-              <%= link_to "削除", customer, method: :delete, data: { confirm: "【#{customer.code}】#{customer.name}を削除しますか？" }, class: "btn btn-danger btn-sm btn-delete-customers" %>
             </td>
           <% end %>
           <td><%= customer.code %><a class=<%= stamp(customer.created_at, customer.updated_at) %>></td>
           <td><%= customer.name %></td>
+          <td>
+            <!-- 削除 -->
+            <%= link_to "", customer, method: :delete,
+                                      data: { confirm: "【#{customer.code}】#{customer.name}を削除しますか？" },
+                                      class: "fas fa-times-circle fa-lg" %>
+          </td>
         </tr>
         <tr>
           <td colspan="5">
