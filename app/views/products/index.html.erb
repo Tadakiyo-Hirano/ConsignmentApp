@@ -43,38 +43,45 @@
     
     <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
       <thead>
-        <tr>
+        <tr height="50">
           <% if admin_signed_in? %>
-            <th class="pc-width"><%= link_to "登録", new_product_path, class: "btn btn-primary btn-sm btn-new-products" %></th>
+            <th>
+              <!-- 登録 -->
+              <%= link_to "", new_product_path, class: "fas fa-plus-circle fa-lg" %>
+            </th>
           <% end %>
           <th class="mobile-display">商品ｺｰﾄﾞ</th>
           <th class="pc-display"><%= Product.human_attribute_name :code %></th>
           <th><%= Product.human_attribute_name :name %></th>
           <th class="pc-display"><%= Product.human_attribute_name :classification %></th>
           <th class="pc-display"><%= Product.human_attribute_name :category %></th>
+          <th></th>
         </tr>
       </thead>
       
       <% @products.each do |product| %>
-        <tr>
+        <tr height="50">
           <% if admin_signed_in? %>
             <td>
-              <a class="btn btn-default btn-sm" data-toggle="collapse" href="#collapse1-<%= product.id %>"
+              <a class="fas fa-edit fa-lg" data-toggle="collapse" href="#collapse1-<%= product.id %>"
                  role="button" aria-expanded="false" aria-controls="collapse1-<%= product.id %>">
-                編集
+                <!-- 編集 -->
               </a>
-              <%= link_to "削除", product, method: :delete,
-                                  data: { confirm: "【#{product.code}】#{product.name}を削除しますか？" },
-                                  class: "btn btn-danger btn-sm btn-delete-products" %>
             </td>
           <% end %>
           <td><%= product.code %><a class=<%= stamp(product.created_at, product.updated_at) %>></td>
           <td><%= product.name %></td>
           <td class="pc-display"><%= product.classification %></td>
           <td class="pc-display"><%= product.category %></td>
+          <td>
+            <!-- 削除 -->
+            <%= link_to "", product, method: :delete,
+                                     data: { confirm: "【#{product.code}】#{product.name}を削除しますか？" },
+                                     class: "fas fa-times-circle fa-lg" %>
+          </td>
         </tr>
         <tr>
-          <td colspan="5">
+          <td colspan="6">
             <div class="collapse" id="collapse1-<%= product.id %>">
               <div class="collapse-body">
                 <%= render 'form', { product: product } %>

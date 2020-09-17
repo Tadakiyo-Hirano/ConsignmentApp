@@ -1,13 +1,16 @@
 <% provide(:title, "担当者一覧") %>
 
-<h2><i class="fas fa-user-friends"></i>&nbsp;担当者一覧・編集</h2>
+<h2>担当者一覧・編集</h2>
 <div class="container">
   <div class="col col-md-12 admin-menu">
     <%= paginate @users %>
     <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-users">
       <thead>
-        <tr>
-          <th class="pc-width"><%= link_to "登録", new_user_registration_path, class: "btn btn-primary btn-sm btn-new-users" %></th>
+        <tr height="50">
+          <th class="pc-width">
+            <!-- 登録 -->
+            <%= link_to "", new_user_registration_path, class: "fas fa-plus-circle fa-lg" %>
+          </th>
           <th class="pc-display"><%= User.human_attribute_name :code %></th>
           <th><%= User.human_attribute_name :name %></th>
           <th class="pc-display"><%= User.human_attribute_name :email %></th>
@@ -16,11 +19,11 @@
       </thead>
       
       <% @users.each do |user| %>
-        <tr>
+        <tr height="40">
           <td>
-            <a class="btn btn-default btn-sm" data-toggle="collapse" href="#collapse1-<%= user.id %>"
+            <a class="btn btn-primary fas fa-edit" data-toggle="collapse" href="#collapse1-<%= user.id %>"
                role="button" aria-expanded="false" aria-controls="collapse1-<%= user.id %>">
-              編集
+              <!-- 編集 -->
             </a>
             <a class="btn btn-danger fas fa-unlock-alt" data-toggle="collapse" href="#collapse2-<%= user.id %>"
                role="button" aria-expanded="false" aria-controls="collapse2-<%= user.id %>">
@@ -29,9 +32,12 @@
           <td class="pc-display"><%= format("%03d", user.code) %><a class=<%= stamp(user.created_at, user.updated_at) %>></td>
           <td><%= user.name %></td>
           <td class="pc-display"><%= user.email %></td>
-          <td><%= link_to "削除", user_path(user), method: :delete,
-                                  data: { confirm: "【#{format("%03d", user.code)}】#{user.name}のデータを削除しますか？" },
-                                  class: "btn btn-danger btn-sm" %></td>
+          <td>
+            <!-- 削除 -->
+            <%= link_to "", user_path(user), method: :delete,
+                                             data: { confirm: "【#{format("%03d", user.code)}】#{user.name}のデータを削除しますか？" },
+                                             class: "fas fa-times-circle fa-lg" %>
+          </td>
         </tr>
         <tr>
           <td colspan="5">
