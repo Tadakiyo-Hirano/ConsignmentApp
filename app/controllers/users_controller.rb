@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   before_action :signed_in_user
-  before_action :authenticate_admin!, only: %i(index create update password_update destroy)
+  before_action :authenticate_admin!, only: %i(create update password_update destroy)
   before_action :set_user, only: %i(show end_tasks update password_update destroy)
-  # before_action :signed_in_correct_user, only: %i(show end_tasks)
-  before_action :signed_in_correct_user_or_admin, only: %i(show end_tasks)
+  before_action :signed_in_correct_user, only: %i(show end_tasks)
+  # before_action :signed_in_correct_user_or_admin, only: %i(show end_tasks)
   
   
   def index

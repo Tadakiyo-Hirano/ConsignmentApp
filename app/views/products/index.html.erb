@@ -55,7 +55,9 @@
           <th><%= Product.human_attribute_name :name %></th>
           <th class="pc-display"><%= Product.human_attribute_name :classification %></th>
           <th class="pc-display"><%= Product.human_attribute_name :category %></th>
-          <th></th>
+          <% if admin_signed_in? %>
+            <th></th>
+          <% end %>
         </tr>
       </thead>
       
@@ -73,12 +75,14 @@
           <td><%= product.name %></td>
           <td class="pc-display"><%= product.classification %></td>
           <td class="pc-display"><%= product.category %></td>
-          <td>
-            <!-- 削除 -->
-            <%= link_to "", product, method: :delete,
-                                     data: { confirm: "【#{product.code}】#{product.name}を削除しますか？" },
-                                     class: "fas fa-times-circle fa-lg" %>
-          </td>
+          <% if admin_signed_in? %>
+            <td>
+              <!-- 削除 -->
+              <%= link_to "", product, method: :delete,
+                                       data: { confirm: "【#{product.code}】#{product.name}を削除しますか？" },
+                                       class: "fas fa-times-circle fa-lg" %>
+            </td>
+          <% end %>
         </tr>
         <tr>
           <td colspan="6">

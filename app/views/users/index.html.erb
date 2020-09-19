@@ -7,37 +7,47 @@
     <table class="table-responsive table-bordered table-condensed table-hover bg-light" id="table-users">
       <thead>
         <tr height="50">
-          <th class="pc-width">
-            <!-- 登録 -->
-            <%= link_to "", new_user_registration_path, class: "fas fa-plus-circle fa-lg" %>
-          </th>
+          <% if admin_signed_in? %>
+            <th class="pc-width">
+              <!-- 登録 -->
+              <%= link_to "", new_user_registration_path, class: "fas fa-plus-circle fa-lg" %>
+            </th>
+          <% end %>
           <th class="pc-display"><%= User.human_attribute_name :code %></th>
           <th><%= User.human_attribute_name :name %></th>
-          <th class="pc-display"><%= User.human_attribute_name :email %></th>
-          <th></th>
+          <th class="pc-display">
+            <%= User.human_attribute_name :email %>
+          </th>
+          <% if admin_signed_in? %>
+            <th></th>
+          <% end %>
         </tr>
       </thead>
       
       <% @users.each do |user| %>
         <tr height="40">
-          <td>
-            <a class="btn btn-primary fas fa-edit" data-toggle="collapse" href="#collapse1-<%= user.id %>"
-               role="button" aria-expanded="false" aria-controls="collapse1-<%= user.id %>">
-              <!-- 編集 -->
-            </a>
-            <a class="btn btn-danger fas fa-unlock-alt" data-toggle="collapse" href="#collapse2-<%= user.id %>"
-               role="button" aria-expanded="false" aria-controls="collapse2-<%= user.id %>">
-            </a>
-          </td>
+          <% if admin_signed_in? %>
+            <td>
+              <a class="btn btn-primary fas fa-edit" data-toggle="collapse" href="#collapse1-<%= user.id %>"
+                 role="button" aria-expanded="false" aria-controls="collapse1-<%= user.id %>">
+                <!-- 編集 -->
+              </a>
+              <a class="btn btn-danger fas fa-unlock-alt" data-toggle="collapse" href="#collapse2-<%= user.id %>"
+                 role="button" aria-expanded="false" aria-controls="collapse2-<%= user.id %>">
+              </a>
+            </td>
+          <% end %>
           <td class="pc-display"><%= format("%03d", user.code) %><a class=<%= stamp(user.created_at, user.updated_at) %>></td>
           <td><%= user.name %></td>
           <td class="pc-display"><%= user.email %></td>
-          <td>
-            <!-- 削除 -->
-            <%= link_to "", user_path(user), method: :delete,
-                                             data: { confirm: "【#{format("%03d", user.code)}】#{user.name}のデータを削除しますか？" },
-                                             class: "fas fa-times-circle fa-lg" %>
-          </td>
+          <% if admin_signed_in? %>
+            <td>
+              <!-- 削除 -->
+              <%= link_to "", user_path(user), method: :delete,
+                                               data: { confirm: "【#{format("%03d", user.code)}】#{user.name}のデータを削除しますか？" },
+                                               class: "fas fa-times-circle fa-lg" %>
+            </td>
+          <% end %>
         </tr>
         <tr>
           <td colspan="5">

@@ -52,7 +52,9 @@
           <% end %>
           <th><%= Customer.human_attribute_name :code %></th>
           <th><%= Customer.human_attribute_name :name %></th>
-          <th></th>
+          <% if admin_signed_in? %>
+            <th></th>
+          <% end %>
         </tr>
       </thead>
       
@@ -68,12 +70,14 @@
           <% end %>
           <td><%= customer.code %><a class=<%= stamp(customer.created_at, customer.updated_at) %>></td>
           <td><%= customer.name %></td>
-          <td>
-            <!-- 削除 -->
-            <%= link_to "", customer, method: :delete,
-                                      data: { confirm: "【#{customer.code}】#{customer.name}を削除しますか？" },
-                                      class: "fas fa-times-circle fa-lg" %>
-          </td>
+          <% if admin_signed_in? %>
+            <td>
+              <!-- 削除 -->
+              <%= link_to "", customer, method: :delete,
+                                        data: { confirm: "【#{customer.code}】#{customer.name}を削除しますか？" },
+                                        class: "fas fa-times-circle fa-lg" %>
+            </td>
+          <% end %>
         </tr>
         <tr>
           <td colspan="5">
