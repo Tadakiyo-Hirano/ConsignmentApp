@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admins::RegistrationsController < Devise::RegistrationsController
+  before_action :guard_signup!, only: %i[new create destroy cancel]
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -37,6 +38,12 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # def cancel
   #   super
   # end
+  
+  private
+
+    def guard_signup!
+      raise ActionController::RoutingError, 'NOT FOUND'
+    end
 
   # protected
 

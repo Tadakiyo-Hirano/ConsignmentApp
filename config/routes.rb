@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     get '/users/sign_out', to: 'devise/sessions#destroy' # logout
   end
   
-  resources :admins, only: :show
+  resources :admins, only: %i(show index)
   
   resources :users, only: %i(index show update destroy) do
     resources :consignments do

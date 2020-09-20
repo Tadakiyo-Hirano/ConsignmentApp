@@ -1,8 +1,9 @@
 <% provide(:title, "登録") %>
+
 <div class="container container-top">
   <div class="col col-md-6 col-md-offset-3 login-top">
     <div class="center jumbotron">
-      <p>アカウント登録</p>
+      <p>担当者アカウント登録</p>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         
@@ -34,7 +35,7 @@
         </div>
       <% end %>
     
-      <%= render "users/shared/links" %>
+      <!--<= render "users/shared/links" %>-->
     </div>
   </div>
 </div>

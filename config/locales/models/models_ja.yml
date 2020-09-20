@@ -25,6 +25,7 @@ ja:
         reset_password_token: パスワードリセット時のトークン
         reset_password_sent_at: パスワードリセットメール送信日時
         remember_created_at: Remember me チェックボックスON
+        current_password: 現在のパスワード
         created_at: 作成日
         updated_at: 更新日
       product:

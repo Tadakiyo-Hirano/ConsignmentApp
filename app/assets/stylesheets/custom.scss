@@ -6,8 +6,8 @@
   font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 }
 
-.pagination {
-  flex-wrap: wrap;
+body {
+  background-color:  #f9f9f9;
 }
 
 table.main {
@@ -168,6 +168,10 @@ p.pc-display {
   margin-left: -4px;
 }
 
+.page-item.disabled .page-link {
+    background-color: #f9f9f9;
+}
+
 /* 登録アイコン */
 
 .fa-pulscircle {
@@ -219,10 +223,6 @@ p.pc-display {
 }
 
 /* トップページ */
-
-body {
-  background-color:  #f9f9f9;
-}
 
 .jumbotron {
   p {

@@ -3,11 +3,15 @@
   <%= render 'layouts/hamburger_button' %>
   
   <div class="p-2 container-fluid header-top">
-    <div><%= link_to header_title, root_path, id: "logo" %></div>
+    <div>
+      <%= link_to header_title, root_path, id: "logo" %>
+    </div>
     <div class="header-list">
       <ul class="navbar-nav mr-autot">
         <% unless admin_signed_in? %>
-          <li class="pc-display"><%= link_to "&nbsp;#{current_user.name}".html_safe, user_path(current_user), class: "header-menu fas fa-user-circle" if user_signed_in? %></li>
+          <li class="pc-display">
+            <%= link_to "&nbsp;#{current_user.name}".html_safe, user_path(current_user), class: "header-menu fas fa-user-circle" if user_signed_in? %>
+          </li>
         <% end %>
         <!-- ドロップダウンメニュー -->
         <div class="dropdown">

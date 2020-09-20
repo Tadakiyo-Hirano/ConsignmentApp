@@ -14,7 +14,7 @@ module ApplicationHelper
   def header_title
     if current_admin
       content_tag(:li, class: "fas fa-user-cog") do
-        "&nbsp;管理者権限".html_safe
+        "&nbsp;管理者".html_safe
       end
     else
       content_tag(:li, class: "fas fa-cubes") do

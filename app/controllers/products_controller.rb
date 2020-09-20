@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
   def index
     @search_params = product_search_params
     @search_none = search_none
-    @products = @search_none ? Product.search(@search_params).page(params[:page]).per(10).order(code: :asc) : 
+    @products = @search_none ? Product.search(@search_params).page(params[:page]).order(code: :asc) : 
                                Product.search(@search_params).order(code: :asc)
     @export_products = Product.all
     respond_to do |format|
