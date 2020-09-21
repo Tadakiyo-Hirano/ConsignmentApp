@@ -26,6 +26,7 @@ gem 'prawn-table'
 gem 'roo'
 gem 'line-bot-api'
 gem 'whenever', require: false
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'awesome_print' # コンソールで ap User.all等とすると、User.allより見やすい。

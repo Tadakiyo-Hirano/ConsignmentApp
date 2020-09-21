@@ -25,6 +25,7 @@ rails_env = ENV['RAILS_ENV'] || :development
 set :environment, rails_env
 set :output, "#{Rails.root}/log/cron.log"
 
-every 1.day, at: ['7:00 am'] do # タスクを処理するペースを記載する。（例は毎朝7時に実行）
-  rake 'line_push:line_push_memo'
+# every 1.day, at: ['7:00 am'] do # タスクを処理するペース。（毎朝7時に実行）
+every 1.minutes do 
+  runner 'line_push:line_push_memo'
 end

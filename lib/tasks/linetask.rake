@@ -1,6 +1,6 @@
 namespace :line_push do 
   desc "linebot実行"
-  task :line_push_memo => :environment do
+  task line_push_memo: :environment do
     #ログ
     # logger = Logger.new 'log/linetask.log'
 
@@ -34,7 +34,8 @@ namespace :line_push do
         config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
         config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
       }
-      response = client.push_message(ENV["LINE_CHANNEL_USER_ID"], message)
+      # response = client.push_message(ENV["LINE_CHANNEL_USER_ID"], message)
+      response = client.broadcast(message)
       p response
 
     #デバッグのため
