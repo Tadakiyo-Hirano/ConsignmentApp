@@ -47,6 +47,8 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :posts, only: %i(show edit update)
+  
   post 'callback', to: 'linebot#callback'
 
 end

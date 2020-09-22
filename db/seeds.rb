@@ -53,3 +53,13 @@ puts "Sample products created successfully!"
 end
 
 puts "Sample customers created successfully!"
+
+Post.create!(
+    month_day: 20,
+    month_notice: "テスト1",
+    year_month: 4,
+    year_day: 20,
+    year_notice: "テスト2"
+  )
+  
+puts "Sample posts created successfully!"

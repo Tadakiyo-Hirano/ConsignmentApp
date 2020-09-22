@@ -8,9 +8,9 @@ namespace :line_push do
     def text
       date = Date.today
 
-      case date.strftime('%d')
-        when "20"
-          "明日は締日です。委託品の売上、回収処理確認をお願いします。" + metal_text
+      case date.strftime('%-d')
+        when Post.find(1).month_day.to_s
+          Post.find(1).month_notice + metal_text
         else
           "1日1回動作テスト\n#{DateTime.now.strftime('%Y/%m/%d %H時%M分')}#{User.find(1).name}#{date.strftime('%d')}"
       end
@@ -18,9 +18,10 @@ namespace :line_push do
 
     def metal_text
       date = Date.today
-      day = date.strftime('%m%d')
-      if day == "0420"
-        "\n棚卸しもありますので、委託品の最終チェックも提出お願いします。"
+      month = date.strftime('%-m')
+      day = date.strftime('%-d')
+      if month == Post.find(1).year_month.to_s && day == Post.find(1).year_day.to_s
+        "\n#{Post.find(1).year_notice}"
       else
         ""
       end

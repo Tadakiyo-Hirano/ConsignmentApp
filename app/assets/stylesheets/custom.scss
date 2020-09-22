@@ -606,6 +606,19 @@ p.pc-display {
 //   }
 // }
 
+/* LINE通知フォーム posts/edit */
+
+.edit-post {
+  p {
+    margin: 8px 0 0 0;
+  }
+}
+
+.border-post {
+  border: thin groove;
+  margin: 30px 0 30px 0;
+}
+
 /* ハンバーガーメニュー _hambuger_button */
 
 .hamburger-menu {

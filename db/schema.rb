@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_03_141821) do
+ActiveRecord::Schema.define(version: 2020_09_22_063753) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -49,6 +49,16 @@ ActiveRecord::Schema.define(version: 2020_09_03_141821) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["code"], name: "index_customers_on_code", unique: true
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.integer "month_day"
+    t.string "month_notice"
+    t.integer "year_month"
+    t.integer "year_day"
+    t.string "year_notice"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "products", force: :cascade do |t|
