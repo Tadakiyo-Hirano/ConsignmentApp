@@ -12,7 +12,7 @@ namespace :line_push do
         when "20"
           "明日は締日です。委託品の売上、回収処理確認をお願いします。" + metal_text
         else
-          "1日1回動作テスト\n#{DateTime.now.strftime('%Y/%m/%d %H時%M分')}"
+          "1日1回動作テスト\n#{DateTime.now.strftime('%Y/%m/%d %H時%M分')}#{User.find(1).name}#{date.strftime('%d')}"
       end
     end
 
