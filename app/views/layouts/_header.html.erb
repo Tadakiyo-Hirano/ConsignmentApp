@@ -19,11 +19,11 @@
             <i class="fas fa-cog"></i>&nbsp;設定
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdown1">
-            <a><%= link_to "&nbsp;商品一覧/編集".html_safe, products_path, class: "dropdown-item fas fa-boxes" %></a>
-            <a><%= link_to "&nbsp;得意先一覧/編集".html_safe, customers_path, class: "dropdown-item fas fa-building" %></a>
+            <a><%= link_to product_menu_text, products_path, class: "dropdown-item" %></a>
+            <a><%= link_to customer_menu_text, customers_path, class: "dropdown-item" %></a>
             <a>
-              <%= link_to "&nbsp;担当者一覧/編集".html_safe, users_path, class: "dropdown-item fas fa-user-circle" if admin_signed_in? %>
-              <%= link_to "&nbsp;担当者情報編集".html_safe, edit_user_registration_path, class: "dropdown-item fas fa-user-circle" unless admin_signed_in? %>
+              <%= link_to "担当者一覧/編集", users_path, class: "dropdown-item" if admin_signed_in? %>
+              <%= link_to "担当者情報編集", edit_user_registration_path, class: "dropdown-item" unless admin_signed_in? %>
             </a>
           </div>
         </div>

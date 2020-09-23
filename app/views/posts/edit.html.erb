@@ -46,17 +46,10 @@
             <%= f.submit "登録", class: "btn btn-default btn-block btn-user" %>
           </div>
           <div class="btn-item">
-            <%= link_to "戻る", "#", class: "btn btn-secondary btn-block btn-user" %>
+            <%= link_to "戻る", admin_path(current_admin), class: "btn btn-secondary btn-block btn-user" %>
           </div>
         </div>
       <% end %>
     </div>
   </div>
 </div>
-
-
-<%= @post.month_day %>
-<%= @post.month_notice %>
-<%= @post.year_month %>
-<%= @post.year_day %>
-<%= @post.year_notice %>

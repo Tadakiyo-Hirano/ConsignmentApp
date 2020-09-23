@@ -23,6 +23,32 @@ module ApplicationHelper
     end
   end
   
+  # ヘッダー設定メニュー表示
+  def product_menu_text
+    if admin_signed_in?
+      "商品一覧/編集"
+    else
+      "登録商品一覧"
+    end
+  end
+  
+  def customer_menu_text
+    if admin_signed_in?
+      "得意先一覧/編集"
+    else
+      "登録得意先一覧"
+    end
+  end
+  
+  # ハンバーガーメニューログイン名表示
+  def loged_in_name
+    if user_signed_in?
+      current_user.name
+    elsif admin_signed_in?
+      current_admin.name
+    end
+  end
+  
   # 得意先コード表示
   def code(object)
     format('%03d', object.code)

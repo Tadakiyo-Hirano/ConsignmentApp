@@ -7,15 +7,15 @@
       <!-- ここに中身を入れる -->
       <div class="hamburger-menu">
         <ul>
-          <li class="hamburger-title"><i class="fas fa-cog "></i>&nbsp;設定</li>
+          <li class="hamburger-title"><%= loged_in_name %></li>
           <% if admin_signed_in? %>
-            <li class="hamburger-item"><%= link_to "メイン", admin_path(current_admin), class: "hamburger-menu" %></li>
+            <li class="hamburger-item"><%= link_to "トップ画面", admin_path(current_admin), class: "hamburger-menu" %></li>
           <% else %>
-            <li class="hamburger-item"><%= link_to "メイン", user_path(current_user), class: "hamburger-menu" %></li>
+            <li class="hamburger-item"><%= link_to "トップ画面", user_path(current_user), class: "hamburger-menu" %></li>
           <% end %>
-          <li class="hamburger-item list-style-none"><%= link_to "商品一覧/編集", products_url, class: "hamburger-menu" %></li>
-          <li class="hamburger-item list-style-none"><%= link_to "得意先一覧/編集", customers_url, class: "hamburger-menu" %></li>
-          <li class="hamburger-item list-style-none">
+          <li class="hamburger-item"><%= link_to product_menu_text, products_url, class: "hamburger-menu" %></li>
+          <li class="hamburger-item"><%= link_to customer_menu_text, customers_url, class: "hamburger-menu" %></li>
+          <li class="hamburger-item">
             <%= link_to "担当者一覧/編集", users_path, class: "hamburger-menu" if admin_signed_in? %>
             <%= link_to "担当者情報編集", edit_user_registration_path, class: "hamburger-menu" unless admin_signed_in? %>
           </li>
