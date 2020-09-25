@@ -51,4 +51,10 @@ ja:
         processing_date: 処理日
         return_quantity: 引上数量
         sales_quantity: 売上数量
+      post:
+        month_day: 月間通知日
+        month_notice: 月間通知メッセージ
+        year_month: 年間通知(月)
+        year_day: 年間通知(日)
+        year_notice: 年間通知メッセージ
         
