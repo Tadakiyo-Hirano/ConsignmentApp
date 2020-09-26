@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   def update
     if @post.update_attributes(post_params)
       flash[:notice] = "通知設定を更新しました。"
-      redirect_to @post
+      redirect_to admin_url
     else
       flash.now[:alert] = "更新に失敗しました。<br>" + @post.errors.full_messages.join("<br>")
       render :edit
@@ -25,6 +25,6 @@ class PostsController < ApplicationController
    end
    
    def post_params
-      params.require(:post).permit(:month_day, :month_notice, :year_month, :year_day, :year_notice)
+      params.require(:post).permit(:month_day, :month_notice, :month_check, :year_month, :year_day, :year_notice, :year_check)
    end
 end

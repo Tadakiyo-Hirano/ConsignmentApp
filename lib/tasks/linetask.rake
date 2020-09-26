@@ -7,10 +7,15 @@ namespace :line_push do
     #ここから処理
     def text
       date = Date.today
-
+      post_num = Post.find(1)
+      
       case date.strftime('%-d')
-        when Post.find(1).month_day.to_s
-          Post.find(1).month_notice + year_text
+        when post_num.month_day.to_s
+          if post_num.month_check == true
+            post_num.month_notice + year_text
+          else
+            year_text
+          end
         else
           # "1日1回動作テスト\n#{DateTime.now.strftime('%Y/%m/%d %H時%M分')}#{User.find(1).name}#{date.strftime('%d')}"
           year_text
@@ -18,11 +23,17 @@ namespace :line_push do
     end
 
     def year_text
-      date = Date.today
-      month = date.strftime('%-m')
-      day = date.strftime('%-d')
-      if month == Post.find(1).year_month.to_s && day == Post.find(1).year_day.to_s
-        "#{Post.find(1).year_notice}"
+      post_num = Post.find(1)
+      if post_num.year_check == true
+        date = Date.today
+        month = date.strftime('%-m')
+        day = date.strftime('%-d')
+        
+        if month == post_num.year_month.to_s && day == post_num.year_day.to_s
+          "#{post_num.year_notice}"
+        else
+          ""
+        end
       else
         ""
       end

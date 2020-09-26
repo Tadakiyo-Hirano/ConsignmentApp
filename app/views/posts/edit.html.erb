@@ -7,7 +7,15 @@
       <%= form_with(model: @post, local: true) do |f| %>
         <p class="border-post"></p>
         
-        <p>月間通知</p>
+        <p>
+          月間通知&emsp;
+          <%= f.check_box :month_check, {} , "true", "false" %>
+          チェックで通知ON
+        </p>
+        <p>
+          <%= month_notification %>
+        </p>
+        
         <div class="form-group row edit-post">
           <div class="col col-md-4">
             <%= f.select :month_day, [*1..31], {}, class: "form-control" %>
@@ -20,7 +28,15 @@
         
         <p class="border-post"></p>
         
-        <p>年間通知</p>
+        <p>
+          年間通知&emsp;
+          <%= f.check_box :year_check, {} , "true", "false" %>
+          チェックで通知ON
+        </p>
+        <p>
+          <%= year_notification %>
+        </p>
+        
         <div class="form-group row edit-post">
           <div class="col col-md-4">
             <%= f.select :year_month, [*1..12], {}, class: "form-control" %>
