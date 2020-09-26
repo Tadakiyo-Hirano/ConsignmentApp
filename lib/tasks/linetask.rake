@@ -28,23 +28,44 @@ namespace :line_push do
       end
     end
     
-    def reminder_text
-      # Consignment.where("ship_date < ? ", Time.current - 2.month).where(done: false)
-    end
-
     message = {
-        type: 'text',
-        text: text
-      }
-      client = Line::Bot::Client.new { |config|
-        config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
-        config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
-      }
-      # response = client.push_message(ENV["LINE_CHANNEL_USER_ID"], message)
-      response = client.broadcast(message)
-      p response
-
-    #デバッグのため
-    p "ここまでOK"
+      type: 'text',
+      text: text
+    }
+    
+    client = Line::Bot::Client.new { |config|
+      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
+      config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
+    }
+    # response = client.push_message(ENV["LINE_CHANNEL_USER_ID"], message)
+    response = client.broadcast(message)
+    p response
+    
+    p "OK" #デバッグ
+  end
+  
+  task line_push_reminder: :environment do
+    
+    def reminder_text
+      elapse = Consignment.where("ship_date < ? ", Time.current - 1.month).where(done: false)
+      if elapse.count > 0
+        "3ヶ月以上経過している委託が#{elapse.count}件あります。確認してください。\nhttps://www.google.com/"
+      end
+    end
+    
+    message = {
+      type: 'text',
+      text: reminder_text
+    }
+    
+    client = Line::Bot::Client.new { |config|
+      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
+      config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
+    }
+    
+    response = client.broadcast(message)
+    p response
+    
+    p "OK"  #デバッグ
   end
 end

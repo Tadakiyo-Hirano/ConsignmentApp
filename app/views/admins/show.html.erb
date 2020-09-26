@@ -38,3 +38,7 @@
     </table>
   </div>
 </div>
+<% aaa = Consignment.where("ship_date < ? ", Time.current - 6.month).where(done: false) %>
+<% aaa.each do |a| %>
+<p><%= a.ship_date %><%= User.find(a.user_id).name %></p>
+<% end %>

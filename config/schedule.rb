@@ -29,3 +29,7 @@ set :output, "#{Rails.root}/log/cron.log"
 every 1.minutes do 
   runner 'line_push:line_push_memo'
 end
+
+every 1.month, at: 'start of the month at 0am' do
+  runner 'line_push:line_push_reminder'
+end
