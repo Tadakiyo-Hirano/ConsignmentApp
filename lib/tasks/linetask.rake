@@ -58,9 +58,16 @@ namespace :line_push do
   task line_push_reminder: :environment do
     
     def reminder_text
-      elapse = Consignment.where("ship_date < ? ", Time.current - 1.month).where(done: false)
-      if elapse.count > 0
-        "3ヶ月以上経過している委託が#{elapse.count}件あります。確認してください。\nhttps://www.google.com/"
+      post_num = Post.find(1)
+      if post_num.reminder_check == true
+        reminder = post_num.reminder_month
+        reminder_text = post_num.reminder_notice
+        elapse = Consignment.where("ship_date < ? ", Time.current - reminder.to_i.month).where(done: false)
+        if elapse.count > 0
+          "#{reminder}ヶ月以上経過している委託が#{elapse.count}件あります。確認してください。\n" + reminder_text
+        else
+          ""
+        end
       end
     end
     

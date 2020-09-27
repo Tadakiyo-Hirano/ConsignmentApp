@@ -25,6 +25,8 @@ class PostsController < ApplicationController
    end
    
    def post_params
-      params.require(:post).permit(:month_day, :month_notice, :month_check, :year_month, :year_day, :year_notice, :year_check)
+      params.require(:post).permit(:month_day, :month_notice, :month_check,
+                                   :year_month, :year_day, :year_notice, :year_check,
+                                   :reminder_month, :reminder_notice, :reminder_check)
    end
 end

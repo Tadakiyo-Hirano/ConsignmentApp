@@ -19,4 +19,13 @@ module PostsHelper
       FALSE_MSG
     end
   end
+  
+  def reminder_notification
+    case @post.reminder_check
+    when true
+      TRUE_MSG
+    when false
+      FALSE_MSG
+    end
+  end
 end

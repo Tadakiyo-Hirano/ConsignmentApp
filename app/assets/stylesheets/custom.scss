@@ -619,6 +619,12 @@ p.pc-display {
   margin: 30px 0 30px 0;
 }
 
+.reminder-post-text {
+  margin: -10px 0 0 15px;
+  white-space: pre-line;
+  text-align: left;
+}
+
 /* ハンバーガーメニュー _hambuger_button */
 
 .hamburger-menu {
@@ -743,6 +749,10 @@ p.pc-display {
 }
 
 .field_with_errors input:select {
+  border: 2px solid #d9534f;
+}
+
+.field_with_errors .text_area {
   border: 2px solid #d9534f;
 }
 

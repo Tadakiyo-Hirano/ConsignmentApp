@@ -8,6 +8,28 @@
         <p class="border-post"></p>
         
         <p>
+          リマインダー通知&emsp;
+          <%= f.check_box :reminder_check, {} , "true", "false" %>
+          チェックで通知ON
+        </p>
+        <p>
+          <%= reminder_notification %>
+        </p>
+        
+        <div class="form-group row edit-post">
+          <div class="col col-md-4">
+            <%= f.select :reminder_month, [*1..12], {}, class: "form-control" %>
+          </div>
+          <div class="col col-md-8 col-offset-4">
+            <p>ヶ月以上</p>
+          </div>
+          <div class="reminder-post-text">経過した未処理の委託がある場合毎月通知します。</div>
+        </div>
+        <%= f.text_area :reminder_notice, placeholder: "追加メッセージ(300文字以内)", class: "form-control" %>
+        
+        <p class="border-post"></p>
+        
+        <p>
           月間通知&emsp;
           <%= f.check_box :month_check, {} , "true", "false" %>
           チェックで通知ON
@@ -24,7 +46,7 @@
             <p>日に通知</p>
           </div>
         </div>
-        <%= f.text_area :month_notice, placeholder: "通知メッセージ(300文字以内)", class: "form-control" %>
+        <%= f.text_area :month_notice, placeholder: "通知メッセージ(300文字以内)", class: "text_area form-control" %>
         
         <p class="border-post"></p>
         
@@ -53,7 +75,7 @@
             <p>日に通知</p>
           </div>
         </div>
-        <%= f.text_area :year_notice, placeholder: "通知メッセージ(300文字以内)", class: "form-control" %>
+        <%= f.text_area :year_notice, placeholder: "通知メッセージ(300文字以内)", class: "text_area form-control" %>
         
         <p class="border-post"></p>
         
