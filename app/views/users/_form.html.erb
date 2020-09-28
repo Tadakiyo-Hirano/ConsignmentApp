@@ -2,5 +2,5 @@
   <%= f.number_field :code, placeholder: "#{User.human_attribute_name :code}", class: "form-control" %>
   <%= f.text_field :name, placeholder: "#{User.human_attribute_name :name}", class: "form-control" %>
   <%= f.email_field :email, placeholder: "#{User.human_attribute_name :email}", class: "form-control" %>
-  <%= f.submit "更新", data: { confirm: "#{user.name}の情報を更新してよろしいですか？" }, class: "btn btn-default btn-block" %>
+  <%= f.submit "更新", data: { confirm: "#{user.name}の情報を更新してよろしいですか？" }, class: "btn btn-primary btn-block" %>
 <% end %>

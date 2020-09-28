@@ -1,5 +1,5 @@
 <%= form_with(model: customer, local: true, method: :patch) do |f| %>
   <%= f.text_field :code, placeholder: "#{Customer.human_attribute_name :code}", class: "form-control" %>
   <%= f.text_field :name, placeholder: "#{Customer.human_attribute_name :name}", class: "form-control" %>
-  <%= f.submit "更新", class: "btn btn-default btn-block" %>
+  <%= f.submit "更新", class: "btn btn-primary btn-block" %>
 <% end %>

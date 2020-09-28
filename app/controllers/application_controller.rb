@@ -49,9 +49,9 @@ class ApplicationController < ActionController::Base
     
     # 他ユーザーのpathにアクセスした場合は自分のメインページにリダイレクト
     def signed_in_correct_user
-      unless current_user.id == @user.id
+      if admin_signed_in? || current_user.id != @user.id
         flash[:alert] = "アクセス権限がありません。"
-        redirect_to user_url(current_user)
+        redirect_to root_url
       end
     end
     

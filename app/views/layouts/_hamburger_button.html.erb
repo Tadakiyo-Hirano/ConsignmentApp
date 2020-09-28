@@ -13,12 +13,16 @@
           <% else %>
             <li class="hamburger-item"><%= link_to "トップ画面", user_path(current_user), class: "hamburger-menu" %></li>
           <% end %>
-          <li class="hamburger-item"><%= link_to product_menu_text, products_url, class: "hamburger-menu" %></li>
-          <li class="hamburger-item"><%= link_to customer_menu_text, customers_url, class: "hamburger-menu" %></li>
           <li class="hamburger-item">
             <%= link_to "担当者一覧/編集", users_path, class: "hamburger-menu" if admin_signed_in? %>
             <%= link_to "担当者情報編集", edit_user_registration_path, class: "hamburger-menu" unless admin_signed_in? %>
           </li>
+          <li class="hamburger-item"><%= link_to product_menu_text, products_url, class: "hamburger-menu" %></li>
+          <li class="hamburger-item"><%= link_to customer_menu_text, customers_url, class: "hamburger-menu" %></li>
+          <% if admin_signed_in? %>
+            <li class="hamburger-item"><%= link_to "管理者情報編集", edit_admin_registration_path, class: "hamburger-menu" %></li>
+            <li class="hamburger-item"><%= link_to "LINE通知設定", edit_post_path(1), class: "hamburger-menu" %></li>
+          <% end %>
         </ul>
         <ul>
           <li class="hamburger-title"><%= link_to "&nbsp;ログアウト".html_safe, destroy_user_session_path, method: :delete, class: "hamburger-menu fas fa-sign-out-alt" %></li>
