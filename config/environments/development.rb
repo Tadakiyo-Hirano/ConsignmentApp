@@ -5,6 +5,7 @@ Rails.application.configure do
   
   # devise認証メール
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.web_console.whitelisted_ips = '219.102.215.201'
   
   # Settings specified here will take precedence over those in config/application.rb.
 

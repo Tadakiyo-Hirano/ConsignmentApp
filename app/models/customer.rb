@@ -15,8 +15,8 @@ class Customer < ApplicationRecord
   # CSVインポート
   def self.import(file)
     imported_num = 0
-    CSV.foreach(file.path, headers: true) do |row|
-      # IDが見つかれば、レコード呼出し、見つかれなければ、新しく作成
+    CSV.foreach(file.path, headers: true, encoding: 'Shift_JIS:UTF-8') do |row|
+      # codeが見つかれば、レコード呼出し、見つかれなければ、新しく作成
       customer = find_by(code: row["code"]) || new 
       # CSVからデータを取得し、設定する
       customer.attributes = row.to_hash.slice(*updatable_attributes)

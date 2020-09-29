@@ -76,15 +76,6 @@ ActiveRecord::Schema.define(version: 2020_09_27_074310) do
     t.index ["code"], name: "index_products_on_code", unique: true
   end
 
-  create_table "sessions", force: :cascade do |t|
-    t.string "session_id", null: false
-    t.text "data"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
-    t.index ["updated_at"], name: "index_sessions_on_updated_at"
-  end
-
   create_table "stocks", force: :cascade do |t|
     t.integer "return_quantity", default: 0, null: false
     t.integer "sales_quantity", default: 0, null: false
