@@ -9,7 +9,7 @@
           <%= f.text_field :code, placeholder: "#{Product.human_attribute_name :code}", class: "form-control" %>
           <%= f.text_field :name, placeholder: "#{Product.human_attribute_name :name}", class: "form-control" %>
           <div class="input-group-append">
-            <%= f.submit "検索", class: "btn btn-sm btn-primary" %>
+            <%= f.submit "検索", class: "btn btn-sm btn-default" %>
           </div>
           <% if admin_signed_in? %>
             <div class="input-group hidden-btn">

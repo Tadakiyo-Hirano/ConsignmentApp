@@ -37,9 +37,14 @@
           <!--<= f.label :password_confirmation %><br />-->
           <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認用パスワード(6文字以上)", class: "form-control" %>
         </div>
-      
-        <div class="actions">
-          <%= f.submit "更新", class: "btn btn-primary form-control" %>
+        
+        <div class="btn-field">
+        <div class="actions btn-item">
+          <%= f.submit "更新", class: "btn btn-primary form-control btn-block" %>
+        </div>
+        <div class="btn-item">
+          <%= link_to "戻る", admin_path(1), class: "btn btn-secondary btn-block" %>
+        </div>
         </div>
       <% end %>
       

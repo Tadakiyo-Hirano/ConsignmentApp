@@ -87,9 +87,20 @@ h1, h2, h3, h4, h5 {
 .btn-default {
   background-color: #52c2d0;
   color: #fff;
+  transition: all 3.0s;
 }
 
 .btn-default:hover {
+  background-color: #52c2d0;
+  color: #fff;
+}
+
+.btn-default:focus {
+  background-color: #52c2d0;
+  color: #fff;
+}
+
+.btn-default:active {
   background-color: #52c2d0;
   color: #fff;
 }
@@ -354,6 +365,11 @@ p.pc-display {
 
 #dropdown-setting:focus {
   outline: 0;
+}
+
+.dropdown-item:focus {
+  color: #000;
+  background-color: #fff;
 }
 
 /* 管理者画面 */
