@@ -2,11 +2,15 @@ class ConsignmentsController < ApplicationController
   before_action :signed_in_user
   before_action :set_user_consignments
   before_action :set_consignment, only: %i(show edit update destroy)
-  before_action :signed_in_correct_user, only: %i(index new create edit update destroy)
+  before_action :signed_in_correct_user, only: %i(index show new create edit update destroy)
   before_action :signed_in_correct_user_or_admin, only: %i(by_customer)
   
   def index
-    # redirect_to new_user_consignment_path
+    redirect_to new_user_consignment_path
+  end
+  
+  def show
+    
   end
   
   def by_customer
@@ -14,10 +18,6 @@ class ConsignmentsController < ApplicationController
     @search_none = consignment_search_none
     @consignments = @search_none ? Consignment.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number) : 
                                    Consignment.where(done: false).search(@search_params).order(customer_code: :asc).group_by(&:customer_id_number)
-    # @consignments = Consignment.all.order(customer_id_number: :asc)
-    # @consignments = Consignment.all.group(:customer_id_number).order(customer_id_number: :asc)
-    # @consignments = Consignment.all.order(customer_id_number: :asc).group_by(&:customer_id_number)
-    # @consignments = Consignment.where(done: false).order(customer_id_number: :asc).group_by(&:customer_id_number)
     @customers_pdf = Consignment.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number)
   end
   
@@ -26,8 +26,6 @@ class ConsignmentsController < ApplicationController
     @search_none = consignment_search_none
     @consignments = @search_none ? Consignment.where(done: false).order(product_code: :asc).group_by(&:product_id_number) : 
                                    Consignment.where(done: false).search(@search_params).order(product_code: :asc).group_by(&:product_id_number)
-    # @consignments = Consignment.all.order(product_id_number: :asc).group_by(&:product_id_number)
-    # @consignments = Consignment.where(done: false).order(product_id_number: :asc).group_by(&:product_id_number)
     @products_pdf = Consignment.where(done: false).order(product_code: :asc).group_by(&:product_id_number)
   end
   
@@ -103,9 +101,6 @@ class ConsignmentsController < ApplicationController
       params.require(:consignment).permit(:ship_date, :customer_id_number, :customer_code, :customer_name,
                                           :product_id_number, :product_code, :product_name, :serial_number,
                                           :quantity, :note, :user_id)
-      # params.require(:consignment).permit(:ship_date, :customer_id_number, :customer_code, :customer_name,
-      #                                     :product_id_number, :product_code, :product_name, :serial_number,
-      #                                     :note, :user_id, stocks_attributes: [:id, :consignment_quantity, :return_quantity, :sales_quantity])
     end
     
     def set_user_consignments

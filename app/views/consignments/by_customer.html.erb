@@ -4,9 +4,19 @@
 <div class="container">
   <div class="col col-md-12 user-menu">
     <div class="search-link-form">
-      <div class="search-link"><%= link_to "#{@user.name}", @user, class: "btn btn-outline-primary" %></div>
-      <div class="search-link"><%= link_to "商品別", by_product_user_consignments_path(@user), class: "btn btn-outline-primary" %></div>
-      <div class="search-link"><p class="pc-display"><%= link_to "PDF", documents_user_consignments_path(text: "customers_pdf", format: "pdf"), :target=>["_blank"], class: "btn btn-danger" %></p></div>
+      <% unless admin_signed_in? %>
+        <div class="search-link">
+          <%= link_to "#{@user.name}", @user, class: "btn btn-outline-primary" %>
+        </div>
+      <% end %>
+      <div class="search-link">
+        <%= link_to "商品別", by_product_user_consignments_path(@user), class: "btn btn-outline-primary" %>
+      </div>
+      <div class="search-link">
+        <p class="pc-display">
+          <%= link_to "PDF", documents_user_consignments_path(text: "customers_pdf", format: "pdf"), :target=>["_blank"], class: "btn btn-danger" %>
+        </p>
+      </div>
       <div class="search-link">
         <%= form_with(scope: :search, url: by_customer_user_consignments_path(@user), class: "form-inline", method: :get, local: true) do |f| %>
           <div class="input-group mb-3">
@@ -23,19 +33,6 @@
     </div>
     
     <% @consignments.each do |customer_id_number, consignments| %>
-      <!--<table class="table table-bordered table-condensed bg-light" width="50%">-->
-      <!--  <tbody>-->
-      <!--    <tr>-->
-      <!--      <th width="50%" class="pc-display"><= Consignment.human_attribute_name :customer_code %></th>-->
-      <!--      <th width="50%" class="pc-display"><= Consignment.human_attribute_name :customer_name %></th>-->
-      <!--    </tr>-->
-      <!--    <tr>-->
-      <!--      <td class="pc-display"><= Customer.find(customer_id_number).code %></td>-->
-      <!--      <td><= Customer.find(customer_id_number).name %></td>-->
-      <!--    </tr>-->
-      <!--  </tbody>-->
-      <!--</table>-->
-      
       <table class="table every table-responsive table-bordered table-condensed bg-light">
         <thead>
           <tr>
