@@ -26,6 +26,15 @@ table.main {
     border: solid 2px #e3e3e3;
     background-color: #fff;
   }
+  td.mobile-bottom {
+    border-bottom: dashed #e3e3e3;
+  }
+  td.mobile-right {
+    border-right: dashed #e3e3e3;
+  }
+  tbody.sub, th.sub {
+    border: solid #c0c0c0;
+  }
 }
 
 table.every {

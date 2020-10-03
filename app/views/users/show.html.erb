@@ -33,24 +33,24 @@
           <th width="6%" class="pc-display">
             編集
           </th>
-          <th class="mobile-display"></th>
+          <!--<th class="mobile-display"></th>-->
           
-          <th width="11%" class="nowrap">
+          <th width="11%" class="pc-display nowrap">
             <%= Consignment.human_attribute_name :ship_date %>
           </th>
           <th width="28%" class="pc-display">
             <%= Product.human_attribute_name :code %>・<%= Product.human_attribute_name :name %>
           </th>
-          <th class="mobile-display">
-            <%= Product.human_attribute_name :name %>
-          </th>
+          <!--<th class="mobile-display">-->
+          <!--  <= Product.human_attribute_name :name %>-->
+          <!--</th>-->
           
           <th width="8%" class="pc-display">
             委託残
           </th>
-          <th class="mobile-display nowrap">
-            残数
-          </th>
+          <!--<th class="mobile-display nowrap">-->
+          <!--  残数-->
+          <!--</th>-->
           
           <th width="12%" class="pc-display">
             <%= Consignment.human_attribute_name :serial_number %>
@@ -63,6 +63,9 @@
           <th width="15%" class="pc-display">
             <%= Consignment.human_attribute_name :note %>
           </th>
+          
+          <th class="mobile-display sub"></th>
+          <th class="mobile-display sub" colspan="3">得意先 / 商品名</th>
         </tr>
       </thead>
       
@@ -70,17 +73,17 @@
         <tbody>
           <!--< if none_zero_total(c) %> <!-- 委託残数0は表示しない。 -->
             <tr>
-              <td><%= link_to "", user_consignment_path(@user, c), class: "far fa-edit" %></td>
+              <td class="pc-display"><%= link_to "", user_consignment_path(@user, c), class: "far fa-edit" %></td>
               <td class="pc-display"><%= l(c.ship_date, format: :default) %><a class=<%= stamp(c.created_at, c.updated_at) %>></a></td>
-              <td class="mobile-display"><%= l(c.ship_date, format: :short) %><a class=<%= stamp(c.created_at, c.updated_at) %>></a></td>
+              <!--<td class="mobile-display"><= l(c.ship_date, format: :short) %><a class=<= stamp(c.created_at, c.updated_at) %>></a></td>-->
               
               <td class="pc-display">
                 【<%= c.product_id_num&.code %>】<br><%= c.product_id_num&.name %>
               </td>
-              <td class="mobile-display">
-                <%= c.product_id_num&.name %>
-              </td>
-              <td>
+              <!--<td class="mobile-display">-->
+              <!--  <= c.product_id_num&.name %>-->
+              <!--</td>-->
+              <td class="pc-display">
                 <%= link_to total_consignment_balance(c), user_consignment_stocks_path(@user, c), class: "#{total_consignment_balance_color(c)}" %>
               </td>
               <td class="pc-display"><%= c.serial_number %></td>
@@ -90,6 +93,17 @@
               <td class="pc-display"><%= c.note %></td>
             </tr>
           <!--< end %>-->
+        </tbody>
+        
+        <tbody class="mobile-display sub">
+          <tr>
+            <td class="mobile-bottom mobile-right"><%= link_to l(c.ship_date, format: :short), user_consignment_path(@user, c) %></td>
+            <td class="mobile-bottom" colspan="3"><%= c.customer_id_num&.name %></td>
+          </tr>
+          <tr>
+            <td class="mobile-right"><%= link_to "#{total_consignment_balance(c)}台", user_consignment_stocks_path(@user, c), class: "#{total_consignment_balance_color(c)}" %></td>
+            <td colspan="3"><%= c.product_id_num&.name %></td>
+          </tr>
         </tbody>
       <% end %>
     </table>
