@@ -1,6 +1,6 @@
 <% provide(:title, @user.name) %>
 
-<h3>処理済</h3>
+<h4>処理済</h4>
 <div class="container">
   <div class="col col-md-12 user-menu">
     <div class="search-link-form">
@@ -25,68 +25,52 @@
 
     <%= paginate @user_consignments if @search_none %>
     <table class="table main table-responsive table-bordered table-condensed table-hover bg-light" id="table-products">
-      <thead>
+      <!-- PC画面 -->
+      <thead class="pc-display">
         <tr>
-          <th width="6%" class="pc-display">
-            編集
-          </th>
-          <th class="mobile-display"></th>
-          
-          <th width="11%" class="nowrap">
-            <%= Consignment.human_attribute_name :ship_date %>
-          </th>
-          <th width="28%" class="pc-display">
-            <%= Product.human_attribute_name :code %>・<%= Product.human_attribute_name :name %>
-          </th>
-          <th class="mobile-display">
-            <%= Product.human_attribute_name :name %>
-          </th>
-          
-          <th width="8%" class="pc-display">
-            委託残
-          </th>
-          <th class="mobile-display nowrap">
-            残数
-          </th>
-          
-          <th width="12%" class="pc-display">
-            <%= Consignment.human_attribute_name :serial_number %>
-          </th>
-          
-          <th width="20%" class="pc-display">
-            <%= Consignment.human_attribute_name :customer_code %>・<%= Consignment.human_attribute_name :customer_name %>
-          </th>
-          
-          <th width="15%" class="pc-display">
-            <%= Consignment.human_attribute_name :note %>
-          </th>
+          <th width="6%">編集</th>
+          <th width="11%" class="nowrap"><%= Consignment.human_attribute_name :ship_date %></th>
+          <th width="28%"><%= Product.human_attribute_name :code %>・<%= Product.human_attribute_name :name %></th>
+          <th width="8%">委託残</th>
+          <th width="12%"><%= Consignment.human_attribute_name :serial_number %></th>
+          <th width="20%"><%= Consignment.human_attribute_name :customer_code %>・<%= Consignment.human_attribute_name :customer_name %></th>
+          <th width="15%"><%= Consignment.human_attribute_name :note %></th>
+        </tr>
+      </thead>
+      
+      <!-- Mobile画面 -->
+      <thead class="mobile-display sub">
+        <tr>
+          <th class="nowrap">委託日</th>
+          <th>得意先 / 商品名</th>
+          <th>残</th>
         </tr>
       </thead>
       
       <% @user_consignments.decorate.each do |c| %>
-        <tbody>
-          <!--< if none_zero_total(c) %> <!-- 委託残数0は表示しない。 -->
-            <tr>
-              <td><%= link_to "", user_consignment_path(@user, c), class: "far fa-edit" %></td>
-              <td class="pc-display"><%= l(c.ship_date, format: :default) %><a class=<%= stamp(c.created_at, c.updated_at) %>></a></td>
-              <td class="mobile-display"><%= l(c.ship_date, format: :short) %><a class=<%= stamp(c.created_at, c.updated_at) %>></a></td>
-              
-              <td class="pc-display">
-                【<%= c.product_id_num&.code %>】<br><%= c.product_id_num&.name %>
-              </td>
-              <td class="mobile-display">
-                <%= c.product_id_num&.name %>
-              </td>
-              <td>
-                <%= link_to total_consignment_balance(c), user_consignment_stocks_path(@user, c), class: "#{total_consignment_balance_color(c)}" %>
-              </td>
-              <td class="pc-display"><%= c.serial_number %></td>
-              <td class="pc-display">
-                【<%= c.customer_id_num&.code %>】<br><%= c.customer_id_num&.name %>
-              </td>
-              <td class="pc-display"><%= c.note %></td>
-            </tr>
-          <!--< end %>-->
+        <!-- PC画面 -->
+        <tbody class="pc-display">
+          <tr>
+            <td><%= link_to "", user_consignment_path(@user, c), class: "far fa-edit" %></td>
+            <td><%= l(c.ship_date, format: :default) %><a class=<%= stamp(c.created_at, c.updated_at) %>></a></td>
+            <td>【<%= c.product_id_num&.code %>】<br><%= c.product_id_num&.name %></td>
+            <td><%= link_to total_consignment_balance(c), user_consignment_stocks_path(@user, c), class: "#{total_consignment_balance_color(c)}" %></td>
+            <td><%= c.serial_number %></td>
+            <td>【<%= c.customer_id_num&.code %>】<br><%= c.customer_id_num&.name %></td>
+            <td><%= c.note %></td>
+          </tr>
+        </tbody>
+        
+        <!-- Mobile画面 -->
+        <tbody class="mobile-display sub">
+          <tr>
+            <td rowspan="2" class="dotted-right"><%= link_to l(c.ship_date, format: :short), user_consignment_path(@user, c) %></td>
+            <td class="dashed-bottom none-border dotted-bottom"><%= c.customer_id_num&.name %></td>
+            <td rowspan="2" class="dotted-left"><%= link_to "#{total_consignment_balance(c)}", user_consignment_stocks_path(@user, c), class: "#{total_consignment_balance_color(c)}" %></td>
+          </tr>
+          <tr>
+            <td class="none-border"><%= c.product_id_num&.name %></td>
+          </tr>
         </tbody>
       <% end %>
     </table>
