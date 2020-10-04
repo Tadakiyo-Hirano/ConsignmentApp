@@ -25,7 +25,7 @@ class StocksController < ApplicationController
     @stock = @consignment.stocks.build(stock_params)
     if @stock.save
       done_decision
-      flash[:notice] = "在庫受払を登録しました。" + @consignment.done.to_s
+      flash[:notice] = "在庫受払を登録しました。"
       redirect_to user_consignment_stocks_path
     else
       flash.now[:alert] = "登録に失敗しました。<br> " + @stock.errors.full_messages.join("<br>")
@@ -45,7 +45,7 @@ class StocksController < ApplicationController
     ActiveRecord::Base.transaction do
       @stock.update_attributes!(stock_params)
       done_decision
-      flash[:notice] = "#{@stock.processing_date}の在庫受払を更新しました。" + @consignment.done.to_s
+      flash[:notice] = "#{@stock.processing_date}の在庫受払を更新しました。"
       redirect_to user_consignment_stocks_path
     end
   rescue ActiveRecord::RecordInvalid
@@ -58,7 +58,7 @@ class StocksController < ApplicationController
     # @stocks = @user.consignments.find(params[:consignment_id]).stocks
     @stock.destroy
     done_decision
-    flash[:alert] = "#{@stock.processing_date}の在庫受払を削除しました。" + @consignment.done.to_s
+    flash[:alert] = "#{@stock.processing_date}の在庫受払を削除しました。"
     redirect_to user_consignment_stocks_url
   end
   

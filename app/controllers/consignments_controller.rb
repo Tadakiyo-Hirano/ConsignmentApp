@@ -1,6 +1,7 @@
 class ConsignmentsController < ApplicationController
   before_action :signed_in_user
   before_action :set_user_consignments
+  before_action :authenticate_user!, only: %i(by_customer by_product)
   before_action :set_consignment, only: %i(show edit update destroy)
   before_action :signed_in_correct_user, only: %i(index show new create edit update destroy)
   before_action :signed_in_correct_user_or_admin, only: %i(by_customer)

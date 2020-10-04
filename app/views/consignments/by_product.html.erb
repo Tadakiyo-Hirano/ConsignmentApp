@@ -35,27 +35,48 @@
     <% @consignments.each do |product_id_number, consignments| %>
       <table class="table every default table-responsive table-bordered table-condensed bg-light">
         <thead>
-          <tr>
+          <!-- PC画面 -->
+          <tr class="pc-display">
             <th colspan="4" class="every">【<%= Product.find(product_id_number).code %>】<%= Product.find(product_id_number).name %></th>
+          </tr>
+          <!-- Mobile画面 -->
+          <tr class="mobile-display">
+            <th><%= Product.find(product_id_number).name %></th>
+            <th>残</th>
           </tr>
         </thead>
         
         <tbody>
-          <tr>
+          <!-- PC画面 -->
+          <tr class="pc-display">
             <th width="15%" class="pc-display"><%= Customer.human_attribute_name :code %></th>
             <th width="45%"><%= Customer.human_attribute_name :name %></th>
             <th width="10%" class="pc-display">委託残</th>
             <th width="10%" class="mobile-display">残</th>
-            <th width="230">担当者</th>
+            <th width="30%">担当者</th>
           </tr>
           <% consignments.each do |consignment| %>
-            <tr>
-              <td class="pc-display"><%= Customer.find(consignment.customer_id_number).code %></td>
+            <!-- PC画面 -->
+            <tr class="pc-display">
+              <td><%= Customer.find(consignment.customer_id_number).code %></td>
               <td><%= Customer.find(consignment.customer_id_number).name %></td>
               <td class="<%= total_consignment_balance_color(consignment) %>">
-                <%= total_consignment_balance(consignment) %>
+                <%= stock_link(consignment) %>
               </td>
               <td><%= User.find(consignment.user_id).name %></td>
+            </tr>
+            
+            <!-- Mobile画面 -->
+            <tr class="mobile-display">
+              <td width="90%" class="font-small">
+                <%= Customer.find(consignment.customer_id_number).name %><br>
+                <a class="font-xxsmall">
+                  <%= "担当:#{User.find(consignment.user_id).name}" %>
+                </a>
+              </td>
+              <td width="10%" class="<%= total_consignment_balance_color(consignment) %>">
+                <%= stock_link(consignment) %>
+              </td>
             </tr>
           <% end %>
         </tbody>

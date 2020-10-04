@@ -55,22 +55,26 @@
             <th width="30%">担当者</th>
           </tr>
           <% consignments.each do |consignment| %>
+            <!-- PC画面 -->
             <tr class="pc-display">
               <td><%= Product.find(consignment.product_id_number).code %></td>
               <td><%= Product.find(consignment.product_id_number).name %></td>
               <td class="<%= total_consignment_balance_color(consignment) %>">
-                <%= total_consignment_balance(consignment) %>
+                <%= stock_link(consignment) %>
               </td>
               <td><%= User.find(consignment.user_id).name %></td>
             </tr>
             
+            <!-- Mobile画面 -->
             <tr class="mobile-display">
               <td width="90%" class="font-small">
                 <%= Product.find(consignment.product_id_number).name %><br>
-                <a class="font-xxsmall"><%= "担当:#{User.find(consignment.user_id).name}" %></a>
+                <a class="font-xxsmall">
+                  <%= "担当:#{User.find(consignment.user_id).name}" %>
+                </a>
               </td>
               <td width="10%" class="<%= total_consignment_balance_color(consignment) %>">
-                <%= total_consignment_balance(consignment) %>
+                <%= stock_link(consignment) %>
               </td>
             </tr>
           <% end %>
