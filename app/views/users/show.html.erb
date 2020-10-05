@@ -34,10 +34,10 @@
         <tr>
           <th width="6%">編集</th>
           <th width="11%" class="nowrap"><%= Consignment.human_attribute_name :ship_date %></th>
-          <th width="28%"><%= Product.human_attribute_name :code %>・<%= Product.human_attribute_name :name %></th>
+          <th width="28%"><%= Product.human_attribute_name :name %></th>
           <th width="8%">委託残</th>
           <th width="12%"><%= Consignment.human_attribute_name :serial_number %></th>
-          <th width="20%"><%= Consignment.human_attribute_name :customer_code %>・<%= Consignment.human_attribute_name :customer_name %></th>
+          <th width="20%"><%= Consignment.human_attribute_name :customer_name %></th>
           <th width="15%"><%= Consignment.human_attribute_name :note %></th>
         </tr>
       </thead>
@@ -57,10 +57,10 @@
           <tr>
             <td><%= link_to "", user_consignment_path(@user, c), class: "far fa-edit" %></td>
             <td><%= l(c.ship_date, format: :default) %><a class=<%= stamp(c.created_at, c.updated_at) %>></a></td>
-            <td>【<%= c.product_id_num&.code %>】<br><%= c.product_id_num&.name %></td>
+            <td><%= c.product_id_num&.name %></td>
             <td><%= link_to total_consignment_balance(c), user_consignment_stocks_path(@user, c), class: "#{total_consignment_balance_color(c)}" %></td>
             <td><%= c.serial_number %></td>
-            <td>【<%= c.customer_id_num&.code %>】<br><%= c.customer_id_num&.name %></td>
+            <td><%= c.customer_id_num&.name %></td>
             <td><%= c.note %></td>
           </tr>
         </tbody>

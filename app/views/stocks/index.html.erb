@@ -1,6 +1,6 @@
 <% provide(:title, "#{customer_name} / #{product_name}") %>
 
-<h3>委託在庫受払 一覧</h3>
+<h4>委託在庫受払 一覧</h4>
 <div class="container">
   <div class="col col-md-8 offset-md-2 user-menu">
     <table class="table main table-responsive table-bordered table-condensed bg-light">
@@ -62,6 +62,6 @@
         <% end %>
       </tbody>
     </table>
-    <%= link_to "戻る", :back, class: "btn btn-secondary btn-block btn-stock" %>
+    <%= link_to "戻る", @user, class: "btn btn-secondary btn-block btn-stock" %>
   </div>
 </div>
