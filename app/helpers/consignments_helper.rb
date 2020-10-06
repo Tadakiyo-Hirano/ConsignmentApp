@@ -1,4 +1,8 @@
 module ConsignmentsHelper
+  # エラーメッセージ
+  def error_message
+    @consignment.errors.full_messages.join("<br>")
+  end
   
   # user, consignment側で使用。委託残数合計 create updateにも@stocks = @user.consignments.find(params[:consignment_id]).stocksを設定しないとvalidation時、undefined method mapのエラーが発生する。
   def consignment_remaining_count

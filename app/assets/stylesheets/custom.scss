@@ -48,13 +48,15 @@ table.every {
   th {
     border: solid 1px #e3e3e3;
     background-color: #52c2d0;
-    opacity: .8;
+    opacity: .6;
     color: #fff;
+    font-size: small;
   }
   th.every {
     background-color: #52c2d0;
     text-align: left;
     opacity: 1;
+    font-size: medium;
   }
   td {
     border: solid 1px #e3e3e3;
@@ -254,6 +256,12 @@ p.pc-display {
   border: 0px none;
   color: red;
   outline:0;
+}
+
+/* LINEアイコン */
+
+.fa-line {
+  color: #00b900;
 }
 
 /* トップページ */

@@ -13,6 +13,13 @@ class Consignment < ApplicationRecord
   validates :quantity, presence: true, numericality: { greater_than: 0 }
   validates :serial_number, length: { maximum: 50 }
   validates :note, length: { maximum: 100 }
+  after_validation :remove_consignment_error_messages
+  
+  # 委託情報登録時、不要なバリデーションの表示をさせない。
+  def remove_consignment_error_messages
+    errors.messages.delete(:customer_id_number)
+    errors.messages.delete(:product_id_number)
+  end
   
   # 検索
   scope :search, -> (search_params) do

@@ -3,8 +3,7 @@ class ConsignmentsController < ApplicationController
   before_action :set_user_consignments
   before_action :authenticate_user!, only: %i(by_customer by_product)
   before_action :set_consignment, only: %i(show edit update destroy)
-  before_action :signed_in_correct_user, only: %i(index show new create edit update destroy)
-  before_action :signed_in_correct_user_or_admin, only: %i(by_customer)
+  before_action :signed_in_correct_user, only: %i(index show by_customer by_product new create edit update destroy)
   
   def index
     redirect_to new_user_consignment_path
@@ -65,7 +64,7 @@ class ConsignmentsController < ApplicationController
       flash[:notice] = "登録完了。"
       redirect_to @user
     else
-      flash.now[:alert] = "登録に失敗しました、赤枠内は必須です。<br>" + @consignment.errors.full_messages.join("<br>")
+      flash.now[:alert] = "登録に失敗しました、赤枠内は必須です。<br>" + error_message
       render :new
     end
   rescue ActiveRecord::NotNullViolation
@@ -86,7 +85,7 @@ class ConsignmentsController < ApplicationController
       redirect_to @user
     end
   rescue ActiveRecord::RecordInvalid
-    flash.now[:alert] = "更新に失敗しました。<br>" + @consignment.errors.full_messages.join("<br>")
+    flash.now[:alert] = "更新に失敗しました。<br>" + error_message
     render :edit
   end
   
