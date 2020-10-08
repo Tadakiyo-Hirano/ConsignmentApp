@@ -14,7 +14,7 @@ table.main {
   border: solid 2px #e3e3e3;
   th {
     border: solid 1px #e3e3e3;
-    background-color: #52c2d0;
+    background-color: #6495ed;
     color: #fff;
   }
   th.main {
@@ -47,13 +47,13 @@ table.every {
   border: solid 1px #e3e3e3;
   th {
     border: solid 1px #e3e3e3;
-    background-color: #52c2d0;
+    background-color: #6495ed;
     opacity: .6;
     color: #fff;
     font-size: small;
   }
   th.every {
-    background-color: #52c2d0;
+    background-color: #6495ed;
     text-align: left;
     opacity: 1;
     font-size: medium;
@@ -110,23 +110,23 @@ h1, h2, h3, h4, h5 {
 }
 
 .btn-default {
-  background-color: #52c2d0;
+  background-color: #6495ed;
   color: #fff;
   transition: all 3.0s;
 }
 
 .btn-default:hover {
-  background-color: #52c2d0;
+  background-color: #6495ed;
   color: #fff;
 }
 
 .btn-default:focus {
-  background-color: #52c2d0;
+  background-color: #6495ed;
   color: #fff;
 }
 
 .btn-default:active {
-  background-color: #52c2d0;
+  background-color: #6495ed;
   color: #fff;
 }
 
@@ -286,7 +286,7 @@ p.pc-display {
   padding-top: 30px;
   text-align: right;
   .fa-user-cog, .fa-user {
-    color: #52c2d0;
+    color: #6495ed;
     text-decoration: none;
   }
 }
@@ -296,7 +296,7 @@ p.pc-display {
 /* ウィンドウ幅が767px以上 */
 @media screen and (min-width: 767px) {
   #menu-bg {
-    background-color: #52c2d0;
+    background-color: #6495ed;
   }
   #nav-drawer {
     display:none;
@@ -322,7 +322,7 @@ p.pc-display {
 /* ウィンドウ幅が最大767pxまで */
 @media screen and (max-width: 767px) {
   #menu-bg {
-    background-color: #52c2d0;
+    background-color: #6495ed;
   }
   #logo {
   margin-left: 50px;
@@ -345,7 +345,7 @@ p.pc-display {
  /* ウィンドウ幅が最大479pxまで */
 @media screen and (max-width: 479px) {
   #menu-bg {
-    background-color: #52c2d0;
+    background-color: #6495ed;
   }
   #logo {
   margin-left: 50px;
@@ -389,7 +389,7 @@ p.pc-display {
 /* ヘッダードロップダウンメニュー */
 
 #dropdown-setting {
-  background-color: #52c2d0;
+  background-color: #6495ed;
   color: #fff;
   border: transparent;
 }
@@ -816,7 +816,7 @@ p.pc-display {
 }
 
 .page-item.active>.page-link {
-  background-color: #52c2d0;
+  background-color: #6495ed;
 }
 
 /*ホバー時のデザイン*/
@@ -842,7 +842,7 @@ p.pc-display {
 .debug_dump {
   padding: 0.5em 1em;
   margin: 2em 0;
-  border: double 5px #52c2d0;
+  border: double 5px #6495ed;
   clear: both;
   float: left;
   width: 100%;

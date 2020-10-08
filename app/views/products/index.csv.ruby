@@ -6,9 +6,7 @@ CSV.generate do |csv|
   @export_products.each do |product|
     column_values = [
       product.code,
-      product.name,
-      product.classification,
-      product.category
+      product.name
     ]
     csv << column_values
   end

@@ -13,8 +13,6 @@ ja:
         name: 担当者
         email: メールアドレス
         encrypted_password: 暗号化されたパスワード
-        reset_password_token: パスワードリセット時のトークン
-        reset_password_sent_at: パスワードリセットメール送信日時
         remember_created_at: Remember me チェックボックスON
         created_at: 作成日
         updated_at: 更新日
@@ -22,8 +20,6 @@ ja:
         name: 管理者名
         email: メールアドレス
         encrypted_password: 暗号化されたパスワード
-        reset_password_token: パスワードリセット時のトークン
-        reset_password_sent_at: パスワードリセットメール送信日時
         remember_created_at: Remember me チェックボックスON
         current_password: 現在のパスワード
         created_at: 作成日
@@ -31,8 +27,6 @@ ja:
       product:
         code: 商品コード
         name: 商品名
-        classification: 区分
-        category: 分類
       customer:
         code: 得意先コード
         name: 得意先名

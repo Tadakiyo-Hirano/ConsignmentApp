@@ -53,8 +53,6 @@
           <th class="mobile-display">商品ｺｰﾄﾞ</th>
           <th class="pc-display"><%= Product.human_attribute_name :code %></th>
           <th><%= Product.human_attribute_name :name %></th>
-          <th class="pc-display"><%= Product.human_attribute_name :classification %></th>
-          <th class="pc-display"><%= Product.human_attribute_name :category %></th>
           <% if admin_signed_in? %>
             <th></th>
           <% end %>
@@ -73,8 +71,6 @@
           <% end %>
           <td><%= product.code %><a class=<%= stamp(product.created_at, product.updated_at) %>></td>
           <td><%= product.name %></td>
-          <td class="pc-display"><%= product.classification %></td>
-          <td class="pc-display"><%= product.category %></td>
           <% if admin_signed_in? %>
             <td>
               <!-- 削除 -->
