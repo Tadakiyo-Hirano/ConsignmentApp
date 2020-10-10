@@ -21,7 +21,7 @@
       <div class="search-link">
         <%= form_with(scope: :search, url: by_user_user_consignments_path(@user), class: "form-inline", method: :get, local: true) do |f| %>
           <div class="input-group mb-3">
-            <%= f.text_field :user_id, placeholder: "#{User.human_attribute_name :name}", class: "form-control" %>
+            <%= f.text_field :user_name, placeholder: "#{User.human_attribute_name :name}", class: "form-control" %>
             <div class="input-group-append">
               <%= f.submit "検索", class: "btn btn-sm btn-primary" %>
             </div>
@@ -38,7 +38,7 @@
         <thead>
           <!-- PC画面 -->
           <tr class="pc-display">
-            <th colspan="4" class="every"><%= User.find(user_id).name %></th>
+            <th colspan="5" class="every"><%= User.find(user_id).name %></th>
           </tr>
           <!-- Mobile画面 -->
           <tr class="mobile-display">
@@ -50,15 +50,19 @@
         <tbody>
           <!-- PC画面 -->
           <tr class="pc-display">
-            <th width="15%" class="pc-display"><%= Product.human_attribute_name :code %></th>
-            <th width="35%" class="pc-display"><%= Product.human_attribute_name :name %></th>
-            <th width="40%"><%= Customer.human_attribute_name :name %></th>
-            <th width="10%" class="pc-display">委託残</th>
-            <th width="10%" class="mobile-display">残</th>
+            <th width="10%"><%= Consignment.human_attribute_name :ship_date %></th>
+            <th width="20%"><%= Product.human_attribute_name :code %></th>
+            <th width="30%"><%= Product.human_attribute_name :name %></th>
+            <th width="30%"><%= Customer.human_attribute_name :name %></th>
+            <th width="10%">委託残</th>
           </tr>
           <% consignments.each do |consignment| %>
             <!-- PC画面 -->
             <tr class="pc-display">
+              <td>
+                <%= l(consignment.ship_date, format: :short) %>
+                <a class=<%= stamp(consignment.created_at, consignment.updated_at) %>></a>
+              </td>
               <td><%= Product.find(consignment.product_id_number).code %></td>
               <td><%= Product.find(consignment.product_id_number).name %></td>
               <td><%= Customer.find(consignment.customer_id_number).name %></td>
@@ -72,6 +76,7 @@
               <td width="90%" class="font-small">
                 <%= Product.find(consignment.product_id_number).name %><br>
                 <a class="font-xxsmall">
+                  <%= l(consignment.ship_date, format: :short) %><a class=<%= stamp(consignment.created_at, consignment.updated_at) %>></a>
                   <%= "委託先:#{Customer.find(consignment.customer_id_number).name}" %>
                 </a>
               </td>

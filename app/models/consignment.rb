@@ -13,20 +13,22 @@ class Consignment < ApplicationRecord
   validates :quantity, presence: true, numericality: { greater_than: 0 }
   validates :serial_number, length: { maximum: 50 }
   validates :note, length: { maximum: 100 }
+  validates :user_name, presence: true
   after_validation :remove_consignment_error_messages
   
   # 委託情報登録時、不要なバリデーションの表示をさせない。
   def remove_consignment_error_messages
     errors.messages.delete(:customer_id_number)
     errors.messages.delete(:product_id_number)
+    errors.messages.delete(:user_name)
   end
   
   # 検索
   scope :search, -> (search_params) do
     return if search_params.blank?
-    customer_name_like(search_params[:customer_name]).product_name_like(search_params[:product_name]).user_name_like(search_params[User.joins(:name)])
+    customer_name_like(search_params[:customer_name]).product_name_like(search_params[:product_name]).user_name_like(search_params[:user_name])
   end
   scope :customer_name_like, -> (customer_name) { where('customer_name LIKE ?', "%#{customer_name}%") if customer_name.present? }
   scope :product_name_like, -> (product_name) { where('product_name LIKE ?', "%#{product_name}%") if product_name.present? }
-  scope :user_name_like, -> (user_name) { where('user_id LIKE ?', "%#{user_name}%") if user_name.present? }
+  scope :user_name_like, -> (user_name) { where('user_name LIKE ?', "%#{user_name}%") if user_name.present? }
 end

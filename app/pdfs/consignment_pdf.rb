@@ -40,34 +40,55 @@ class ConsignmentPdf < Prawn::Document
   end
   
   def table_content
-    table consignment_rows do
-      cells.size = 6 # 文字サイズ
-      cells.padding = 3 # セルのpadding幅
-      cells.borders = [:top, :bottom, :right, :left] # 表示するボーダーの向き(top, bottom, right, leftがある)
-      cells.border_width = 0.1 # ボーダーの太さ
-
-      # 個別設定
-      # row(0)は0行目、row(1)は1行目、row(-1)は最後の行、row(-2)は最後から2行目を表す
-      row(0).border_width = 0.5
-      columns(0).align = :center
-      columns(1).align = :center
-      columns(2).align = :center
-      columns(3).align = :center
-      columns(4).align = :center
-      columns(5).align = :center
-      columns(6).align = :center
-      columns(7).align = :center
-      columns(8).align = :center
-      row(0).align = :center
-      # row(-2).border_width = 1.5
-      # row(-1).background_color = "cdd3e2"
-      # row(-1).borders = []
-
-      self.header     = true  # 1行目をヘッダーとするか否か
-      self.row_colors = ['ffffff'] # 列の色
-      if @documents == "customers_pdf" || @documents == "products_pdf"
+    if @documents == "customers_pdf" || @documents == "products_pdf"
+      table consignment_rows do
+        cells.size = 6 # 文字サイズ
+        cells.padding = 3 # セルのpadding幅
+        cells.borders = [:top, :bottom, :right, :left] # 表示するボーダーの向き(top, bottom, right, leftがある)
+        cells.border_width = 0.1 # ボーダーの太さ
+  
+        # 個別設定
+        # row(0)は0行目、row(1)は1行目、row(-1)は最後の行、row(-2)は最後から2行目を表す
+        row(0).border_width = 0.5
+        columns(0).align = :center
+        columns(1).align = :center
+        columns(2).align = :center
+        columns(3).align = :center
+        columns(4).align = :center
+        columns(5).align = :center
+        columns(6).align = :center
+        columns(7).align = :center
+        columns(8).align = :center
+        row(0).align = :center
+        # row(-2).border_width = 1.5
+        # row(-1).background_color = "cdd3e2"
+        # row(-1).borders = []
+  
+        self.header     = true  # 1行目をヘッダーとするか否か
+        self.row_colors = ['ffffff'] # 列の色
         self.column_widths = [60, 100, 60, 100, 40, 50, 60, 100, 190] # 列の幅
-      else
+      end
+    else
+      table consignment_rows do
+        cells.size = 6
+        cells.padding = 3
+        cells.borders = [:top, :bottom, :right, :left]
+        cells.border_width = 0.1
+        
+        row(0).border_width = 0.5
+        columns(0).align = :center
+        columns(1).align = :center
+        columns(2).align = :center
+        columns(3).align = :center
+        columns(4).align = :center
+        columns(5).align = :center
+        columns(6).align = :center
+        columns(7).align = :center
+        columns(8).align = :center
+        row(0).align = :center
+  
+        self.header     = true
+        self.row_colors = ['ffffff'] 
         self.column_widths = [50, 60, 100, 60, 100, 40, 60, 100, 190]
       end
     end

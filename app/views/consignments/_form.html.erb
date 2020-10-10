@@ -43,6 +43,7 @@
 
 <div class="consignment-form">
   <%= f.text_area :note, placeholder: "#{Consignment.human_attribute_name :note}", class: "form-control" %>
+  <%= f.hidden_field :user_name, value: @user.name, class: "form-control", readonly: true %>
 </div>
 
 <div class="consignment-form btn-field">

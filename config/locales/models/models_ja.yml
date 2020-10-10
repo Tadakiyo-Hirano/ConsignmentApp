@@ -41,6 +41,7 @@ ja:
         serial_number: 機番
         quantity: 委託数量
         note: 備考
+        user_name: 担当者
       stock:
         processing_date: 処理日
         return_quantity: 引上数量

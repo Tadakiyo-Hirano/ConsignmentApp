@@ -109,7 +109,7 @@ class ConsignmentsController < ApplicationController
     def consignment_params
       params.require(:consignment).permit(:ship_date, :customer_id_number, :customer_code, :customer_name,
                                           :product_id_number, :product_code, :product_name, :serial_number,
-                                          :quantity, :note, :user_id)
+                                          :quantity, :note, :user_name, :user_id)
     end
     
     def set_user_consignments
@@ -125,6 +125,6 @@ class ConsignmentsController < ApplicationController
     
     # 検索用
     def consignment_search_params
-      params.fetch(:search, {}).permit(:customer_code, :customer_name, :product_code, :product_name, :user_id)
+      params.fetch(:search, {}).permit(:customer_code, :customer_name, :product_code, :product_name, :user_name)
     end
 end
