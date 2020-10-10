@@ -4,13 +4,14 @@
 <div class="container">
   <div class="col col-md-12 user-menu">
     <div class="search-link-form">
-      <% unless admin_signed_in? %>
-        <div class="search-link">
-          <%= link_to "#{@user.name}", @user, class: "btn btn-outline-primary" %>
-        </div>
-      <% end %>
+      <div class="search-link">
+        <%= link_to "#{@user.name}", @user, class: "btn btn-outline-primary" %>
+      </div>
       <div class="search-link">
         <%= link_to "得意先別", by_customer_user_consignments_path(@user), class: "btn btn-outline-primary" %>
+      </div>
+      <div class="search-link">
+        <%= link_to "担当別",  by_user_user_consignments_path(@user), class: "btn btn-outline-primary" %>
       </div>
       <div class="search-link">
         <p class="pc-display">
@@ -37,7 +38,7 @@
         <thead>
           <!-- PC画面 -->
           <tr class="pc-display">
-            <th colspan="4" class="every">【<%= Product.find(product_id_number).code %>】<%= Product.find(product_id_number).name %></th>
+            <th colspan="5" class="every">【<%= Product.find(product_id_number).code %>】<%= Product.find(product_id_number).name %></th>
           </tr>
           <!-- Mobile画面 -->
           <tr class="mobile-display">
@@ -49,15 +50,19 @@
         <tbody>
           <!-- PC画面 -->
           <tr class="pc-display">
-            <th width="15%" class="pc-display"><%= Customer.human_attribute_name :code %></th>
+            <th width="10%"><%= Consignment.human_attribute_name :ship_date %></th>
+            <th width="15%"><%= Customer.human_attribute_name :code %></th>
             <th width="45%"><%= Customer.human_attribute_name :name %></th>
-            <th width="10%" class="pc-display">委託残</th>
-            <th width="10%" class="mobile-display">残</th>
-            <th width="30%">担当者</th>
+            <th width="10%">委託残</th>
+            <th width="20%">担当者</th>
           </tr>
           <% consignments.each do |consignment| %>
             <!-- PC画面 -->
             <tr class="pc-display">
+              <td>
+                <%= l(consignment.ship_date, format: :short) %>
+                <a class=<%= stamp(consignment.created_at, consignment.updated_at) %>></a>
+              </td>
               <td><%= Customer.find(consignment.customer_id_number).code %></td>
               <td><%= Customer.find(consignment.customer_id_number).name %></td>
               <td class="<%= total_consignment_balance_color(consignment) %>">
@@ -71,6 +76,7 @@
               <td width="90%" class="font-small">
                 <%= Customer.find(consignment.customer_id_number).name %><br>
                 <a class="font-xxsmall">
+                  <%= l(consignment.ship_date, format: :short) %><a class=<%= stamp(consignment.created_at, consignment.updated_at) %>></a>
                   <%= "担当:#{User.find(consignment.user_id).name}" %>
                 </a>
               </td>

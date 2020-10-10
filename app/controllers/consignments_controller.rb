@@ -29,17 +29,26 @@ class ConsignmentsController < ApplicationController
     @products_pdf = Consignment.where(done: false).order(product_code: :asc).group_by(&:product_id_number)
   end
   
+  def by_user
+    @search_params = consignment_search_params
+    @search_none = consignment_search_none
+    @consignments = @search_none ? Consignment.where(done: false).order(user_id: :asc).group_by(&:user_id) : 
+                                   Consignment.where(done: false).search(@search_params).order(user_id: :asc).group_by(&:user_id)
+    @users_pdf = Consignment.where(done: false).order(user_id: :asc).group_by(&:user_id)
+  end
+  
   def documents
     @documents = params[:text]
     @customers_pdf = Consignment.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number)
     @products_pdf = Consignment.where(done: false).order(product_code: :asc).group_by(&:product_id_number)
+    @users_pdf = Consignment.where(done: false).order(user_id: :asc).group_by(&:user_id)
     # @customers = @user.consignments.where(done: false).order(customer_code: :asc).group_by(&:customer_id_number) # pdf上で使用するレコードのインスタンスを作成
     respond_to do |format|
       format.html
       format.pdf do
 
         # pdfを新規作成。インスタンスを渡す。
-        pdf = ConsignmentPdf.new(@customers_pdf, @products_pdf, @documents)
+        pdf = ConsignmentPdf.new(@customers_pdf, @products_pdf, @users_pdf, @documents)
 
         send_data pdf.render,
           filename:    "委託一覧表(#{Date.current}).pdf",
@@ -116,6 +125,6 @@ class ConsignmentsController < ApplicationController
     
     # 検索用
     def consignment_search_params
-      params.fetch(:search, {}).permit(:customer_code, :customer_name, :product_code, :product_name)
+      params.fetch(:search, {}).permit(:customer_code, :customer_name, :product_code, :product_name, :user_id)
     end
 end

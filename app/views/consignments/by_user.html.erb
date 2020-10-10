@@ -1,6 +1,6 @@
-<% provide(:title, "得意先別委託情報") %>
+<% provide(:title, "担当者別委託情報") %>
 
-<h4>得意先別委託</h4>
+<h4>担当者別委託</h4>
 <div class="container">
   <div class="col col-md-12 user-menu">
     <div class="search-link-form">
@@ -8,41 +8,41 @@
         <%= link_to "#{@user.name}", @user, class: "btn btn-outline-primary" %>
       </div>
       <div class="search-link">
+        <%= link_to "得意先別", by_customer_user_consignments_path(@user), class: "btn btn-outline-primary" %>
+      </div>
+      <div class="search-link">
         <%= link_to "商品別", by_product_user_consignments_path(@user), class: "btn btn-outline-primary" %>
       </div>
       <div class="search-link">
-        <%= link_to "担当別",  by_user_user_consignments_path(@user), class: "btn btn-outline-primary" %>
-      </div>
-      <div class="search-link">
         <p class="pc-display">
-          <%= link_to "PDF", documents_user_consignments_path(text: "customers_pdf", format: "pdf"), :target=>["_blank"], class: "btn btn-danger" %>
+          <%= link_to "PDF", documents_user_consignments_path(text: "users_pdf", format: "pdf"), :target=>["_blank"], class: "btn btn-danger" %>
         </p>
       </div>
       <div class="search-link">
-        <%= form_with(scope: :search, url: by_customer_user_consignments_path(@user), class: "form-inline", method: :get, local: true) do |f| %>
+        <%= form_with(scope: :search, url: by_user_user_consignments_path(@user), class: "form-inline", method: :get, local: true) do |f| %>
           <div class="input-group mb-3">
-            <%= f.text_field :customer_name, placeholder: "#{Customer.human_attribute_name :name}", class: "form-control" %>
+            <%= f.text_field :user_id, placeholder: "#{User.human_attribute_name :name}", class: "form-control" %>
             <div class="input-group-append">
               <%= f.submit "検索", class: "btn btn-sm btn-primary" %>
             </div>
           </div>
           <div class="ml-3 mb-3">
-            <%= by_customer_search_results_text(@consignments) %>&emsp;<%= by_customer_search_results_link(by_customer_user_consignments_path(@user)) %>
+            <%= by_user_search_results_text(@consignments) %>&emsp;<%= by_user_search_results_link(by_user_user_consignments_path(@user)) %>
           </div>
         <% end %>
       </div>
     </div>
     
-    <% @consignments.each do |customer_id_number, consignments| %>
-      <table class="table every table-responsive table-bordered table-condensed bg-light">
+    <% @consignments.each do |user_id, consignments| %>
+      <table class="table every default table-responsive table-bordered table-condensed bg-light">
         <thead>
           <!-- PC画面 -->
           <tr class="pc-display">
-            <th colspan="5" class="every">【<%= Customer.find(customer_id_number).code %>】<%= Customer.find(customer_id_number).name %></th>
+            <th colspan="4" class="every"><%= User.find(user_id).name %></th>
           </tr>
           <!-- Mobile画面 -->
           <tr class="mobile-display">
-            <th class="every"><%= Customer.find(customer_id_number).name %></th>
+            <th class="every"><%= User.find(user_id).name %></th>
             <th class="every">残</th>
           </tr>
         </thead>
@@ -50,25 +50,21 @@
         <tbody>
           <!-- PC画面 -->
           <tr class="pc-display">
-            <th width="10%"><%= Consignment.human_attribute_name :ship_date %></th>
-            <th width="15%"><%= Product.human_attribute_name :code %></th>
-            <th width="45%"><%= Product.human_attribute_name :name %></th>
-            <th width="10%">委託残</th>
-            <th width="20%">担当者</th>
+            <th width="15%" class="pc-display"><%= Product.human_attribute_name :code %></th>
+            <th width="35%" class="pc-display"><%= Product.human_attribute_name :name %></th>
+            <th width="40%"><%= Customer.human_attribute_name :name %></th>
+            <th width="10%" class="pc-display">委託残</th>
+            <th width="10%" class="mobile-display">残</th>
           </tr>
           <% consignments.each do |consignment| %>
             <!-- PC画面 -->
             <tr class="pc-display">
-              <td>
-                <%= l(consignment.ship_date, format: :short) %>
-                <a class=<%= stamp(consignment.created_at, consignment.updated_at) %>></a>
-              </td>
               <td><%= Product.find(consignment.product_id_number).code %></td>
               <td><%= Product.find(consignment.product_id_number).name %></td>
+              <td><%= Customer.find(consignment.customer_id_number).name %></td>
               <td class="<%= total_consignment_balance_color(consignment) %>">
                 <%= stock_link(consignment) %>
               </td>
-              <td><%= User.find(consignment.user_id).name %></td>
             </tr>
             
             <!-- Mobile画面 -->
@@ -76,8 +72,7 @@
               <td width="90%" class="font-small">
                 <%= Product.find(consignment.product_id_number).name %><br>
                 <a class="font-xxsmall">
-                  <%= l(consignment.ship_date, format: :short) %><a class=<%= stamp(consignment.created_at, consignment.updated_at) %>></a>
-                  <%= "担当:#{User.find(consignment.user_id).name}" %>
+                  <%= "委託先:#{Customer.find(consignment.customer_id_number).name}" %>
                 </a>
               </td>
               <td width="10%" class="<%= total_consignment_balance_color(consignment) %>">

@@ -3,15 +3,16 @@ class ConsignmentPdf < Prawn::Document
   include ConsignmentsHelper
   
   # 引数にモデルなどのデータを渡す
-  def initialize(customers, products, documents)
+  def initialize(customers, products, users, documents)
     super(page_size: 'A4', page_layout: :landscape) # superで初期設定を指定(ページサイズ、マージン等)
     @documents = documents
     @customers_pdf = customers # インスタンスを受け取り。コンポーネント作成時などにレコード内のデータを使える
     @products_pdf = products
+    @users_pdf = users
     font "vendor/fonts/ipaexm.ttf"
     stroke_axis if Rails.env.development? # 目盛りの表示(開発環境のみ)
     
-    if @documents == "customers_pdf" || @documents == "products_pdf"
+    if @documents == "customers_pdf" || @documents == "products_pdf" || @documents == "users_pdf"
       header
       table_content
     else
@@ -30,6 +31,8 @@ class ConsignmentPdf < Prawn::Document
         draw_text "得意先別･委託商品一覧", size: 25, at: [0, 20]
       elsif @documents == "products_pdf"
         draw_text "商品別･委託商品一覧", size: 25, at: [0, 20]
+      elsif @documents == "users_pdf"
+        draw_text "担当者別別･委託商品一覧", size: 25, at: [0, 20]
       end
       
       draw_text "出力日:  #{Date.current.strftime("%Y年%-m月%-d日")}", at: [620, 20]
@@ -62,7 +65,11 @@ class ConsignmentPdf < Prawn::Document
 
       self.header     = true  # 1行目をヘッダーとするか否か
       self.row_colors = ['ffffff'] # 列の色
-      self.column_widths = [60, 100, 60, 100, 40, 50, 60, 100, 190] # 列の幅
+      if @documents == "customers_pdf" || @documents == "products_pdf"
+        self.column_widths = [60, 100, 60, 100, 40, 50, 60, 100, 190] # 列の幅
+      else
+        self.column_widths = [50, 60, 100, 60, 100, 40, 60, 100, 190]
+      end
     end
   end
   
@@ -118,6 +125,36 @@ class ConsignmentPdf < Prawn::Document
                 Customer.find(consignment.customer_id_number).name,
                 consignment.quantity - consignment.stocks.map { |s| s.return_quantity }.sum - consignment.stocks.map { |s| s.sales_quantity }.sum,
                 User.find(consignment.user_id).name,
+                consignment.ship_date.strftime("%Y年%m月%d日"),
+                consignment.serial_number,
+                consignment.note
+              ]
+        end
+      end
+    end
+    # return arr
+    
+    if @documents == "users_pdf"
+      arr = [["#{User.human_attribute_name :name}",
+              "#{Consignment.human_attribute_name :product_code}",
+              "#{Consignment.human_attribute_name :product_name}",
+              "#{Consignment.human_attribute_name :customer_code}",
+              "#{Consignment.human_attribute_name :customer_name}",
+              "委託残",
+              "#{Consignment.human_attribute_name :ship_date}",
+              "#{Consignment.human_attribute_name :serial_number}",
+              "#{Consignment.human_attribute_name :note}"
+            ]]
+      
+      @users_pdf.each do |user_id, consignments|
+        arr << [User.find(user_id).name, "", "", "", "", "", "", "", ""]
+        consignments.each do |consignment|
+        arr << ["",
+                Product.find(consignment.product_id_number).code,
+                Product.find(consignment.product_id_number).name,
+                Customer.find(consignment.customer_id_number).code,
+                Customer.find(consignment.customer_id_number).name,
+                consignment.quantity - consignment.stocks.map { |s| s.return_quantity }.sum - consignment.stocks.map { |s| s.sales_quantity }.sum,
                 consignment.ship_date.strftime("%Y年%m月%d日"),
                 consignment.serial_number,
                 consignment.note

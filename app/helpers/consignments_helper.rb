@@ -100,4 +100,25 @@ module ConsignmentsHelper
       link_to "戻る", path
     end
   end
+  
+  # 担当者別の検索
+  def by_user_search_none
+    @search_params.blank? || @search_params[:user_id] == ""
+  end
+  
+  def by_user_search_results_text(search_hash)
+    if @search_params[:user_id] == ""
+      "検索ワードを入力してください。"
+    elsif params[:search].present?
+      "検索結果 #{search_hash.count}件"
+    end
+  end
+  
+  def by_user_search_results_link(path)
+    if @search_params[:user_id] == ""
+      return
+    elsif params[:search].present?
+      link_to "戻る", path
+    end
+  end
 end
