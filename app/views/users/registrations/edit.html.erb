@@ -21,17 +21,17 @@
         <% end %>
       
         <%= f.label "新しいパスワード", class: "label-user" %><nobr>（最小<%= @minimum_password_length %>文字）</nobr>
-        <%= f.password_field :password, autocomplete: "new-password", placeholder: "変更しない場合は空白のままにしてください。", class: "form-control" %>
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "変更しない場合は空白のまま。", class: "form-control" %>
      
         <%= f.label :password_confirmation, class: "label-user" %>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
 
         <%= f.label :current_password, class: "label-user-edit" %>
-        <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "パスワードを変更するには、現在のパスワードが必要です。", class: "form-control" %>
+        <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "パスワードを変更する場合は入力。", class: "form-control" %>
         
         <div class="btn-field">
           <div class="btn-item">
-            <%= f.submit "更新", class: "btn btn-default btn-block btn-user" %>
+            <%= f.submit "更新", class: "btn btn-primary btn-block btn-user" %>
           </div>
           <div class="btn-item">
             <%= link_to "戻る", :back, class: "btn btn-secondary btn-block btn-user" %>

@@ -26,6 +26,8 @@ class UsersController < ApplicationController
   
   def update
     if @user.update_attributes(user_params)
+      # ユーザーモデル(User)を更新した場合、委託(モデルconsignment)の、担当者名(user_name)も同時更新する。
+      Consignment.where(['user_id == ?', @user.id]).update_all(user_name: User.find(@user.id).name)
       flash[:notice] = "【#{format("%03d", @user.code)}】#{@user.name}の情報を更新しました。"
       redirect_to users_url
     elsif @user.name.blank?
