@@ -429,6 +429,25 @@ p.pc-display {
   margin: 0 10px 20px 0;
 }
 
+.reminder-message {
+  color: red;
+}
+
+.reminder-area {
+  .btn:hover {
+    color: red;
+    background-color: #f9f9f9;
+  }
+  .btn:active {
+    color: red !important;
+    background-color: #f9f9f9 !important;
+    box-shadow: none !important;
+  }
+  .btn:focus {
+    box-shadow: none;
+  }
+}
+
 /* ユーザー一覧 users/index */
 
 #table-usres {

@@ -1,0 +1,38 @@
+<!-- リマインダーモーダル -->
+<div class="modal fade" id="reminder-modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-fluid" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reminderModalTitle">リマインダー</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="modal-search-list">
+          <div class="search-table">
+            <p class="fixed-cell"></p>
+            <p class="variable-cell"></p>
+            <p class="variable-cell"></p>
+          </div>
+        </div>
+        
+        <% @customers&.each do |customer| %>
+          <div class="target-area-customer modal-search-list">
+            <div class="search-table">
+              <p class="fixed-cell">
+                
+              </p>
+              <p class="variable-cell"></p>
+              <p class="variable-cell"></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+      </div>
+    </div>
+  </div>
+</div>

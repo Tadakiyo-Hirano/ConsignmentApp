@@ -3,9 +3,14 @@
 <h4><%= @user.name %></h4>
 <% if @user_consignments.present? %>
   <% reminder_consignments.each do |a| %>
-    <p class="center"><%= "#{reminder_month}ヶ月経過した委託が#{@reminder.count}件あります。" %></p>
+    <p class="center reminder-area">
+      <%= button_tag type: "button", data: {toggle: "modal", target: "#reminder-modal"}, class: "btn btn-outline-danger reminder-message" do %>
+        <%= "#{reminder_month}ヶ月経過した委託が#{@reminder.count}件あります。" %>
+      <% end %>
+    </p>
   <% end %>
 <% end %>
+
 <div class="container">
   <div class="col col-md-12 user-menu">
     <!--<div class="search-link-form mobile-display">-->
@@ -91,6 +96,5 @@
   </div>
 </div>
 
-<!--< reminder_consignments.each do |a| %>-->
-<!--<= a.ship_date %>-->
-<!--< end %>-->
+<!-- リマインダーモーダル -->
+<%= render 'reminder' %>
