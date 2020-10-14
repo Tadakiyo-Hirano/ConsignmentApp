@@ -6,7 +6,7 @@ module UsersHelper
   
   def reminder_consignments
     @user_consignments.each do
-      @reminder = @user_consignments.where("ship_date < ?", Date.current - reminder_month.month)
+      @reminder = @user_consignments.where("ship_date < ?", Date.current - reminder_month.month).order(ship_date: :desc)
     end
     @reminder
   end

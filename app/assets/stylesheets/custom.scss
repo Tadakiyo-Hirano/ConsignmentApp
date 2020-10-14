@@ -41,6 +41,11 @@ table.main {
     border: solid #c0c0c0;
     font-size: small;
   }
+  thead.reminder {
+    th {
+      background-color: rgba(255, 0, 0, 0.7);
+    }
+  }
 }
 
 table.every {
@@ -63,7 +68,6 @@ table.every {
     background-color: #fff;
   }
   tbody.sub, thead.sub {
-    // border: solid #c0c0c0;
     font-size: small;
   }
 }
@@ -411,6 +415,7 @@ p.pc-display {
 }
 
 /* ユーザーメインページ users/show */
+
 .user-menu {
   margin-top: 30px;
   text-align: center;

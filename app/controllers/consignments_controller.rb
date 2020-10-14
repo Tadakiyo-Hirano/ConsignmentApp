@@ -10,7 +10,6 @@ class ConsignmentsController < ApplicationController
   end
   
   def show
-    
   end
   
   def by_customer
@@ -90,7 +89,7 @@ class ConsignmentsController < ApplicationController
     ActiveRecord::Base.transaction do
       @consignment.update_attributes!(consignment_params)
       done_decision
-      flash[:notice] = "委託情報を更新しました。" + @consignment.done.to_s
+      flash[:notice] = "委託情報を更新しました。"
       redirect_to @user
     end
   rescue ActiveRecord::RecordInvalid

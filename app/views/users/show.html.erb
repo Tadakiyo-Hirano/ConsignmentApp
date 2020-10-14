@@ -2,7 +2,7 @@
 
 <h4><%= @user.name %></h4>
 <% if @user_consignments.present? %>
-  <% reminder_consignments.each do |a| %>
+  <% if reminder_consignments.present? %>
     <p class="center reminder-area">
       <%= button_tag type: "button", data: {toggle: "modal", target: "#reminder-modal"}, class: "btn btn-outline-danger reminder-message" do %>
         <%= "#{reminder_month}ヶ月経過した委託が#{@reminder.count}件あります。" %>
@@ -57,7 +57,7 @@
       <!-- Mobile画面 -->
       <thead class="mobile-display sub">
         <tr>
-          <th class="nowrap">委託日</th>
+          <th class="nowrap"><%= Consignment.human_attribute_name :ship_date %></th>
           <th>得意先 / 商品名</th>
           <th>残</th>
         </tr>

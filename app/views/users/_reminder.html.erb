@@ -1,34 +1,62 @@
 <!-- リマインダーモーダル -->
 <div class="modal fade" id="reminder-modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-fluid" role="document">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-fluid modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="reminderModalTitle">リマインダー</h5>
+        <h5 class="modal-title" id="reminderModalTitle"><%= @user.name %></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
       </div>
       
       <div class="modal-body">
-        <div class="modal-search-list">
-          <div class="search-table">
-            <p class="fixed-cell"></p>
-            <p class="variable-cell"></p>
-            <p class="variable-cell"></p>
-          </div>
-        </div>
-        
-        <% @customers&.each do |customer| %>
-          <div class="target-area-customer modal-search-list">
-            <div class="search-table">
-              <p class="fixed-cell">
-                
-              </p>
-              <p class="variable-cell"></p>
-              <p class="variable-cell"></p>
-            </div>
-          </div>
-        <% end %>
+        <table class="table main table-responsive table-bordered table-condensed table-hover bg-light center" id="table-products">
+          <!-- PC画面 -->
+          <thead class="pc-display reminder">
+            <tr>
+              <th>編集</th>
+              <th><%= Consignment.human_attribute_name :ship_date %></th>
+              <th><%= Consignment.human_attribute_name :product_name %></th>
+              <th><%= Consignment.human_attribute_name :customer_name %></th>
+            </tr>
+          </thead>
+          
+          <!-- Mobile画面 -->
+          <thead class="mobile-display sub reminder">
+            <tr>
+              <th class="nowrap"><%= Consignment.human_attribute_name :ship_date %></th>
+              <th>得意先 / 商品名</th>
+              <th>残</th>
+            </tr>
+          </thead>
+          
+          <% reminder_consignments.each do |c| %>
+            <!-- PC画面 -->
+            <tbody class="pc-display reminder">
+              <tr>
+                <td><%= link_to "", user_consignment_path(@user, c), class: "far fa-edit" %></td>
+                <td><%= c.ship_date %></td>
+                <td><%= c.product_name %></td>
+                <td><%= c.customer_name %></td>
+              </tr>
+            </tbody>
+            
+            <!-- Mobile画面 -->
+            <tbody class="mobile-display sub">
+              <tr>
+                <td rowspan="2" class="dotted-right">
+                  <%= link_to l(c.ship_date, format: :short), user_consignment_path(@user, c) %>
+                  <a class=<%= stamp(c.created_at, c.updated_at) %>></a>
+                </td>
+                <td class="dashed-bottom none-border dotted-bottom"><%= c.customer_name %></td>
+                <td rowspan="2" class="dotted-left"><%= link_to "#{total_consignment_balance(c)}", user_consignment_stocks_path(@user, c), class: "#{total_consignment_balance_color(c)}" %></td>
+              </tr>
+              <tr>
+                <td class="none-border"><%= c.product_name %></td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>

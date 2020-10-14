@@ -31,7 +31,7 @@ ja:
         code: 得意先コード
         name: 得意先名
       consignment:
-        ship_date: 出荷日
+        ship_date: 委託日
         customer_id: 得意先ID
         customer_code: 得意先コード
         customer_name: 得意先名
