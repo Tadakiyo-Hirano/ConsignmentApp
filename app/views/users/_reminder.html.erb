@@ -31,32 +31,34 @@
             </tr>
           </thead>
           
-          <% reminder_consignments.each do |c| %>
-            <!-- PC画面 -->
-            <tbody class="pc-display reminder">
-              <tr>
-                <td><%= link_to "", user_consignment_path(@user, c), class: "far fa-edit" %></td>
-                <td><%= c.ship_date %></td>
-                <td><%= c.product_name %></td>
-                <td><%= c.customer_name %></td>
-                <td><%= link_to total_consignment_balance(c), user_consignment_stocks_path(@user, c), class: "#{total_consignment_balance_color(c)}" %></td>
-              </tr>
-            </tbody>
-            
-            <!-- Mobile画面 -->
-            <tbody class="mobile-display sub">
-              <tr>
-                <td rowspan="2" class="dotted-right">
-                  <%= link_to l(c.ship_date, format: :short), user_consignment_path(@user, c) %>
-                  <a class=<%= stamp(c.created_at, c.updated_at) %>></a>
-                </td>
-                <td class="dashed-bottom none-border dotted-bottom"><%= c.customer_name %></td>
-                <td rowspan="2" class="dotted-left"><%= link_to "#{total_consignment_balance(c)}", user_consignment_stocks_path(@user, c), class: "#{total_consignment_balance_color(c)}" %></td>
-              </tr>
-              <tr>
-                <td class="none-border"><%= c.product_name %></td>
-              </tr>
-            </tbody>
+          <% if @user_consignments.present? %>
+            <% reminder_consignments.each do |c| %>
+              <!-- PC画面 -->
+              <tbody class="pc-display reminder">
+                <tr>
+                  <td><%= link_to "", user_consignment_path(@user, c), class: "far fa-edit" %></td>
+                  <td><%= c.ship_date %></td>
+                  <td><%= c.product_name %></td>
+                  <td><%= c.customer_name %></td>
+                  <td><%= link_to total_consignment_balance(c), user_consignment_stocks_path(@user, c), class: "#{total_consignment_balance_color(c)}" %></td>
+                </tr>
+              </tbody>
+              
+              <!-- Mobile画面 -->
+              <tbody class="mobile-display sub">
+                <tr>
+                  <td rowspan="2" class="dotted-right">
+                    <%= link_to l(c.ship_date, format: :short), user_consignment_path(@user, c) %>
+                    <a class=<%= stamp(c.created_at, c.updated_at) %>></a>
+                  </td>
+                  <td class="dashed-bottom none-border dotted-bottom"><%= c.customer_name %></td>
+                  <td rowspan="2" class="dotted-left"><%= link_to "#{total_consignment_balance(c)}", user_consignment_stocks_path(@user, c), class: "#{total_consignment_balance_color(c)}" %></td>
+                </tr>
+                <tr>
+                  <td class="none-border"><%= c.product_name %></td>
+                </tr>
+              </tbody>
+            <% end %>
           <% end %>
         </table>
       </div>

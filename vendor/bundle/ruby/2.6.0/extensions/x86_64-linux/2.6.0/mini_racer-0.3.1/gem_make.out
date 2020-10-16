@@ -1,0 +1,52 @@
+current directory: /home/ubuntu/environment/consignment_app/vendor/bundle/ruby/2.6.0/gems/mini_racer-0.3.1/ext/mini_racer_extension
+/home/ubuntu/.rvm/rubies/ruby-2.6.3/bin/ruby -I /home/ubuntu/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0 -r ./siteconf20201016-8231-14fu5s2.rb extconf.rb
+checking for -lpthread... yes
+creating Makefile
+
+current directory: /home/ubuntu/environment/consignment_app/vendor/bundle/ruby/2.6.0/gems/mini_racer-0.3.1/ext/mini_racer_extension
+make "DESTDIR=" clean
+
+current directory: /home/ubuntu/environment/consignment_app/vendor/bundle/ruby/2.6.0/gems/mini_racer-0.3.1/ext/mini_racer_extension
+make "DESTDIR="
+compiling mini_racer_extension.cc
+cc1plus: warning: command line option ‘-Wimplicit-int’ is valid for C/ObjC but not for C++
+mini_racer_extension.cc: In function ‘v8::Local<v8::Value> convert_ruby_to_v8(v8::Isolate*, v8::Local<v8::Context>, VALUE)’:
+mini_racer_extension.cc:542:96: warning: ignoring return value of ‘v8::Maybe<bool> v8::Object::Set(v8::Local<v8::Context>, uint32_t, v8::Local<v8::Value>)’, declared with attribute warn_unused_result [-Wunused-result]
+             array->Set(context, i, convert_ruby_to_v8(isolate, context, rb_ary_entry(value, i)));
+                                                                                                ^
+In file included from mini_racer_extension.cc:5:0:
+/home/ubuntu/environment/consignment_app/vendor/bundle/ruby/2.6.0/gems/libv8-8.4.255.0-x86_64-linux/vendor/v8/include/v8.h:3667:37: note: declared here
+   V8_WARN_UNUSED_RESULT Maybe<bool> Set(Local<Context> context, uint32_t index,
+                                     ^~~
+mini_racer_extension.cc:552:78: warning: ignoring return value of ‘v8::Maybe<bool> v8::Object::Set(v8::Local<v8::Context>, v8::Local<v8::Value>, v8::Local<v8::Value>)’, declared with attribute warn_unused_result [-Wunused-result]
+                   convert_ruby_to_v8(isolate, context, rb_ary_entry(pair, 1)));
+                                                                              ^
+In file included from mini_racer_extension.cc:5:0:
+/home/ubuntu/environment/consignment_app/vendor/bundle/ruby/2.6.0/gems/libv8-8.4.255.0-x86_64-linux/vendor/v8/include/v8.h:3664:37: note: declared here
+   V8_WARN_UNUSED_RESULT Maybe<bool> Set(Local<Context> context,
+                                     ^~~
+mini_racer_extension.cc: In function ‘VALUE rb_external_function_notify_v8(VALUE)’:
+mini_racer_extension.cc:1161:46: warning: ignoring return value of ‘v8::Maybe<bool> v8::Object::Set(v8::Local<v8::Context>, v8::Local<v8::Value>, v8::Local<v8::Value>)’, declared with attribute warn_unused_result [-Wunused-result]
+                             .ToLocalChecked());
+                                              ^
+In file included from mini_racer_extension.cc:5:0:
+/home/ubuntu/environment/consignment_app/vendor/bundle/ruby/2.6.0/gems/libv8-8.4.255.0-x86_64-linux/vendor/v8/include/v8.h:3664:37: note: declared here
+   V8_WARN_UNUSED_RESULT Maybe<bool> Set(Local<Context> context,
+                                     ^~~
+mini_racer_extension.cc:1186:58: warning: ignoring return value of ‘v8::Maybe<bool> v8::Object::Set(v8::Local<v8::Context>, v8::Local<v8::Value>, v8::Local<v8::Value>)’, declared with attribute warn_unused_result [-Wunused-result]
+                                         .ToLocalChecked());
+                                                          ^
+In file included from mini_racer_extension.cc:5:0:
+/home/ubuntu/environment/consignment_app/vendor/bundle/ruby/2.6.0/gems/libv8-8.4.255.0-x86_64-linux/vendor/v8/include/v8.h:3664:37: note: declared here
+   V8_WARN_UNUSED_RESULT Maybe<bool> Set(Local<Context> context,
+                                     ^~~
+At global scope:
+cc1plus: warning: unrecognized command line option ‘-Wno-self-assign’
+cc1plus: warning: unrecognized command line option ‘-Wno-parentheses-equality’
+cc1plus: warning: unrecognized command line option ‘-Wno-constant-logical-operand’
+cc1plus: warning: unrecognized command line option ‘-Wno-cast-function-type’
+linking shared-object mini_racer_extension.so
+
+current directory: /home/ubuntu/environment/consignment_app/vendor/bundle/ruby/2.6.0/gems/mini_racer-0.3.1/ext/mini_racer_extension
+make "DESTDIR=" install
+/usr/bin/install -m 0755 mini_racer_extension.so ./.gem.20201016-8231-s3ov13
