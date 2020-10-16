@@ -12,17 +12,17 @@ Admin.create!(
    name: '管理アカウント'
 )
 
-# num1 = 1
-# 30.times do |n|
-#   User.create!(
-#     email: "sample-#{n + 1}@email.com",
-#     password: "password",
-#     name: "テスト太郎#{n + 1}",
-#     code: num1 += 1
-#   )
-# end
+num1 = 1
+30.times do |n|
+  User.create!(
+    email: "sample-#{n + 1}@email.com",
+    password: "password",
+    name: "テスト太郎#{n + 1}",
+    code: num1 += 1
+  )
+end
 
-# puts "Sample users created successfully!"
+puts "Sample users created successfully!"
 
 # num2 = 710011
 # 21.times do |n|
