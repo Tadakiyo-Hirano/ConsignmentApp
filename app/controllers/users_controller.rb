@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end
   
   def show
+    redirect_to users_url if admin_signed_in
     @search_params = consignment_search_params
     @search_none = consignment_search_none
     @user_consignments = @search_none ? @user.consignments.where(done: false).search(@search_params).page(params[:page]).per(10).order(ship_date: :desc).order(product_code: :desc).order(created_at: :desc) : 
@@ -27,7 +28,7 @@ class UsersController < ApplicationController
   def update
     if @user.update_attributes(user_params)
       # ユーザーモデル(User)を更新した場合、委託(モデルconsignment)の、担当者名(user_name)も同時更新する。
-      Consignment.where(['user_id == ?', @user.id]).update_all(user_name: User.find(@user.id).name)
+      Consignment.where(['user_id == ?', @user.id]).update_all(user_name: User.find(@user.id).name) if Consignment.where(user_id: @user.id).present?
       flash[:notice] = "【#{format("%03d", @user.code)}】#{@user.name}の情報を更新しました。"
       if admin_signed_in?
         redirect_to users_url
