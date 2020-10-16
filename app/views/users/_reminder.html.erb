@@ -18,6 +18,7 @@
               <th><%= Consignment.human_attribute_name :ship_date %></th>
               <th><%= Consignment.human_attribute_name :product_name %></th>
               <th><%= Consignment.human_attribute_name :customer_name %></th>
+              <th>委託残</th>
             </tr>
           </thead>
           
@@ -38,6 +39,7 @@
                 <td><%= c.ship_date %></td>
                 <td><%= c.product_name %></td>
                 <td><%= c.customer_name %></td>
+                <td><%= link_to total_consignment_balance(c), user_consignment_stocks_path(@user, c), class: "#{total_consignment_balance_color(c)}" %></td>
               </tr>
             </tbody>
             
