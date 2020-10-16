@@ -29,7 +29,11 @@ class UsersController < ApplicationController
       # ユーザーモデル(User)を更新した場合、委託(モデルconsignment)の、担当者名(user_name)も同時更新する。
       Consignment.where(['user_id == ?', @user.id]).update_all(user_name: User.find(@user.id).name)
       flash[:notice] = "【#{format("%03d", @user.code)}】#{@user.name}の情報を更新しました。"
-      redirect_to users_url
+      if admin_signed_in?
+        redirect_to users_url
+      else
+        redirect_to @user
+      end
     elsif @user.name.blank?
       flash[:alert] = "更新に失敗しました。<br>" + @user.errors.full_messages.join("<br>")
       redirect_to users_url
