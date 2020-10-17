@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    redirect_to users_url if admin_signed_in
+    redirect_to users_url if admin_signed_in?
     @search_params = consignment_search_params
     @search_none = consignment_search_none
     @user_consignments = @search_none ? @user.consignments.where(done: false).search(@search_params).page(params[:page]).per(10).order(ship_date: :desc).order(product_code: :desc).order(created_at: :desc) : 
