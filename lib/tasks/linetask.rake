@@ -86,4 +86,22 @@ namespace :line_push do
     
     p "OK"  #デバッグ
   end
+  
+  # テスト送信様
+  task test_push: :environment do
+    message = {
+      type: 'text',
+      text: "テスト送信"
+    }
+    
+    client = Line::Bot::Client.new { |config|
+      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
+      config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
+    }
+    
+    response = client.broadcast(message)
+    p response
+    
+    p "OK"  #デバッグ
+  end
 end
