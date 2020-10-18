@@ -59,7 +59,7 @@ namespace :line_push do
     
     def reminder_text
       post_num = Post.find(1)
-      if post_num.reminder_check == true
+      if post_num.reminder_check == true && Time.current.day == 18
         reminder = post_num.reminder_month
         reminder_text = post_num.reminder_notice
         elapse = Consignment.where("ship_date < ? ", Time.current - reminder.to_i.month).where(done: false)
@@ -87,7 +87,7 @@ namespace :line_push do
     p "OK"  #デバッグ
   end
   
-  # テスト送信様
+  # テスト送信用
   task test_push: :environment do
     message = {
       type: 'text',
