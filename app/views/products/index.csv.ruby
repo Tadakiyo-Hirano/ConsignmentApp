@@ -1,7 +1,7 @@
 require 'csv'
 
 CSV.generate do |csv|
-  column_names = %w(code name classification category)
+  column_names = %w(code name)
   csv << column_names
   @export_products.each do |product|
     column_values = [
