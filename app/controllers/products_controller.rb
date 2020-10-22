@@ -48,7 +48,7 @@ class ProductsController < ApplicationController
       # 商品モデル(Product)を更新した場合、更新したProduct.idとProduct.product_id_numberと同じ委託(モデルconsignment)の商品コード、商品名も同時更新する。
       # Consignment.where(['product_id_number == ?', @product.id]).update_all(product_code: Product.find(@product.id).code, product_name: Product.find(@product.id).name)
       # Consignment.where(['cast(product_id_number as text) == ?', @product.id]).update_all(product_code: Product.find(@product.id).code ,product_name: Product.find(@product.id).name) if Consignment.where(product_id_number: @product.id).present?
-      Consignment.where(['CAST(product_id_number AS text) == ?', @product.id]).update_all(product_code: Product.find(@product.id).code, product_name: Product.find(@product.id).name) if Consignment.where(['CAST(product_id_number AS text) == ?', @product.id])
+      Consignment.where(['CAST(product_id_number AS text) == ?', @product.id.to_s]).update_all(product_code: Product.find(@product.id).code, product_name: Product.find(@product.id).name) if Consignment.where(['CAST(product_id_number AS text) == ?', @product.id.to_s])
       flash[:notice] = "【#{@product.code} / #{@product.name}】の情報を更新しました。"
       redirect_to products_url
     elsif @product.name.blank?
