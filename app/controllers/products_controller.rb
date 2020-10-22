@@ -78,7 +78,7 @@ class ProductsController < ApplicationController
       num = Product.import(params[:file])
       # 商品モデル(Product)を更新した場合、更新したProduct.idとProduct.product_id_numberと同じ委託(モデルconsignment)の商品コード、商品名も同時更新する。
       Product.where.not(code: nil).each do |product|
-        Consignment.where(['product_id_number == ?', product.id]).update_all(product_code: Product.find(product.id).code ,product_name: Product.find(product.id).name) if Consignment.where(product_code: Product.find(product.id).code).present?
+        Consignment.where(['cast(product_id_number as integer) == ?', product.id]).update_all(product_code: Product.find(product.id).code ,product_name: Product.find(product.id).name) if Consignment.where(product_code: Product.find(product.id).code).present?
       end
       flash[:notice] = "#{num.to_s}件の商品情報を追加/更新しました。"
       redirect_to products_url
