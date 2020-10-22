@@ -49,7 +49,7 @@ class ProductsController < ApplicationController
       # Consignment.where(['product_id_number == ?', @product.id]).update_all(product_code: Product.find(@product.id).code, product_name: Product.find(@product.id).name)
       # Consignment.where(['cast(product_id_number as text) == ?', @product.id]).update_all(product_code: Product.find(@product.id).code ,product_name: Product.find(@product.id).name) if Consignment.where(product_id_number: @product.id).present?
       if Rails.env.production?
-        Consignment.where(['product_id_number::text == ?', @product.id.to_str]).update_all(product_code: Product.find(@product.id).code, product_name: Product.find(@product.id).name) if Consignment.where(['product_id_number::text == ?', @product.id.to_str])
+        Consignment.where(['product_id_number::text == ?', @product.id.to_s]).update_all(product_code: Product.find(@product.id).code, product_name: Product.find(@product.id).name) if Consignment.where(['product_id_number::text == ?', @product.id.to_s])
       else Rails.env.development? || Rails.env.test?
         Consignment.where(['product_id_number == ?', @product.id]).update_all(product_code: Product.find(@product.id).code, product_name: Product.find(@product.id).name) if Consignment.where(['product_id_number == ?', @product.id])
       end
