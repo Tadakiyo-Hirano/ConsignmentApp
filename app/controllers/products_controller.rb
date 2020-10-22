@@ -52,7 +52,7 @@ class ProductsController < ApplicationController
       redirect_to products_url
       product_code = Product.find(@product.id).code
       product_name = Product.find(@product.id).name
-      Consignment.where(['product_id_number == ?', @product.id]).update_all(product_code: product_code, product_name: product_name) if Consignment.where(product_id_number: @product.id).present?
+      Consignment.where(['cast(product_id_number as integer) == ?', @product.id]).update_all(product_code: product_code, product_name: product_name) if Consignment.where(product_id_number: @product.id).present?
     elsif @product.name.blank?
       flash[:alert] = "更新に失敗しました。<br>" + @product.errors.full_messages.join("<br>")
       redirect_to products_url
