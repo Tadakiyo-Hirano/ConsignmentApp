@@ -14,15 +14,15 @@ class UsersController < ApplicationController
     redirect_to users_url if admin_signed_in?
     @search_params = consignment_search_params
     @search_none = consignment_search_none
-    @user_consignments = @search_none ? @user.consignments.where(done: false).search(@search_params).page(params[:page]).per(10).order(ship_date: :desc).order(product_code: :desc).order(created_at: :desc) : 
-                               @user.consignments.where(done: false).search(@search_params).order(ship_date: :desc).order(product_code: :desc).order(created_at: :desc)
+    @user_consignments = @search_none ? @user.consignments.where('done = ?', false).search(@search_params).page(params[:page]).per(10).order(ship_date: :desc).order(product_code: :desc).order(created_at: :desc) : 
+                               @user.consignments.where('done = ?', false).search(@search_params).order(ship_date: :desc).order(product_code: :desc).order(created_at: :desc)
   end
   
   def end_tasks
     @search_params = consignment_search_params
     @search_none = consignment_search_none
-    @user_consignments = @search_none ? @user.consignments.where(done: true).search(@search_params).page(params[:page]).per(10).order(ship_date: :desc).order(code: :desc) : 
-                               @user.consignments.where(done: true).search(@search_params).order(ship_date: :desc).order(code: :desc)
+    @user_consignments = @search_none ? @user.consignments.where('done = ?', true).search(@search_params).page(params[:page]).per(10).order(ship_date: :desc).order(code: :desc) : 
+                               @user.consignments.where('done = ?', true).search(@search_params).order(ship_date: :desc).order(code: :desc)
   end
   
   def update
