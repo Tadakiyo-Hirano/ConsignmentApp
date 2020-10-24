@@ -6,7 +6,7 @@ module ConsignmentsHelper
   
   # user, consignment側で使用。委託残数合計 create updateにも@stocks = @user.consignments.find(params[:consignment_id]).stocksを設定しないとvalidation時、undefined method mapのエラーが発生する。
   def consignment_remaining_count
-    @user.consignments.find_by(params[:consignment_id]).quantity - @stocks.map { |s| s.return_quantity }.sum - @stocks.map { |s| s.sales_quantity }.sum
+    @user.consignments.find(params[:consignment_id]).quantity - @stocks.map { |s| s.return_quantity }.sum - @stocks.map { |s| s.sales_quantity }.sum
   end
   
   # user, consignment側で使用。委託残数合計がマイナスの場合、文字色赤色にする。
@@ -18,11 +18,11 @@ module ConsignmentsHelper
   
   # stock側で使用。委託残数合計 consignment.quantityがnilの場合、計算を飛ばして表示させエラーを回避
   def total_consignment_balance(c)
-    if c.quantity != nil
+    # if c.quantity != nil
       # @stocks = @user.consignments.find_by(params[:consignment_id]).stocks
-      @stocks = @user.consignments.find_by(params[:consignment_id])
+      # @stocks = @user.consignments.find_by(params[:consignment_id])
       c.quantity - c.stocks.map { |s| s.return_quantity }.sum - c.stocks.map { |s| s.sales_quantity }.sum
-    end
+    # end
   end
   
   # stock側で使用。委託残数合計がマイナスの場合、文字色赤色にする。
