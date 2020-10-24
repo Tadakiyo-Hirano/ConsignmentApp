@@ -15,18 +15,47 @@ class Customer < ApplicationRecord
   # CSVインポート
   def self.import(file)
     imported_num = 0
-    CSV.foreach(file.path, headers: true, encoding: 'r:CP932:UTF-8') do |row|
-      # codeが見つかれば、レコード呼出し、見つかれなければ、新しく作成
-      customer = find_by(code: row["code"]) || new 
-      # CSVからデータを取得し、設定する
-      customer.attributes = row.to_hash.slice(*updatable_attributes)
-      customer.save
-      imported_num += 1
+
+    open(file.path, 'r:cp932:utf-8', undef: :replace) do |f|
+      csv = CSV.new(f, :headers => :first_row)
+      begin
+        csv.each do |row|
+          next if row.header_row?
+          table = Hash[[row.headers, row.fields].transpose]
+
+          customer = find_by(code: table["code"])
+          if customer.nil?
+            customer = new
+          end
+
+          customer.attributes = table.to_hash.slice(*table.to_hash.except(:code).keys)
+
+          if customer.valid?
+            customer.save!
+            imported_num += 1
+          end
+        end
+      rescue
+      end
     end
     imported_num
   end
   
-  def self.updatable_attributes
-    ["code", "name"]
-  end
+  #mac,windowsで文字コードエラーが解決しないため上記に変更
+  # def self.import(file)
+  #   imported_num = 0
+  #   CSV.foreach(file.path, headers: true, encoding: 'r:CP932:UTF-8') do |row|
+  #     # codeが見つかれば、レコード呼出し、見つかれなければ、新しく作成
+  #     customer = find_by(code: row["code"]) || new 
+  #     # CSVからデータを取得し、設定する
+  #     customer.attributes = row.to_hash.slice(*updatable_attributes)
+  #     customer.save
+  #     imported_num += 1
+  #   end
+  #   imported_num
+  # end
+  
+  # def self.updatable_attributes
+  #   ["code", "name"]
+  # end
 end

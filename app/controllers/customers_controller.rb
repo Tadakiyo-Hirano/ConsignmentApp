@@ -50,9 +50,11 @@ class CustomersController < ApplicationController
   def update
     if @customer.update_attributes(customer_params)
       # 得意先モデル(Customer)を更新した場合、更新したCustomer.idとConsignment.customer_id_numberと同じ委託(モデルconsignment)の得意先コード、得意先名も同時更新する。
-      Consignment.where(['customer_id_number == ?', @customer.id]).update_all(customer_code: Customer.find(@customer.id).code, customer_name: Customer.find(@customer.id).name) if Consignment.where(['customer_id_number == ?', @customer.id])
-      # Consignment.where(['cast(customer_id_number as integer) == ?', @customer.id]).update_all(customer_code: Customer.find(@customer.id).code ,customer_name: Customer.find(@customer.id).name) if Consignment.where(['cast(customer_id_number as integer) == ?', @customer.id]).present?
-      # Consignment.where('cast(customer_id_number as integer) LIKE ?', @customer.id).update_all(customer_code: Customer.find(@customer.id).code ,customer_name: Customer.find(@customer.id).name) if Consignment.where('cast(customer_id_number as integer) LIKE ?', @customer.id).present?
+      if Rails.env.production?
+        Consignment.where(['customer_id_number::integer = ?', @customer.id]).update_all(customer_code: Customer.find(@customer.id).code, customer_name: Customer.find(@customer.id).name) if Consignment.where(['customer_id_number::integer = ?', @customer.id])
+      else Rails.env.development? || Rails.env.test?
+        Consignment.where(['customer_id_number == ?', @customer.id]).update_all(customer_code: Customer.find(@customer.id).code, customer_name: Customer.find(@customer.id).name) if Consignment.where(['customer_id_number == ?', @customer.id])
+      end
       flash[:notice] = "【#{@customer.code} / #{@customer.name}】の情報を更新しました。"
       redirect_to customers_url
     elsif @customer.name.blank?

@@ -13,22 +13,6 @@ class Product < ApplicationRecord
   scope :code_like, -> (code) { where('code LIKE ?', "%#{code}%") if code.present? }
   
   # CSVインポート
-  # def self.import(file)
-  #   imported_num = 0
-  #   CSV.foreach(file.path, headers: true, encoding: 'r:CP932') do |row|
-  #     # IDが見つかれば、レコード呼出し、見つかれなければ、新しく作成
-  #     product = find_by(code: row["code"]) || new 
-  #     # CSVからデータを取得し、設定する
-  #     product.attributes = row.to_hash.slice(*updatable_attributes)
-  #     product.save
-  #     imported_num += 1
-  #   end
-  #   imported_num
-  # end
-  
-  # def self.updatable_attributes
-  #   ["code", "name"]
-  # end
   def self.import(file)
     imported_num = 0
 
@@ -56,4 +40,22 @@ class Product < ApplicationRecord
     end
     imported_num
   end
+  
+  #mac,windowsで文字コードエラーが解決しないため上記に変更
+  # def self.import(file)
+  #   imported_num = 0
+  #   CSV.foreach(file.path, headers: true, encoding: 'r:CP932') do |row|
+  #     # IDが見つかれば、レコード呼出し、見つかれなければ、新しく作成
+  #     product = find_by(code: row["code"]) || new 
+  #     # CSVからデータを取得し、設定する
+  #     product.attributes = row.to_hash.slice(*updatable_attributes)
+  #     product.save
+  #     imported_num += 1
+  #   end
+  #   imported_num
+  # end
+  
+  # def self.updatable_attributes
+  #   ["code", "name"]
+  # end
 end
