@@ -18,11 +18,11 @@ module ConsignmentsHelper
   
   # stock側で使用。委託残数合計 consignment.quantityがnilの場合、計算を飛ばして表示させエラーを回避
   def total_consignment_balance(c)
-    if c.quantity != nil
-      # @stocks = @user.consignments.find_by(params[:consignment_id]).stocks
-      @stocks = @user.consignments.find_by(params[:consignment_id])
-      c.quantity - c.stocks.map { |s| s.return_quantity }.sum - c.stocks.map { |s| s.sales_quantity }.sum
-    end
+    # if c.quantity != nil
+    # @stocks = @user.consignments.find_by(params[:consignment_id]).stocks
+    @stocks = @user.consignments.find_by(params[:consignment_id])
+    c.quantity - c.stocks.map { |s| s.return_quantity }.sum - c.stocks.map { |s| s.sales_quantity }.sum
+    # end
   end
   
   # stock側で使用。委託残数合計がマイナスの場合、文字色赤色にする。
