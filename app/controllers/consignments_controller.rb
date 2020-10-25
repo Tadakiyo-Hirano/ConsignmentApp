@@ -58,8 +58,8 @@ class ConsignmentsController < ApplicationController
   end
   
   def new
-    @customers = Customer.all
-    @products = Product.all
+    @customers = Customer.all.order(code: :asc)
+    @products = Product.all.order(code: :asc)
     @consignment = Consignment.new
     @consignment.stocks.build
   end
