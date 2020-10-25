@@ -34,7 +34,7 @@
           <div class="target-area-customer modal-search-list">
             <div class="search-table">
               <p class="fixed-cell">
-                <%= button_tag "確定", value: "#{customer.code}",id: "#{customer.code}", data: {dismiss: "modal" },
+                <%= button_tag "確定", value: "#{customer.code}", value2: "#{customer.name}", id: "#{customer.code}", data: {dismiss: "modal" },
                                        class: "#{customer.id} #{customer.name} btn btn-default btn-sm select_customer-btn", onclick: "customerfunc()" %>
               </p>
               <p class="variable-cell"><%= customer.code %></p>
@@ -55,7 +55,8 @@
   $('.select_customer-btn').on('click', function customerfunc() {
     var select_customer_code =  $(this).attr("id");
     var select_customer_id =  $(this).attr("class").split(" ")[0];
-    var select_customer_name =  $(this).attr("class").split(" ")[1];
+    // var select_customer_name =  $(this).attr("class").split(" ")[1];
+    var select_customer_name =  $(this).attr("value2");
     document.getElementById("output_customer_code").value = select_customer_code;
     document.getElementById("output_customer_id").value = select_customer_id;
     document.getElementById("output_customer_name").value = select_customer_name;

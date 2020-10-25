@@ -34,8 +34,8 @@
           <div class="target-area-product modal-search-list">
             <div class="search-table">
               <p class="fixed-cell">
-                <%= button_tag "確定", value: "#{product.code}",id: "#{product.code}", data: {dismiss: "modal" },
-                                       class: "#{product.id} #{product.name} btn btn-default btn-sm select_product-btn", onclick: "productfunc()" %>
+                <%= button_tag "確定", value: "#{product.code}", value2: "#{product.name}", id: "#{product.code}", data: {dismiss: "modal" },
+                                       class: "#{product.id} btn btn-default btn-sm select_product-btn", onclick: "productfunc()" %>
               </p>
               <p class="variable-cell"><%= product.code %></p>
               <p class="variable-cell" onclick="productfunc()"><%= product.name %></p>
@@ -55,7 +55,8 @@
   $('.select_product-btn').on('click', function productfunc() {
     var select_product_code =  $(this).attr("id");
     var select_product_id = $(this).attr("class").split(" ")[0];
-    var select_product_name = $(this).attr("class").split(" ")[1];
+    // var select_product_name = $(this).attr("class").split(" ")[1];
+    var select_product_name = $(this).attr("value2");
     document.getElementById("output_product_code").value = select_product_code;
     document.getElementById("output_product_id").value = select_product_id;
     document.getElementById("output_product_name").value = select_product_name;
