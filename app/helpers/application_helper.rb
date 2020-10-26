@@ -14,7 +14,7 @@ module ApplicationHelper
   def header_title
     if current_admin
       content_tag(:li, class: "fas fa-user-cog") do
-        "&nbsp;管理者".html_safe
+        "&nbsp;管理画面".html_safe
       end
     else
       content_tag(:li, class: "fas fa-cubes") do
@@ -45,7 +45,7 @@ module ApplicationHelper
     if user_signed_in?
       current_user.name
     elsif admin_signed_in?
-      current_admin.name
+      "管理画面"
     end
   end
   

@@ -12,15 +12,11 @@ ja:
         code: 担当者コード
         name: 担当者
         email: メールアドレス
-        encrypted_password: 暗号化されたパスワード
         remember_created_at: Remember me チェックボックスON
         created_at: 作成日
         updated_at: 更新日
       admin:
-        name: 管理者名
         email: メールアドレス
-        encrypted_password: 暗号化されたパスワード
-        remember_created_at: Remember me チェックボックスON
         current_password: 現在のパスワード
         created_at: 作成日
         updated_at: 更新日

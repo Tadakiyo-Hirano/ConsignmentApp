@@ -9,7 +9,6 @@
 Admin.create!(
    email: "sample@email.com",
    password: "password",
-   name: '管理アカウント'
 )
 
 num1 = 1
