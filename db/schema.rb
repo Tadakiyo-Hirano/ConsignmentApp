@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2020_10_22_123137) do
   end
 
   create_table "consignments", force: :cascade do |t|
-    t.date "ship_date"
+    t.date "ship_date", null: false
     t.string "customer_code"
     t.string "product_code"
     t.string "serial_number"
@@ -66,8 +66,6 @@ ActiveRecord::Schema.define(version: 2020_10_22_123137) do
   create_table "products", force: :cascade do |t|
     t.string "code", default: "", null: false
     t.string "name"
-    t.string "classification"
-    t.string "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["code"], name: "index_products_on_code", unique: true
@@ -79,7 +77,7 @@ ActiveRecord::Schema.define(version: 2020_10_22_123137) do
     t.integer "consignment_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.date "processing_date"
+    t.date "processing_date", null: false
     t.index ["consignment_id"], name: "index_stocks_on_consignment_id"
   end
 
@@ -89,7 +87,7 @@ ActiveRecord::Schema.define(version: 2020_10_22_123137) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
+    t.string "name", null: false
     t.integer "code", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end

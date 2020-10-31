@@ -48,4 +48,6 @@ ja:
         year_month: 年間通知(月)
         year_day: 年間通知(日)
         year_notice: 年間通知メッセージ
+        reminder_month: 委託超過期間(月)
+        reminder_notice: リマインダー通知メッセージ
         

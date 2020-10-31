@@ -1,5 +1,5 @@
 class AddProcessingDateToStocks < ActiveRecord::Migration[6.0]
   def change
-    add_column :stocks, :processing_date, :date
+    add_column :stocks, :processing_date, :date, null: false
   end
 end

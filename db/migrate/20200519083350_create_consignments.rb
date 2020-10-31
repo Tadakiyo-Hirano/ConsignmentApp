@@ -1,7 +1,7 @@
 class CreateConsignments < ActiveRecord::Migration[6.0]
   def change
     create_table :consignments do |t|
-      t.date :ship_date
+      t.date :ship_date, null: false
       t.string :customer_info
       t.string :product_info
       t.string :serial_number
