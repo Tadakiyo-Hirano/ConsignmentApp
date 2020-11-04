@@ -105,4 +105,37 @@ namespace :line_push do
     
     p "OK"  #デバッグ
   end
+  
+  task test_reminder: :environment do
+    
+    def reminder_text
+      post_num = Post.find(1)
+      if post_num.reminder_check == true
+        reminder = post_num.reminder_month
+        reminder_text = post_num.reminder_notice
+        elapse = Consignment.where("ship_date < ? ", Time.current - reminder.to_i.month).where(done: false)
+        user_name = elapse.group(:user_name).count.keys.to_s.delete!('"[]')
+        if elapse.count > 0
+          "#{reminder}ヶ月以上経過している委託が#{elapse.count}件あります。担当者(#{user_name})は確認してください。\n" + reminder_text
+        else
+          ""
+        end
+      end
+    end
+    
+    message = {
+      type: 'text',
+      text: reminder_text
+    }
+    
+    client = Line::Bot::Client.new { |config|
+      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
+      config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
+    }
+    
+    response = client.broadcast(message)
+    p response
+    
+    p "OK"  #デバッグ
+  end
 end
