@@ -1,6 +1,6 @@
 namespace :line_push do 
   desc "linebot実行"
-  task line_push_memo: :environment do # herokuのスケジューラにコマンドを設定(rake line_push:line_push_memo)
+  task line_push_memo: :environment do # herokuのスケジューラにコマンドを設定(rake line_push:line_push_memo) namespaceの　「line_push」と、taskの「line_push_memo」を「:」でつなげて実行
     #ログ
     # logger = Logger.new 'log/linetask.log'
 
