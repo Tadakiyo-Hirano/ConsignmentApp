@@ -1,6 +1,6 @@
 namespace :line_push do 
   desc "linebot実行"
-  task line_push_memo: :environment do
+  task line_push_memo: :environment do # herokuのスケジューラにコマンドを設定(rake line_push:line_push_memo)
     #ログ
     # logger = Logger.new 'log/linetask.log'
 
@@ -55,7 +55,7 @@ namespace :line_push do
     p "OK" #デバッグ
   end
   
-  task line_push_reminder: :environment do
+  task line_push_reminder: :environment do # herokuのスケジューラにコマンドを設定(rake line_push:line_push_reminder)
     
     def reminder_text
       post_num = Post.find(1)
